@@ -1,0 +1,19 @@
+{
+  "kind": "kit/draw-svg",
+  "title": "Any line drawing",
+  "description": "Your SVG paths draw themselves, one stroke after another; when the last one lands the closed shapes fill in softly and the finished drawing floats over its shadow. Bring an icon, a sketch, a diagram, a mark you own: copy the d of each path from the SVG file. The example (a headset) is drawn by us.",
+  "source": {"type": "kit", "path": "catalog/kit/draw-svg/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {"paths": "the strokes in drawing order: SVG path d strings, or {d, color, fill: false}", "viewBox": "the viewBox of your SVG, for example \"0 0 400 260\"", "text": "1-4 words next to the drawing (optional)", "sub": "small caps over them (optional)", "color": "second colour of the strokes and the fill (sky)", "stage": "ground colour: a name from STAGE, any colour, or none", "cues": "{\"words\": time} when the words come in"},
+  "needs": ["paths"],
+  "changes": [0, 0.2, 0.4, 0.6],
+  "maxWords": 8,
+  "dur": 4,
+  "maxDur": 9,
+  "family": "draw-svg",
+  "draft": false,
+  "example": {"text": "Draw anything", "sub": "your SVG paths", "color": "sky", "viewBox": "0 0 400 260", "paths": ["M60 110 h280 a26 26 0 0 1 26 26 v60 a26 26 0 0 1 -26 26 h-80 c-18 0 -28 -26 -60 -26 s-42 26 -60 26 h-80 a26 26 0 0 1 -26 -26 v-60 a26 26 0 0 1 26 -26 z", "M72 110 C76 22 324 22 328 110", "M96 160 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0 z", "M236 160 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0 z", "M34 148 h-16 a6 6 0 0 0 -6 6 v24 a6 6 0 0 0 6 6 h16", "M366 148 h16 a6 6 0 0 1 6 6 v24 a6 6 0 0 1 -6 6 h-16", {"d": "M150 128 h100", "color": "gold"}]}
+}

@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "keyword",
+  "lead": "type",
   "props": {"text": "1-4 words", "sub": "small caps line (optional)", "color": "colour of the word (gold, teal, coral, blue, violet, leaf)"},
   "needs": ["text"],
   "changes": "words",

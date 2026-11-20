@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "compare",
+  "lead": "type",
   "props": {"items": "2-4 rows: {text: the thing, dir: \"up\" | \"down\", at}; the words up / down are shown only if you put them in sub", "color": "colour of the arrows going up", "color2": "colour of the arrows going down"},
   "needs": ["items"],
   "changes": "items",

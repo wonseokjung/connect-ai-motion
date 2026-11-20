@@ -1,0 +1,21 @@
+{
+  "kind": "remotion/three-screens",
+  "title": "Screens in space",
+  "description": "Your stills hang as panels at different depths in real 3D and the camera glides past them, from the first to the last; the panel you are passing is bright and framed in a colour, the far ones sink into the dark (@remotion/three, WebGL). In 9:16 the camera travels down the wall.",
+  "source": {"type": "remotion", "package": "@remotion/three", "version": "4.0.529", "also": "three 0.170 (MIT), @react-three/fiber 9 (MIT)"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["images"],
+  "props": {"images": "3-6 pictures, in the order the camera passes them", "text": "caption, 1-5 words (optional)", "sub": "small caps over it (optional)", "color": "colour of the frame around the panel in front", "reverse": "true: travel the other way"},
+  "needs": ["images"],
+  "changes": [0, 0.33, 0.66],
+  "maxWords": 9,
+  "dur": 4,
+  "maxDur": 9,
+  "push": false,
+  "family": "three-screens",
+  "draft": false,
+  "example": {"images": ["kit:examples/media/photo-2.jpg", "kit:examples/media/shot-1.jpg", "kit:examples/media/photo-1.jpg", "kit:examples/media/photo-3.jpg", "kit:examples/media/photo-4.jpg"], "text": "A wall of your work", "sub": "stills in space", "color": "teal"}
+}

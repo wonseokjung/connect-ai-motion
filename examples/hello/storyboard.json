@@ -2,8 +2,8 @@
   "version": 1,
   "title": "connect-ai-motion in ten lines",
   "style": "connect",
-  "bg": "remotion/bg-noise-contour",
-  "sound": "tones",
+  "bg": "kit/bg-pool",
+  "sound": false,
   "allow": [
     "CONNECT AI LAB"
   ],
@@ -19,13 +19,15 @@
     {
       "id": "promise",
       "say": "No footage. Only a script. A finished film.",
-      "kind": "remotion/kinetic-lines",
-      "lines": [
-        "No footage",
-        "Only a script",
-        "A finished film"
+      "kind": "kit/photo-strip",
+      "images": [
+        "kit:examples/media/photo-3.jpg",
+        "kit:examples/media/photo-1.jpg",
+        "kit:examples/media/photo-2.jpg",
+        "kit:examples/media/photo-4.jpg"
       ],
-      "hi": 3,
+      "text": "A finished film",
+      "sub": "No footage",
       "dur": 3.0
     },
     {
@@ -36,37 +38,40 @@
       "hi": "one scene",
       "mark": "highlight",
       "color": "coral",
-      "dur": 2.8
+      "dur": 2.8,
+      "bg": {
+        "kind": "kit/bg-pool",
+        "color": "coral",
+        "x": 40
+      }
     },
     {
       "id": "sources",
       "say": "Scenes come from Remotion, HyperFrames, Lottie, GSAP, three.js, shaders, or your own file.",
-      "kind": "kit/grid-wall",
+      "kind": "kit/node-graph",
       "items": [
+        "Scenes",
         "Remotion",
         "HyperFrames",
         "Lottie",
         "GSAP",
         "three.js",
-        "Shaders",
-        "Your own file"
+        "Shaders"
       ],
-      "hi": "Your own file",
-      "color": "teal",
-      "dur": 3.8
+      "hi": "Scenes",
+      "dur": 4.2
     },
     {
       "id": "flow",
       "say": "Write the script, pick the scenes, check, render.",
-      "kind": "remotion/paths-flow",
+      "kind": "kit/draw-route",
       "items": [
         "Script",
         "Scenes",
         "Check",
         "Render"
       ],
-      "color": "teal",
-      "dur": 3.6
+      "dur": 3.8
     },
     {
       "id": "rhythm",
@@ -74,7 +79,12 @@
       "kind": "hyperframes/ring-count",
       "value": "3",
       "unit": "seconds",
-      "dur": 2.8
+      "dur": 2.8,
+      "bg": {
+        "kind": "kit/bg-pool",
+        "color": "teal",
+        "x": 60
+      }
     },
     {
       "id": "check",
@@ -94,10 +104,15 @@
     {
       "id": "shapes",
       "say": "16:9 and 9:16 come from the same storyboard.",
-      "kind": "remotion/gsap-split",
-      "text": "16:9 and 9:16",
-      "sub": "the same storyboard",
-      "dur": 2.8
+      "kind": "kit/device-duo",
+      "src": "kit:examples/media/shot-1.jpg",
+      "src2": "kit:examples/media/shot-tall-1.jpg",
+      "items": [
+        "16:9",
+        "9:16"
+      ],
+      "color": "teal",
+      "dur": 3.2
     },
     {
       "id": "end",

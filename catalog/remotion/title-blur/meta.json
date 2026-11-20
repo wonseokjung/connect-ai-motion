@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "title",
+  "lead": "type",
   "props": {"text": "headline (2-7 words)", "hi": "word(s) to colour gold", "sub": "small caps kicker above (optional)"},
   "needs": ["text"],
   "changes": "words",

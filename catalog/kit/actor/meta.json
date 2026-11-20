@@ -1,0 +1,16 @@
+{
+  "kind": "kit/actor",
+  "title": "One-shape character",
+  "description": "A character drawn from one shape you choose (circle, square, triangle or pill), with two eyes and two thin legs. It walks in, and at the cue it jumps, waves or looks around; it blinks and never stands still. A stand-in you colour yourself, drawn with SVG and moved by the frame.",
+  "source": {"type": "kit", "path": "catalog/kit/actor/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "character",
+  "lead": "picture",
+  "props": {"shape": "circle | square | triangle | pill (circle)", "color": "its colour (coral)", "action": "jump | wave | look (jump)", "text": "1-4 words next to it (optional)", "sub": "small caps over them (optional)", "cues": "{\"act\": time} when it does the action"},
+  "changes": [0, 0.45],
+  "maxWords": 7,
+  "dur": 3.6,
+  "family": "actor",
+  "example": {"shape": "circle", "color": "coral", "action": "jump", "text": "A character, from code", "sub": "one shape"}
+}

@@ -18,4 +18,8 @@ export const getStyle = (name) => STYLES[name] || STYLES.connect;
 export const TIMING = {enter: 12, opacity: 6, blur: 7, exit: 13};
 
 // subject colours (2-3 per film, each tied to one meaning); gold stays the brand accent
-export const HUE = {gold: '#D6892A', goldHi: '#F2B45A', ivory: '#EBE2D2', teal: '#3FB7A6', coral: '#E0605A', red: '#D8433B', blue: '#4C8CC6', violet: '#9B7BD8', leaf: '#7FB069', ink: '#0B0A09', black: '#17130F', white: '#F6F1E7'};
+export const HUE = {gold: '#D6892A', goldHi: '#F2B45A', ivory: '#EBE2D2', teal: '#3FB7A6', coral: '#E0605A', red: '#D8433B', blue: '#4C8CC6', violet: '#9B7BD8', leaf: '#7FB069', ink: '#0B0A09', black: '#17130F', white: '#F6F1E7', sky: '#7CC4E8', sand: '#D9C3A0', rose: '#D97B93', indigo: '#5B66C9', mint: '#8FD3B6', amber: '#FFB547'};
+
+// stages: a picture scene may stand on its own dark ground instead of the film's background ("stage": "night").
+// All of them sit next to the black x gold base; none is bright.
+export const STAGE = {base: '#0B0A09', night: '#0A1018', deep: '#081312', wine: '#170D10', slate: '#12151A', moss: '#0E140E', plum: '#120E18', paper: '#F2ECE0'};

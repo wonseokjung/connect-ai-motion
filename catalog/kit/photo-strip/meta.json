@@ -1,0 +1,21 @@
+{
+  "kind": "kit/photo-strip",
+  "title": "Film strip",
+  "description": "Your stills run through the frame as the frames of a strip of film with sprocket holes, tilted a little; two more strips pass far behind, out of focus, the other way. In 9:16 the film runs top to bottom. The picture for the word video, made from stills.",
+  "source": {"type": "kit", "path": "catalog/kit/photo-strip/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["images"],
+  "props": {"images": "2-8 pictures, in the order they pass", "text": "caption, 1-5 words (optional)", "sub": "small caps over it (optional)", "speed": "how fast the film runs (1)"},
+  "needs": ["images"],
+  "changes": [0, 0.33, 0.66],
+  "maxWords": 9,
+  "dur": 3.2,
+  "maxDur": 8,
+  "push": false,
+  "family": "photo-strip",
+  "draft": false,
+  "example": {"images": ["kit:examples/media/photo-3.jpg", "kit:examples/media/photo-1.jpg", "kit:examples/media/photo-2.jpg", "kit:examples/media/photo-4.jpg"], "text": "Stills become a film", "sub": "frame by frame"}
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "shader/bg-aurora",
+  "title": "Curtains of light (shader)",
+  "description": "Soft curtains of light hang from the top of the frame and sway, in two subject colours on the dark base (shaders Aurora, WebGPU, locked to the frame).",
+  "source": {
+    "type": "shader",
+    "package": "shaders",
+    "version": "4.0.2",
+    "repo": "shader-effects-inc/shaders",
+    "component": "Aurora"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+    "color": "first colour (teal)",
+    "color2": "second colour (the style's accent)",
+    "speed": "0-10 (3)",
+    "strength": "0-1 (0.5)",
+    "y": "where the curtains hang from, 0-1 (0.1)"
+  },
+  "family": "shader-aurora",
+  "example": {}
+}

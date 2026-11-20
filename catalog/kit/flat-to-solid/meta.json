@@ -1,0 +1,17 @@
+{
+  "kind": "kit/flat-to-solid",
+  "title": "Flat to solid",
+  "description": "Flat outlines (square, circle, triangle) float in the frame; at the cue they gain thickness and turn into lit solids, one after the other, and keep turning. One label rolls over to the next (2D becomes 3D). Faces are extruded and painted back to front with @remotion/svg-3d-engine, outlines come from @remotion/shapes.",
+  "source": {"type": "kit", "path": "catalog/kit/flat-to-solid/index.tsx", "also": "@remotion/svg-3d-engine (Remotion License), @remotion/shapes and @remotion/paths (MIT)"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "diagram",
+  "lead": "picture",
+  "props": {"from": "label before the cue, 1-2 words (optional)", "to": "label after the cue, 1-2 words (optional)", "shapes": "1-3 of square | circle | triangle (all three)", "colors": "one colour per shape (teal, coral, sky)", "cues": "{\"solid\": time} when the shapes gain depth"},
+  "changes": [0, 0.36],
+  "maxWords": 4,
+  "dur": 3.6,
+  "maxDur": 7,
+  "family": "flat-to-solid",
+  "example": {"from": "2D", "to": "3D"}
+}

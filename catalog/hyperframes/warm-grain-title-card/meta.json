@@ -13,6 +13,7 @@
   "src": "block.html",
   "role": "scene",
   "use": "title",
+  "lead": "type",
   "props": {
     "text": "title (1-3 words)",
     "sub": "line under it"

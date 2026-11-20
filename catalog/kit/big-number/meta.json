@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "number",
+  "lead": "type",
   "props": {"value": "the number as you say it (10, 1.5K, 40%, $9)", "unit": "small word after it (optional)", "text": "what it counts (1-4 words)", "color": "colour of the number"},
   "needs": ["value"],
   "changes": [0, 0.35],

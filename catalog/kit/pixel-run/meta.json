@@ -1,0 +1,17 @@
+{
+  "kind": "kit/pixel-run",
+  "title": "Pixel game",
+  "description": "A small side-scrolling game drawn with big square pixels: far hills, near hills and the ground scroll at different speeds, and a little hero runs and jumps every block in its way. The same world on every render (the seed is a word).",
+  "source": {"type": "kit", "path": "catalog/kit/pixel-run/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {"text": "1-4 words (optional)", "sub": "small caps over them (optional)", "color": "the hero (coral)", "ground": "the land (teal)", "sky": "colour of the sky", "seed": "a word: another word, another world"},
+  "changes": [0, 0.35, 0.7],
+  "maxWords": 7,
+  "dur": 3.6,
+  "push": false,
+  "family": "pixel-run",
+  "example": {"text": "A game, from code", "sub": "big pixels", "color": "coral", "ground": "teal"}
+}

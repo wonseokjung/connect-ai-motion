@@ -1,0 +1,19 @@
+{
+  "kind": "kit/chart-gantt",
+  "title": "Gantt bars",
+  "description": "A plan on one axis: each row's bar grows from its start to its end when you name it, in its own colour, and a now line walks across the frame for the whole beat; what it has passed turns to full colour. Plain SVG.",
+  "source": {"type": "kit", "path": "catalog/kit/chart-gantt/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {"items": "2-8 rows: {text: label, from: where the bar starts, to: where it ends (plain numbers on one axis), color, at}", "lines": "labels for the steps of the axis, from the first step on (optional)", "text": "small heading (optional)", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 30,
+  "dur": 4.6,
+  "maxDur": 10,
+  "family": "chart-gantt",
+  "draft": false,
+  "example": {"text": "Lessons", "items": [{"text": "Motion", "from": 2, "to": 4}, {"text": "Slides and web", "from": 4, "to": 6}, {"text": "three.js", "from": 6, "to": 8}, {"text": "Blender", "from": 8, "to": 10}, {"text": "Library", "from": 10, "to": 11}], "lines": ["2", "3", "4", "5", "6", "7", "8", "9", "10"]}
+}

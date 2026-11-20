@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "formula",
+  "lead": "type",
   "props": {"tex": "the formula in LaTeX (not checked against the script)", "text": "plain words under it (1-6 words)", "color": "colour of the formula"},
   "needs": ["tex"],
   "changes": [0, 0.4],

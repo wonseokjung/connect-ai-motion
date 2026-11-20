@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "brand",
+  "lead": "type",
   "props": {"text": "name (1-4 words)", "sub": "one quiet line under it (optional)"},
   "needs": ["text"],
   "changes": [0, 0.4],

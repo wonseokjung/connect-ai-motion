@@ -1,7 +1,7 @@
 // CONNECT AI LAB look: black x gold base, thin sans, subject colours on top.
 import {loadFont} from '@remotion/google-fonts/Inter';
 
-const inter = loadFont('normal', {weights: ['200', '300', '400', '500'], subsets: ['latin']});
+const inter = loadFont('normal', {weights: ['200', '300', '400', '500', '800'], subsets: ['latin']});
 
 // Inter has no Korean / Japanese letters: the system fonts after it take over for those.
 export const FONT = `${inter.fontFamily}, "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Hiragino Sans", sans-serif`;

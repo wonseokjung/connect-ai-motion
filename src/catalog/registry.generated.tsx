@@ -2,44 +2,79 @@
 import React from 'react';
 import {HyperFramesBlock} from '../adapters/HyperFrames';
 import {LottieFile} from '../adapters/Lottie';
-import C8 from '../../catalog/kit/bg-pool/index';
-import C9 from '../../catalog/kit/big-number/index';
-import C10 from '../../catalog/kit/compare/index';
-import C11 from '../../catalog/kit/endcard/index';
-import C12 from '../../catalog/kit/grid-wall/index';
-import C13 from '../../catalog/kit/ident/index';
-import C14 from '../../catalog/kit/keyword/index';
-import C15 from '../../catalog/kit/quote/index';
-import C16 from '../../catalog/kit/steps/index';
-import C17 from '../../catalog/kit/timeline/index';
-import C18 from '../../catalog/kit/trend/index';
-import C22 from '../../catalog/remotion/bg-noise-contour/index';
-import C23 from '../../catalog/remotion/bg-noise-dots/index';
-import C24 from '../../catalog/remotion/bg-starburst/index';
-import C25 from '../../catalog/remotion/captions-pages/index';
-import C26 from '../../catalog/remotion/code-swap/index';
-import C27 from '../../catalog/remotion/cursor-prompt/index';
-import C28 from '../../catalog/remotion/gsap-split/index';
-import C29 from '../../catalog/remotion/katex-formula/index';
-import C30 from '../../catalog/remotion/kinetic-lines/index';
-import C31 from '../../catalog/remotion/motion-blur-slam/index';
-import C32 from '../../catalog/remotion/paths-flow/index';
-import C35 from '../../catalog/remotion/rough-mark/index';
-import C36 from '../../catalog/remotion/rounded-chat/index';
-import C37 from '../../catalog/remotion/shapes-bars/index';
-import C38 from '../../catalog/remotion/shapes-pie/index';
-import C39 from '../../catalog/remotion/svg3d-stack/index';
-import C40 from '../../catalog/remotion/sweep-light-leak/index';
-import C41 from '../../catalog/remotion/three-solid/index';
-import C42 from '../../catalog/remotion/title-blur/index';
-import C43 from '../../catalog/remotion/tr-clock-wipe/index';
-import C44 from '../../catalog/remotion/tr-fade/index';
-import C45 from '../../catalog/remotion/tr-flip/index';
-import C46 from '../../catalog/remotion/tr-iris/index';
-import C47 from '../../catalog/remotion/tr-slide/index';
-import C48 from '../../catalog/remotion/tr-wipe/index';
-import C49 from '../../catalog/shader/bg-flow/index';
-import C50 from '../../catalog/shader/bg-godrays/index';
+import C8 from '../../catalog/kit/actor/index';
+import C9 from '../../catalog/kit/bg-pool/index';
+import C10 from '../../catalog/kit/big-number/index';
+import C11 from '../../catalog/kit/chart-donut/index';
+import C12 from '../../catalog/kit/chart-gantt/index';
+import C13 from '../../catalog/kit/chart-heatmap/index';
+import C14 from '../../catalog/kit/chart-line/index';
+import C15 from '../../catalog/kit/chart-scatter/index';
+import C16 from '../../catalog/kit/code-result/index';
+import C17 from '../../catalog/kit/compare/index';
+import C18 from '../../catalog/kit/device-browser/index';
+import C19 from '../../catalog/kit/device-duo/index';
+import C20 from '../../catalog/kit/device-phone/index';
+import C21 from '../../catalog/kit/draw-route/index';
+import C22 from '../../catalog/kit/draw-skyline/index';
+import C23 from '../../catalog/kit/draw-svg/index';
+import C24 from '../../catalog/kit/endcard/index';
+import C25 from '../../catalog/kit/flat-to-solid/index';
+import C26 from '../../catalog/kit/flow-chart/index';
+import C27 from '../../catalog/kit/grid-path/index';
+import C28 from '../../catalog/kit/grid-wall/index';
+import C29 from '../../catalog/kit/ident/index';
+import C30 from '../../catalog/kit/iso-city/index';
+import C31 from '../../catalog/kit/keyword/index';
+import C32 from '../../catalog/kit/node-graph/index';
+import C33 from '../../catalog/kit/orbit/index';
+import C34 from '../../catalog/kit/photo-collage/index';
+import C35 from '../../catalog/kit/photo-kenburns/index';
+import C36 from '../../catalog/kit/photo-parallax/index';
+import C37 from '../../catalog/kit/photo-strip/index';
+import C38 from '../../catalog/kit/photo-wipe/index';
+import C39 from '../../catalog/kit/pixel-run/index';
+import C40 from '../../catalog/kit/quote/index';
+import C41 from '../../catalog/kit/steps/index';
+import C42 from '../../catalog/kit/timeline/index';
+import C43 from '../../catalog/kit/trend/index';
+import C44 from '../../catalog/kit/type-drop/index';
+import C45 from '../../catalog/kit/type-mask/index';
+import C46 from '../../catalog/kit/zoom-lens/index';
+import C50 from '../../catalog/remotion/bg-noise-contour/index';
+import C51 from '../../catalog/remotion/bg-noise-dots/index';
+import C52 from '../../catalog/remotion/bg-starburst/index';
+import C53 from '../../catalog/remotion/captions-pages/index';
+import C54 from '../../catalog/remotion/code-swap/index';
+import C55 from '../../catalog/remotion/cursor-prompt/index';
+import C56 from '../../catalog/remotion/gsap-split/index';
+import C57 from '../../catalog/remotion/katex-formula/index';
+import C58 from '../../catalog/remotion/kinetic-lines/index';
+import C59 from '../../catalog/remotion/motion-blur-slam/index';
+import C60 from '../../catalog/remotion/paths-flow/index';
+import C63 from '../../catalog/remotion/rough-mark/index';
+import C64 from '../../catalog/remotion/rounded-chat/index';
+import C65 from '../../catalog/remotion/shapes-bars/index';
+import C66 from '../../catalog/remotion/shapes-pie/index';
+import C67 from '../../catalog/remotion/svg3d-stack/index';
+import C68 from '../../catalog/remotion/sweep-light-leak/index';
+import C69 from '../../catalog/remotion/three-model/index';
+import C70 from '../../catalog/remotion/three-screens/index';
+import C71 from '../../catalog/remotion/three-solid/index';
+import C72 from '../../catalog/remotion/three-type/index';
+import C73 from '../../catalog/remotion/title-blur/index';
+import C74 from '../../catalog/remotion/tr-clock-wipe/index';
+import C75 from '../../catalog/remotion/tr-fade/index';
+import C76 from '../../catalog/remotion/tr-flip/index';
+import C77 from '../../catalog/remotion/tr-iris/index';
+import C78 from '../../catalog/remotion/tr-slide/index';
+import C79 from '../../catalog/remotion/tr-wipe/index';
+import C80 from '../../catalog/shader/bg-aurora/index';
+import C81 from '../../catalog/shader/bg-flow/index';
+import C82 from '../../catalog/shader/bg-godrays/index';
+import C83 from '../../catalog/shader/bg-marble/index';
+import C84 from '../../catalog/shader/bg-mesh/index';
+import C85 from '../../catalog/shader/bg-studio/index';
 
 export const SCENES: Record<string, React.FC<any>> = {
   "hyperframes/gold-scramble-title": HyperFramesBlock,
@@ -49,52 +84,87 @@ export const SCENES: Record<string, React.FC<any>> = {
   "hyperframes/warm-grain-pill-stat": HyperFramesBlock,
   "hyperframes/warm-grain-shape-label": HyperFramesBlock,
   "hyperframes/warm-grain-title-card": HyperFramesBlock,
-  "kit/big-number": C9,
-  "kit/compare": C10,
-  "kit/endcard": C11,
-  "kit/grid-wall": C12,
-  "kit/ident": C13,
-  "kit/keyword": C14,
-  "kit/quote": C15,
-  "kit/steps": C16,
-  "kit/timeline": C17,
-  "kit/trend": C18,
+  "kit/actor": C8,
+  "kit/big-number": C10,
+  "kit/chart-donut": C11,
+  "kit/chart-gantt": C12,
+  "kit/chart-heatmap": C13,
+  "kit/chart-line": C14,
+  "kit/chart-scatter": C15,
+  "kit/code-result": C16,
+  "kit/compare": C17,
+  "kit/device-browser": C18,
+  "kit/device-duo": C19,
+  "kit/device-phone": C20,
+  "kit/draw-route": C21,
+  "kit/draw-skyline": C22,
+  "kit/draw-svg": C23,
+  "kit/endcard": C24,
+  "kit/flat-to-solid": C25,
+  "kit/flow-chart": C26,
+  "kit/grid-path": C27,
+  "kit/grid-wall": C28,
+  "kit/ident": C29,
+  "kit/iso-city": C30,
+  "kit/keyword": C31,
+  "kit/node-graph": C32,
+  "kit/orbit": C33,
+  "kit/photo-collage": C34,
+  "kit/photo-kenburns": C35,
+  "kit/photo-parallax": C36,
+  "kit/photo-strip": C37,
+  "kit/photo-wipe": C38,
+  "kit/pixel-run": C39,
+  "kit/quote": C40,
+  "kit/steps": C41,
+  "kit/timeline": C42,
+  "kit/trend": C43,
+  "kit/type-drop": C44,
+  "kit/type-mask": C45,
+  "kit/zoom-lens": C46,
   "lottie/arc-orbit": LottieFile,
   "lottie/gold-check": LottieFile,
   "lottie/signal-pulse": LottieFile,
-  "remotion/captions-pages": C25,
-  "remotion/code-swap": C26,
-  "remotion/cursor-prompt": C27,
-  "remotion/gsap-split": C28,
-  "remotion/katex-formula": C29,
-  "remotion/kinetic-lines": C30,
-  "remotion/motion-blur-slam": C31,
-  "remotion/paths-flow": C32,
-  "remotion/rough-mark": C35,
-  "remotion/rounded-chat": C36,
-  "remotion/shapes-bars": C37,
-  "remotion/shapes-pie": C38,
-  "remotion/svg3d-stack": C39,
-  "remotion/three-solid": C41,
-  "remotion/title-blur": C42,
+  "remotion/captions-pages": C53,
+  "remotion/code-swap": C54,
+  "remotion/cursor-prompt": C55,
+  "remotion/gsap-split": C56,
+  "remotion/katex-formula": C57,
+  "remotion/kinetic-lines": C58,
+  "remotion/motion-blur-slam": C59,
+  "remotion/paths-flow": C60,
+  "remotion/rough-mark": C63,
+  "remotion/rounded-chat": C64,
+  "remotion/shapes-bars": C65,
+  "remotion/shapes-pie": C66,
+  "remotion/svg3d-stack": C67,
+  "remotion/three-model": C69,
+  "remotion/three-screens": C70,
+  "remotion/three-solid": C71,
+  "remotion/three-type": C72,
+  "remotion/title-blur": C73,
 };
 export const BGS: Record<string, React.FC<any>> = {
-  "kit/bg-pool": C8,
-  "remotion/bg-noise-contour": C22,
-  "remotion/bg-noise-dots": C23,
-  "remotion/bg-starburst": C24,
-  "shader/bg-flow": C49,
-  "shader/bg-godrays": C50,
+  "kit/bg-pool": C9,
+  "remotion/bg-noise-contour": C50,
+  "remotion/bg-noise-dots": C51,
+  "remotion/bg-starburst": C52,
+  "shader/bg-aurora": C80,
+  "shader/bg-flow": C81,
+  "shader/bg-godrays": C82,
+  "shader/bg-marble": C83,
+  "shader/bg-mesh": C84,
+  "shader/bg-studio": C85,
 };
 // a transition item exports a function (W, H, line) => a @remotion/transitions presentation
 export const TRANSITIONS: Record<string, (w: number, h: number, it: any) => any> = {
-  "remotion/tr-clock-wipe": C43,
-  "remotion/tr-fade": C44,
-  "remotion/tr-flip": C45,
-  "remotion/tr-iris": C46,
-  "remotion/tr-slide": C47,
-  "remotion/tr-wipe": C48,
+  "remotion/tr-clock-wipe": C74,
+  "remotion/tr-fade": C75,
+  "remotion/tr-flip": C76,
+  "remotion/tr-iris": C77,
+  "remotion/tr-slide": C78,
+  "remotion/tr-wipe": C79,
 };
 export const SWEEPS: Record<string, React.FC<any>> = {
-  "remotion/sweep-light-leak": C40,
+  "remotion/sweep-light-leak": C68,
 };

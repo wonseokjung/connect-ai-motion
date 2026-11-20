@@ -14,7 +14,8 @@ import {synth, peakDb} from '../lib/sound.mjs';
 import {analyseFrames} from '../lib/measure.mjs';
 import {checkBlock} from '../lib/hf-import.mjs';
 import {installSkill, removeSkill} from '../lib/install.mjs';
-import {validateMeta, LICENSES} from '../src/core/catalog.mjs';
+import {validateMeta, LICENSES, mediaOf, leadOf} from '../src/core/catalog.mjs';
+import {mediaName} from '../src/core/assets.mjs';
 import {buildTimeline, seriesPlan, itemFrames} from '../src/core/timeline.mjs';
 import {notSaid, readingSeconds, countWords} from '../src/core/text.mjs';
 import {safeBox} from '../src/core/zones.mjs';
@@ -42,7 +43,7 @@ const film = (...beats) => ({version: 1, style: 'connect', sound: false, allow: 
 {
   assert.deepEqual(catErrors, [], 'catalog problems: ' + catErrors.join('; '));
   const all = Object.values(metas);
-  assert.ok(all.length >= 40, `catalog has ${all.length} items`);
+  assert.ok(all.length >= 80, `catalog has ${all.length} items`);
   for (const m of all) assert.ok(LICENSES.test(m.license), `${m.kind}: licence ${m.license}`);
   const playable = all.filter((m) => !m.status || m.status === 'ok');
   for (const src of ['kit', 'remotion', 'hyperframes', 'lottie', 'shader']) assert.ok(playable.some((m) => m.kind.startsWith(src + '/')), `a playable ${src} item`);
@@ -51,15 +52,31 @@ const film = (...beats) => ({version: 1, style: 'connect', sound: false, allow: 
   const families = playable.filter((m) => m.role === 'scene').map((m) => m.family);
   assert.equal(new Set(families).size, families.length, 'every scene has its own family');
   ok('every scene is its own design (no two share a family)');
+  // pictures, not text cards: every scene says what carries it, and most of the catalog is pictures
+  const scenes = playable.filter((m) => m.role === 'scene');
+  for (const m of scenes) assert.ok(['picture', 'type'].includes(m.lead), `${m.kind}: lead`);
+  const pics = scenes.filter((m) => m.lead === 'picture');
+  assert.ok(scenes.length >= 60 && pics.length * 2 > scenes.length, `${pics.length} picture scenes of ${scenes.length}`);
+  ok(`${scenes.length} scenes, ${pics.length} of them carried by a picture (more than half)`);
+  // files a scene shows: listed in "media", and the example files that ship with the kit are really there
+  for (const m of scenes) for (const src of mediaOf(m.example || {}, m)) {
+    assert.ok(src.startsWith('kit:'), `${m.kind}: example media must ship with the kit (${src})`);
+    assert.ok(fs.existsSync(path.join(KIT, src.slice(4))), `${m.kind}: ${src} is missing`);
+  }
+  assert.notEqual(mediaName('kit:examples/media/photo-1.jpg'), mediaName('input/photo-1.jpg'));
+  assert.deepEqual(mediaOf({items: [{src: 'a.jpg'}, {src: 'b.png', text: 'x'}], src: 'c.glb'}, {media: ['items', 'src']}), ['a.jpg', 'b.png', 'c.glb']);
+  ok('media: every example picture, layer and model ships with the kit; paths, lists and {src} items are all found');
   for (const m of all.filter((x) => x.status && x.status !== 'ok')) assert.ok(m.reasons?.length, `${m.kind} says why it cannot play`);
   ok('items that cannot play here say why');
 }
 {
-  const bad = (over) => validateMeta({kind: 'kit/x', title: 't', description: 'd', source: {type: 'kit'}, license: 'MIT', role: 'scene', use: 'title', family: 'x', example: {text: 'a'}, ...over}, 'x');
+  const bad = (over) => validateMeta({kind: 'kit/x', title: 't', description: 'd', source: {type: 'kit'}, license: 'MIT', role: 'scene', use: 'title', lead: 'type', family: 'x', example: {text: 'a'}, ...over}, 'x');
   assert.deepEqual(bad({}), []);
   for (const lic of ['CC-BY-4.0', 'GPL-3.0', 'AGPL-3.0-only', 'NOASSERTION', 'Prosperity-3.0.0', 'unknown', 'SSPL-1.0']) assert.ok(bad({license: lic}).some((e) => /not on the list/.test(e)), lic);
+  const bad0 = bad;
+  assert.ok(bad0({lead: undefined}).some((e) => /lead/.test(e)) && bad0({lead: 'both'}).some((e) => /lead/.test(e)) && bad0({media: 'src'}).some((e) => /media/.test(e)));
   assert.ok(bad({role: 'overlay'}).length && bad({use: 'whatever'}).length && bad({status: 'unsupported'}).length && bad({kind: 'kit/other'}).length);
-  ok('meta contract: CC BY, GPL, AGPL, NOASSERTION, Prosperity and unknown licences are refused; role, use, status, kind are checked');
+  ok('meta contract: CC BY, GPL, AGPL, NOASSERTION, Prosperity and unknown licences are refused; role, use, lead, media, status, kind are checked');
 }
 // ---------- the built-in examples ----------
 {
@@ -67,7 +84,10 @@ const film = (...beats) => ({version: 1, style: 'connect', sound: false, allow: 
   assert.deepEqual(r.errors, [], JSON.stringify(r.errors));
   const tl = r.timelines['16x9'];
   assert.ok(tl.seconds >= 15 && tl.seconds <= 32, `hello is ${tl.seconds} s`);
-  ok(`examples/hello passes check in 16:9 and 9:16 (${tl.seconds.toFixed(1)} s, ${tl.beats.length} beats)`);
+  assert.deepEqual(r.advice, [], JSON.stringify(r.advice));
+  assert.ok(hello.sound === false, 'the built-in example is silent unless you turn the tones on');
+  assert.ok(tl.beats.filter((b) => leadOf(b.meta) === 'picture').length * 2 >= tl.beats.length, 'half of hello is pictures');
+  ok(`examples/hello passes check in 16:9 and 9:16 with no advice (${tl.seconds.toFixed(1)} s, ${tl.beats.length} beats, silent, half of them pictures)`);
   const r2 = await run(readJson(path.join(KIT, 'examples', 'blank', 'storyboard.json')));
   assert.deepEqual(r2.errors, []);
   ok('examples/blank passes check');
@@ -137,6 +157,19 @@ await expectErr(film(beat({kind: 'remotion/tr-fade'})), 'kind', /is a transition
 await expectErr(film(beat({id: 'a'}), beat({id: 'b', kind: 'remotion/title-blur', in: 'kit/keyword'})), 'kind', /not a transition/, 'a scene used as a transition');
 await expectErr(film(beat({kind: 'remotion/code-swap', say: 'swap black to red', from: 'black', to: 'red', text: undefined})), 'field', /needs "code"/, 'a missing field');
 await expectErr(film(beat({kind: 'custom', component: './nope/Scene.tsx'})), 'file', /not found/, 'a custom scene that is not there');
+await expectErr(film(beat({kind: 'kit/photo-kenburns', src: './input/nope.jpg', text: 'One line'})), 'file', /nope\.jpg not found/, 'a picture that is not there');
+{
+  // pictures, not text cards: three word scenes in a row are pointed out; a picture between them clears it
+  const words = ['remotion/title-blur', 'remotion/motion-blur-slam', 'remotion/gsap-split', 'kit/quote'];
+  const r1 = await run(film(...words.map((k, i) => beat({id: 'w' + i, kind: k, dur: 2}))));
+  const a = r1.advice.find((x) => x.what === 'words-only');
+  assert.ok(a && /w0, w1, w2, w3: 4 scenes in a row/.test(a.msg), JSON.stringify(r1.advice));
+  const mixed = [words[0], words[1], 'kit/draw-skyline', words[2], words[3]];
+  const r2 = await run(film(...mixed.map((k, i) => beat({id: 'm' + i, kind: k, dur: 2}))));
+  assert.ok(!r2.advice.some((x) => x.what === 'words-only'), JSON.stringify(r2.advice));
+  assert.ok(r2.facts.some((f) => /pictures: 1 of 5 beats/.test(f)));
+  ok(`words-only run: ${a.msg}`);
+}
 {
   const six = ['remotion/title-blur', 'remotion/motion-blur-slam', 'remotion/gsap-split', 'remotion/rough-mark', 'kit/quote', 'kit/keyword'];
   const story = film(...six.map((k, i) => beat({id: 'b' + i, kind: k, hi: 'line', dur: 2, in: i ? 'remotion/tr-fade' : undefined})));
@@ -170,7 +203,8 @@ await expectErr(film(beat({kind: 'custom', component: './nope/Scene.tsx'})), 'fi
   const open = draftStory(scriptLines('CONNECT AI LAB. AI education for everyone.\nIt takes 3 steps.\n'), metas, info).beats;
   assert.deepEqual([open[0].kind, open[0].text, open[0].sub, open[1].value, open[1].text], ['kit/ident', 'CONNECT AI LAB', 'AI education for everyone', '3', 'steps']);
   assert.equal(metas[story.beats[2].kind].use, 'number');
-  assert.ok(['steps', 'list', 'flow', 'timeline'].includes(metas[story.beats[3].kind].use));
+  assert.ok(['steps', 'list', 'flow', 'timeline', 'map', 'diagram'].includes(metas[story.beats[3].kind].use));
+  for (const b of story.beats) assert.ok(!metas[b.kind].media && metas[b.kind].draft !== false, `${b.id}: a draft never picks a scene that needs your files or data (${b.kind})`);
   assert.equal(metas[story.beats[4].kind].use, 'quote');
   const r = await run(story);
   assert.ok(!r.errors.some((e) => ['said', 'kind', 'repeat', 'field'].includes(e.what)), JSON.stringify(r.errors));
@@ -236,7 +270,7 @@ await expectErr(film(beat({kind: 'custom', component: './nope/Scene.tsx'})), 'fi
   const bad = [];
   const walk = (d) => {
     for (const e of fs.readdirSync(d, {withFileTypes: true})) {
-      if (['node_modules', 'out', 'work', '.git', 'docs'].includes(e.name)) continue;
+      if (['node_modules', 'out', 'work', '.git', 'docs', 'input'].includes(e.name)) continue;
       const f = path.join(d, e.name);
       if (e.isDirectory()) walk(f);
       else if (/\.(wav|mp3|m4a|mov|mp4)$/i.test(e.name)) bad.push(f + ' (media file)');

@@ -1,0 +1,22 @@
+{
+  "kind": "shader/bg-marble",
+  "title": "Dark stone (shader)",
+  "description": "Black marble with slow veins of light in one colour (shaders Marble, WebGPU, locked to the frame).",
+  "source": {
+    "type": "shader",
+    "package": "shaders",
+    "version": "4.0.2",
+    "repo": "shader-effects-inc/shaders",
+    "component": "Marble"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+    "color": "colour of the veins (the style's accent)",
+    "speed": "0-1 (0.05)",
+    "strength": "0-1 (0.2)"
+  },
+  "family": "shader-marble",
+  "example": {}
+}

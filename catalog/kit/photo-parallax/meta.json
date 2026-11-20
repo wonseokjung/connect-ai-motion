@@ -1,0 +1,20 @@
+{
+  "kind": "kit/photo-parallax",
+  "title": "Depth from layers",
+  "description": "Two to five flat pictures (back to front; the front ones with transparent parts, PNG / SVG / WebP) slide at different speeds as the camera moves, so the frame gets depth. The words stand between the layers.",
+  "source": {"type": "kit", "path": "catalog/kit/photo-parallax/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["layers"],
+  "props": {"layers": "2-5 pictures, far to near", "move": "left | right | up (left)", "depth": "how strong, 0-2 (1)", "behind": "the words go behind the layers from this number on (default: only the nearest layer is in front)", "sky": "colour behind everything", "text": "1-4 words (optional)", "sub": "small caps over them (optional)"},
+  "needs": ["layers"],
+  "changes": [0, 0.3],
+  "maxWords": 8,
+  "dur": 3.6,
+  "push": false,
+  "family": "photo-parallax",
+  "draft": false,
+  "example": {"layers": ["kit:examples/media/layer-1.svg", "kit:examples/media/layer-2.svg", "kit:examples/media/layer-3.svg", "kit:examples/media/layer-4.svg"], "sky": "#14202B", "text": "Flat layers, real depth", "sub": "parallax", "behind": 2}
+}

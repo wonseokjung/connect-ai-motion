@@ -18,7 +18,7 @@ import {installSkill, removeSkill} from '../lib/install.mjs';
 import {importHyperFrames} from '../lib/hf-import.mjs';
 
 const argv = process.argv.slice(2);
-const VALUE_FLAGS = ['only', 'agent', 'dir', 'style', 'source', 'secs', 'prefix', 'license', 'use', 'role', 'seconds', 'name', 'scale'];
+const VALUE_FLAGS = ['only', 'agent', 'dir', 'style', 'source', 'secs', 'prefix', 'license', 'use', 'role', 'seconds', 'name', 'scale', 'lead'];
 const flag = (n) => argv.includes('--' + n);
 const opt = (n, d = null) => {
   const i = argv.indexOf('--' + n);
@@ -176,13 +176,14 @@ async function main() {
       let all = Object.values(metas);
       if (opt('use')) all = all.filter((m) => m.use === opt('use'));
       if (opt('role')) all = all.filter((m) => m.role === opt('role'));
+      if (opt('lead')) all = all.filter((m) => m.lead === opt('lead'));
       if (flag('json')) { console.log(JSON.stringify(all, null, 1)); break; }
       for (const role of ['scene', 'bg', 'transition', 'sweep']) {
         const list = all.filter((m) => m.role === role);
         if (!list.length) continue;
         log(`\n${{scene: 'SCENES  ("kind" of a beat)', bg: 'BACKGROUNDS  ("bg" of the film or of a beat)', transition: 'TRANSITIONS  ("in" of a beat; a hard cut needs nothing)', sweep: 'SWEEPS  ("in" of a beat: light passes over a hard cut)'}[role]}`);
         for (const m of list) {
-          log(`  ${m.kind.padEnd(34)} ${m.status && m.status !== 'ok' ? '[' + m.status + '] ' : ''}${m.use.padEnd(10)} ${String(m.license).padEnd(16)} ${m.title}`);
+          log(`  ${m.kind.padEnd(34)} ${m.status && m.status !== 'ok' ? '[' + m.status + '] ' : ''}${m.use.padEnd(10)} ${String(m.lead || '').padEnd(8)} ${String(m.license).padEnd(16)} ${m.title}`);
           if (flag('props') && m.props) for (const [k, v] of Object.entries(m.props)) log(`      ${k}: ${v}`);
           for (const r of m.reasons || []) log(`      why: ${r}`);
         }
@@ -200,7 +201,7 @@ async function main() {
       const role = opt('role', 'scene');
       const P = projectPaths(projectDir(pos[1] || 'fm-gallery'));
       const {metas} = buildCatalog();
-      const story = galleryStory(metas, {sources: opt('source') ? opt('source').split(',') : [], role, secs: Number(opt('secs', '0')), style: opt('style', 'connect')});
+      const story = galleryStory(metas, {sources: opt('source') ? opt('source').split(',') : [], role, secs: Number(opt('secs', '0')), style: opt('style', 'connect'), lead: opt('lead')});
       if (!story.beats.length) { log('nothing to show for that filter'); process.exitCode = 1; break; }
       writeJson(path.join(P.dir, 'storyboard.json'), story);
       if (!fs.existsSync(path.join(P.dir, 'my-info.json'))) writeJson(path.join(P.dir, 'my-info.json'), {name: 'CONNECT AI LAB', style: 'connect'});
@@ -262,7 +263,7 @@ Lottie files, shaders, the kit, or your own file, all called the same way. The k
   npx ${KIT_NAME} check [folder]       rhythm (3 s rule), repeated designs, words not in the script, word count -> out/report.md
   npx ${KIT_NAME} sheet [folder]       stills only: one per beat (fast look before a full render)
   npx ${KIT_NAME} preview [folder]     Remotion Studio with your storyboard
-  npx ${KIT_NAME} catalog              every scene, background and transition (--use number, --role bg, --props, --json)
+  npx ${KIT_NAME} catalog              every scene, background and transition (--lead picture, --use chart, --role bg, --props, --json)
   npx ${KIT_NAME} gallery [folder]     render the catalog itself (--role scene | bg | transition, --source remotion, --sheet)
   npx ${KIT_NAME} hf-import <folder>   HyperFrames blocks -> catalog scenes (unsupported ones listed with reasons)
   npx ${KIT_NAME} doctor               check this computer

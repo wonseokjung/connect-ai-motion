@@ -13,6 +13,7 @@
   "src": "block.html",
   "role": "scene",
   "use": "number",
+  "lead": "type",
   "props": {
     "value": "number as you say it",
     "text": "what it counts (1-2 words)"

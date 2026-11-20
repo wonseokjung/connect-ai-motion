@@ -1,0 +1,20 @@
+{
+  "kind": "kit/zoom-lens",
+  "title": "Lens on a picture",
+  "description": "Your screenshot or picture fills the frame; a round glass travels to one spot and shows it bigger while the rest steps back. For pointing at one thing in a screen without a recording.",
+  "source": {"type": "kit", "path": "catalog/kit/zoom-lens/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["src"],
+  "props": {"src": "your screenshot or picture", "x": "where the lens goes, 0-1 from the left (0.62)", "y": "0-1 from the top (0.42)", "zoom": "how much bigger (2.2)", "text": "1-5 words (optional)", "sub": "small caps over them (optional)", "cues": "{\"look\": time} when the lens arrives"},
+  "needs": ["src"],
+  "changes": [0, 0.28],
+  "maxWords": 8,
+  "dur": 3.4,
+  "push": false,
+  "family": "zoom-lens",
+  "draft": false,
+  "example": {"src": "kit:examples/media/shot-2.jpg", "x": 0.22, "y": 0.36, "zoom": 2.3, "text": "Look at one line", "sub": "a lens, no recording"}
+}

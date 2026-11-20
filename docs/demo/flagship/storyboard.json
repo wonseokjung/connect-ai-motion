@@ -1,0 +1,480 @@
+{
+ "version": 1,
+ "title": "Visual Vibe Coding: what you can make (from the course intro, his own voice)",
+ "style": "connect",
+ "bg": "kit/bg-pool",
+ "voice": "input/voice.wav",
+ "sound": false,
+ "tail": 0,
+ "allow": [
+  "CONNECT AI LAB",
+  "Visual Vibe Coding",
+  "AI education for everyone"
+ ],
+ "beats": [
+  {
+   "id": "title",
+   "at": 0,
+   "say": "And with this visual vibe coding, \"visual vibe coding\" is a term I made up, there's so much you can do.",
+   "kind": "remotion/three-type",
+   "text": "Visual Vibe Coding",
+   "hi": "Vibe",
+   "color": "teal",
+   "sub": "term I made up",
+   "cues": {
+    "turn": {
+     "text": "비주얼",
+     "near": 2.14
+    }
+   }
+  },
+  {
+   "id": "somuch",
+   "at": {
+    "text": "할",
+    "near": 4.72
+   },
+   "say": "And with this visual vibe coding, \"visual vibe coding\" is a term I made up, there's so much you can do.",
+   "kind": "kit/photo-collage",
+   "seed": "vvc",
+   "items": [
+    {
+     "src": "input/stills/iso-city.jpg"
+    },
+    {
+     "src": "input/stills/pixel-run.jpg"
+    },
+    {
+     "src": "input/stills/chart-donut.jpg"
+    },
+    {
+     "src": "input/stills/draw-route.jpg",
+     "at": {
+      "text": "너무나도",
+      "near": 6.5
+     }
+    },
+    {
+     "src": "input/stills/code-result.jpg",
+     "at": {
+      "text": "많습니다",
+      "near": 7.1
+     }
+    },
+    {
+     "src": "input/stills/photo-parallax.jpg",
+     "at": {
+      "text": "이걸",
+      "near": 7.64
+     }
+    }
+   ]
+  },
+  {
+   "id": "dims",
+   "at": {
+    "text": "2D",
+    "near": 8.4
+   },
+   "say": "With 2D, 3D, three.js, Blender, if you use all of these to make things,",
+   "kind": "kit/flat-to-solid",
+   "from": "2D",
+   "to": "3D",
+   "bg": {
+    "kind": "kit/bg-pool",
+    "color": "teal",
+    "y": 60
+   },
+   "cues": {
+    "solid": {
+     "text": "3D",
+     "near": 9.0
+    }
+   }
+  },
+  {
+   "id": "model",
+   "at": {
+    "text": "three.js",
+    "near": 10.0
+   },
+   "say": "With 2D, 3D, three.js, Blender, if you use all of these to make things,",
+   "kind": "remotion/three-model",
+   "src": "kit:examples/media/model-rover.glb",
+   "wire": true,
+   "sub": "three.js",
+   "text": "Blender",
+   "color": "sky",
+   "bg": {
+    "kind": "kit/bg-pool",
+    "color": "blue",
+    "x": 64
+   },
+   "cues": {
+    "shade": {
+     "text": "블렌더",
+     "near": 11.28
+    },
+    "words": {
+     "text": "블렌더",
+     "near": 11.28
+    }
+   }
+  },
+  {
+   "id": "all",
+   "at": {
+    "text": "것들을",
+    "near": 12.54
+   },
+   "say": "With 2D, 3D, three.js, Blender, if you use all of these to make things,",
+   "kind": "kit/orbit",
+   "text": "Make",
+   "items": [
+    {
+     "text": "2D",
+     "at": 12.62
+    },
+    {
+     "text": "3D",
+     "at": 12.86
+    },
+    {
+     "text": "three.js",
+     "at": 13.1
+    },
+    {
+     "text": "Blender",
+     "at": 13.34
+    }
+   ],
+   "stage": "plum"
+  },
+  {
+   "id": "image",
+   "at": {
+    "text": "일상적으로",
+    "near": 14.44
+   },
+   "say": "everyday image generation, video generation, the product detail pages you often make, cartoon characters, movie-like things: you can generate all of it.",
+   "kind": "kit/photo-kenburns",
+   "src": "kit:examples/media/photo-1.jpg",
+   "move": "in",
+   "text": "Image generation",
+   "cues": {
+    "words": {
+     "text": "이미지",
+     "near": 14.92
+    }
+   }
+  },
+  {
+   "id": "video",
+   "at": {
+    "text": "영상",
+    "near": 15.78
+   },
+   "say": "everyday image generation, video generation, the product detail pages you often make, cartoon characters, movie-like things: you can generate all of it.",
+   "kind": "kit/photo-strip",
+   "images": [
+    "kit:examples/media/photo-3.jpg",
+    "kit:examples/media/photo-2.jpg",
+    "kit:examples/media/photo-4.jpg",
+    "kit:examples/media/photo-1.jpg"
+   ],
+   "text": "Video generation",
+   "speed": 1.6
+  },
+  {
+   "id": "page",
+   "at": {
+    "text": "흔하게",
+    "near": 16.94
+   },
+   "say": "everyday image generation, video generation, the product detail pages you often make, cartoon characters, movie-like things: you can generate all of it.",
+   "kind": "kit/device-browser",
+   "src": "input/page.jpg",
+   "page": true,
+   "scroll": 0.3,
+   "text": "Product detail pages",
+   "color": "leaf",
+   "bg": {
+    "kind": "kit/bg-pool",
+    "color": "leaf",
+    "y": 40
+   },
+   "cues": {
+    "click": {
+     "text": "상세페이지",
+     "near": 17.5
+    }
+   }
+  },
+  {
+   "id": "character",
+   "at": {
+    "text": "만화",
+    "near": 18.6
+   },
+   "say": "everyday image generation, video generation, the product detail pages you often make, cartoon characters, movie-like things: you can generate all of it.",
+   "kind": "kit/actor",
+   "shape": "circle",
+   "color": "coral",
+   "action": "jump",
+   "text": "Cartoon characters",
+   "bg": {
+    "kind": "kit/bg-pool",
+    "color": "violet",
+    "x": 36
+   },
+   "cues": {
+    "act": {
+     "text": "캐릭터",
+     "near": 19.44
+    }
+   }
+  },
+  {
+   "id": "movie",
+   "at": {
+    "text": "영화",
+    "near": 20.5
+   },
+   "say": "everyday image generation, video generation, the product detail pages you often make, cartoon characters, movie-like things: you can generate all of it.",
+   "kind": "kit/photo-parallax",
+   "layers": [
+    "kit:examples/media/layer-1.svg",
+    "kit:examples/media/layer-2.svg",
+    "kit:examples/media/layer-3.svg",
+    "kit:examples/media/layer-4.svg"
+   ],
+   "sky": "#14202B",
+   "text": "Movie-like",
+   "behind": 2,
+   "depth": 1.4
+  },
+  {
+   "id": "arvr",
+   "at": {
+    "text": "그리고",
+    "near": 23.3
+   },
+   "say": "And you can put it into AR or VR and build a future world,",
+   "kind": "kit/draw-svg",
+   "viewBox": "0 0 400 260",
+   "paths": [
+    "M60 110 h280 a26 26 0 0 1 26 26 v60 a26 26 0 0 1 -26 26 h-80 c-18 0 -28 -26 -60 -26 s-42 26 -60 26 h-80 a26 26 0 0 1 -26 -26 v-60 a26 26 0 0 1 26 -26 z",
+    "M72 110 C76 22 324 22 328 110",
+    "M96 160 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0 z",
+    "M236 160 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0 z",
+    "M34 148 h-16 a6 6 0 0 0 -6 6 v24 a6 6 0 0 0 6 6 h16",
+    "M366 148 h16 a6 6 0 0 1 6 6 v24 a6 6 0 0 1 -6 6 h-16",
+    {
+     "d": "M150 128 h100",
+     "color": "gold"
+    }
+   ],
+   "text": "AR or VR",
+   "color": "sky",
+   "cues": {
+    "words": {
+     "text": "AR이나",
+     "near": 24.74
+    }
+   }
+  },
+  {
+   "id": "future",
+   "at": {
+    "text": "미래",
+    "near": 27.36
+   },
+   "say": "And you can put it into AR or VR and build a future world,",
+   "kind": "kit/draw-skyline",
+   "stage": "night",
+   "text": "A future world",
+   "seed": "future"
+  },
+  {
+   "id": "mixed",
+   "at": {
+    "text": "현실과",
+    "near": 29.02
+   },
+   "say": "or build a world where reality and virtual mix.",
+   "kind": "kit/photo-wipe",
+   "src": "kit:examples/media/photo-2.jpg",
+   "wire": true,
+   "label": "Reality",
+   "label2": "Virtual",
+   "color": "teal",
+   "cues": {
+    "wipe": {
+     "text": "가상이",
+     "near": 30.16
+    }
+   }
+  },
+  {
+   "id": "learn",
+   "at": {
+    "text": "인공지능이",
+    "near": 32.84
+   },
+   "say": "And if you can do this, you can even build a reinforcement-learning simulator where AI learns.",
+   "kind": "kit/grid-path",
+   "text": "AI learns",
+   "sub": "simulator",
+   "color": "teal",
+   "seed": "link",
+   "cues": {
+    "solve": {
+     "text": "강화학습",
+     "near": 34.42
+    }
+   }
+  },
+  {
+   "id": "webapp",
+   "at": {
+    "text": "웹사이트",
+    "near": 36.28
+   },
+   "say": "And websites, apps, computer games, VR, XR, MR games: you can make all of these.",
+   "kind": "kit/device-duo",
+   "src": "input/page.jpg",
+   "src2": "input/stills/iso-city_tall.jpg",
+   "items": [
+    {
+     "text": "Websites",
+     "at": {
+      "text": "웹사이트",
+      "near": 36.28
+     }
+    },
+    {
+     "text": "Apps",
+     "at": {
+      "text": "앱",
+      "near": 37.62
+     }
+    }
+   ],
+   "color": "coral",
+   "bg": {
+    "kind": "kit/bg-pool",
+    "color": "coral",
+    "x": 60
+   }
+  },
+  {
+   "id": "game",
+   "at": {
+    "text": "컴퓨터",
+    "near": 38.24
+   },
+   "say": "And websites, apps, computer games, VR, XR, MR games: you can make all of these.",
+   "kind": "kit/pixel-run",
+   "text": "Computer games",
+   "color": "coral",
+   "ground": "teal",
+   "seed": "vvc"
+  },
+  {
+   "id": "xr",
+   "at": {
+    "text": "VR",
+    "near": 39.6
+   },
+   "say": "And websites, apps, computer games, VR, XR, MR games: you can make all of these.",
+   "kind": "kit/iso-city",
+   "stage": "plum",
+   "seed": "xr",
+   "items": [
+    {
+     "text": "VR",
+     "color": "teal",
+     "at": {
+      "text": "VR",
+      "near": 39.6
+     }
+    },
+    {
+     "text": "XR",
+     "color": "coral",
+     "at": {
+      "text": "XR",
+      "near": 40.26
+     }
+    },
+    {
+     "text": "MR",
+     "color": "sky",
+     "at": {
+      "text": "MR",
+      "near": 41.08
+     }
+    }
+   ]
+  },
+  {
+   "id": "wall",
+   "at": {
+    "text": "할",
+    "near": 42.58
+   },
+   "say": "There's so much you can do. I mean, the spectrum of what you can do gets enormously wide.",
+   "kind": "remotion/three-screens",
+   "images": [
+    "input/stills/iso-city.jpg",
+    "input/stills/grid-path.jpg",
+    "input/stills/pixel-run.jpg",
+    "input/stills/draw-skyline.jpg",
+    "input/stills/chart-donut.jpg",
+    "input/stills/flat-to-solid.jpg"
+   ],
+   "color": "gold"
+  },
+  {
+   "id": "spectrum",
+   "at": {
+    "text": "스펙트럼",
+    "near": 44.62
+   },
+   "say": "There's so much you can do. I mean, the spectrum of what you can do gets enormously wide.",
+   "kind": "kit/type-mask",
+   "src": "input/mosaic.jpg",
+   "text": "Spectrum",
+   "sub": "enormously wide",
+   "cues": {
+    "open": {
+     "text": "넓어지는",
+     "near": 46.82
+    }
+   },
+   "gain": 1.7
+  },
+  {
+   "id": "brand",
+   "at": 48.3,
+   "say": "CONNECT AI LAB. AI education for everyone.",
+   "kind": "kit/ident",
+   "text": "CONNECT AI LAB",
+   "sub": "AI education for everyone",
+   "dur": 2.1,
+   "in": "remotion/sweep-light-leak"
+  },
+  {
+   "id": "end",
+   "at": 50.4,
+   "say": "Visual Vibe Coding. youtube.com/@CONNECT-AI-LAB aicitybuilders.com",
+   "kind": "kit/endcard",
+   "text": "Visual Vibe Coding",
+   "items": [
+    "youtube.com/@CONNECT-AI-LAB",
+    "aicitybuilders.com"
+   ],
+   "dur": 2.77
+  }
+ ]
+}

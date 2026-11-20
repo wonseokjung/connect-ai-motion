@@ -1,0 +1,21 @@
+{
+  "kind": "kit/device-phone",
+  "title": "Phone",
+  "description": "Your vertical screenshot (or a clip) inside a phone that tilts in, settles and floats, with a soft light passing over the glass. In 16:9 a few words stand next to it; in 9:16 the phone takes the frame.",
+  "source": {"type": "kit", "path": "catalog/kit/device-phone/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "device",
+  "lead": "picture",
+  "media": ["src"],
+  "props": {"src": "your vertical screenshot (jpg, png, webp) or clip (mp4, webm)", "text": "1-5 words next to the phone (optional)", "sub": "small caps over them (optional)", "focus": "which part of the picture stays in view, CSS position (50% 0%)", "color": "colour of the small caps and the rule"},
+  "needs": ["src"],
+  "changes": [0, 0.3],
+  "maxWords": 9,
+  "dur": 3.2,
+  "maxDur": 7,
+  "push": false,
+  "family": "device-phone",
+  "draft": false,
+  "example": {"src": "kit:examples/media/photo-3.jpg", "focus": "62% 50%", "text": "Your picture, in a phone", "sub": "no footage needed", "color": "coral"}
+}

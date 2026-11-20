@@ -5,7 +5,7 @@
 Open source by [CONNECT AI LAB](https://www.youtube.com/@CONNECT-AI-LAB) · AI education for everyone · the tool of lesson 3 of the Visual Vibe Coding course.
 Use it when you have something to say but nothing filmed: a channel intro, a shop promo, an explainer, a lesson recap.
 
-One line of your script is one beat, and one beat is one full-frame scene. The scenes are not ours alone: Remotion packages, HyperFrames blocks, Lottie files, GPU shaders and your own components all sit in one catalog and are called the same way, and one layer on top directs the beats and checks the rhythm.
+One line of your script is one beat, and one beat is one full-frame scene. Most scenes are pictures, not text cards: a chart that draws itself, a line drawing, a 3D model, your screenshot inside a device, a still photo that moves, a flow chart, an isometric city. The scenes are not ours alone: Remotion packages, HyperFrames blocks, Lottie files, GPU shaders and your own components all sit in one catalog and are called the same way, and one layer on top directs the beats and checks the rhythm.
 
 ```mermaid
 flowchart LR
@@ -22,10 +22,12 @@ flowchart LR
 Like mixed martial arts took the best moves of every style and made them work in one ring, this kit does not add one more graphics library. It connects the ones that exist, so any of them is one line in `storyboard.json`:
 
 ```json
-{"say": "No footage. Only a script. A finished film.", "kind": "remotion/kinetic-lines", "lines": ["No footage", "Only a script", "A finished film"]}
-{"say": "Something new every three seconds.",          "kind": "hyperframes/ring-count", "value": "3", "unit": "seconds"}
-{"say": "It checks itself before it renders.",         "kind": "lottie/gold-check", "text": "Check"}
-{"say": "This is my own picture.",                     "kind": "custom", "component": "./scenes/Mine.tsx"}
+{"say": "With 2D, 3D,",                        "kind": "kit/flat-to-solid", "from": "2D", "to": "3D"}
+{"say": "Write the script, check, render.",    "kind": "kit/draw-route", "items": ["Script", "Check", "Render"]}
+{"say": "the product detail pages you make,",  "kind": "kit/device-browser", "src": "input/page.png", "text": "Product detail pages"}
+{"say": "Something new every three seconds.",  "kind": "hyperframes/ring-count", "value": "3", "unit": "seconds"}
+{"say": "It checks itself before it renders.", "kind": "lottie/gold-check", "text": "Check"}
+{"say": "This is my own picture.",             "kind": "custom", "component": "./scenes/Mine.tsx"}
 ```
 
 > **Licences.** This kit is MIT. It runs on [Remotion](https://www.remotion.dev), which is not MIT: Remotion is free for individuals, for companies with up to 3 employees and for non-profits; other companies need a Remotion Company License ([LICENSE.md](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)). Some catalog items use Remotion packages under the same Remotion License, HyperFrames blocks are Apache-2.0, GSAP uses GreenSock's standard no-charge license (not an OSI licence). Each item says its licence in its `meta.json`; the catalog refuses anything that is not on its allow list. The full list is in [NOTICE.md](NOTICE.md).
@@ -34,14 +36,17 @@ Like mixed martial arts took the best moves of every style and made them work in
 
 | | File | What to look at |
 |---|---|---|
-| A talk, without the footage | [demo_jay.mp4](docs/demo/demo_jay.mp4) | 35 s of the author's own lecture (his voice, Korean) with no camera picture at all: 11 beats, 9 of them starting on a word he says, one custom scene (the rabbit he talks about), English on screen taken from the English subtitles of that video |
-| The built-in example | [hello.mp4](docs/demo/hello.mp4) · [9:16](docs/demo/hello_9x16.mp4) | 30 s made from ten lines of text, no voice: what `demo` renders on your computer |
-| Scenes | [gallery_scene.mp4](docs/demo/gallery_scene.mp4) · [sheet](docs/demo/gallery_scene_sheet.jpg) | all 35 scenes with their own example, by source |
-| Backgrounds | [gallery_bg.mp4](docs/demo/gallery_bg.mp4) | 6 backgrounds (noise, rays, GPU shaders) |
+| What you can make | [flagship.mp4](docs/demo/flagship.mp4) · [9:16](docs/demo/flagship_9x16.mp4) | 49 s of the author's own lecture voice (Korean) and no camera picture: 20 beats, 17 of them pictures, each a different scene, every beat starting on a word he says (word times from the audio); English on screen from the English subtitles of that video |
+| A talk, without the footage | [demo_jay.mp4](docs/demo/demo_jay.mp4) | 35 s of the same lecture explained with pictures: 11 beats, 10 of them pictures, three custom scenes written for this film (the rabbit he talks about, the cost that falls, three curves) |
+| The built-in example | [hello.mp4](docs/demo/hello.mp4) · [9:16](docs/demo/hello_9x16.mp4) | 31 s made from ten lines of text, no voice, no sound: what `demo` renders on your computer |
+| Scenes | [gallery_scene.mp4](docs/demo/gallery_scene.mp4) · [sheet](docs/demo/gallery_scene_sheet.jpg) | all 66 scenes with their own example, pictures first |
+| Backgrounds | [gallery_bg.mp4](docs/demo/gallery_bg.mp4) | 10 backgrounds (noise, rays, six GPU shaders) |
 | Transitions | [gallery_transition.mp4](docs/demo/gallery_transition.mp4) | 6 transitions and the light leak that passes over a hard cut |
 | Catalog page | [docs/index.html](docs/index.html) | every item as a looping clip with the line that calls it |
 
-![one still per beat of the lecture demo](docs/demo/demo_jay_sheet.jpg)
+![one still per beat of the flagship demo](docs/demo/flagship_sheet.jpg)
+
+The storyboards behind both films are in [docs/demo/flagship](docs/demo/flagship) and [docs/demo/jay-one-line](docs/demo/jay-one-line) (storyboard, word times, the pictures they use, the custom scenes, the check report; the voice recordings are not in the repository, so they check and render silently).
 
 ## Try it
 
@@ -77,6 +82,7 @@ Your own film: write a few lines in `my-script.md` and run `npx connect-ai-motio
 | A scene, background or transition that does not exist, cannot play here, or is used in the wrong place (it names the closest ones) | error |
 | A missing field, a missing file | error |
 | An empty picture for more than 0.6 s (measured) | error |
+| Three scenes in a row that are carried by words only (show the thing instead: `catalog --lead picture`) | advice |
 | Transitions on more than 40 % of the cuts, the same transition twice | advice |
 | A picture that stands completely still for 1.6 s (measured) | advice |
 | A scene that covers under 2 % of the frame at its fullest (measured) | advice |
@@ -85,15 +91,27 @@ Your own film: write a few lines in `my-script.md` and run `npx connect-ai-motio
 
 ## The catalog
 
-`npx connect-ai-motion catalog` lists everything. Today: **48 items you can play** and 3 listed with the reason they cannot (yet).
+`npx connect-ai-motion catalog` lists everything. Today: **83 items you can play** (66 scenes, 10 backgrounds, 7 transitions) and 3 listed with the reason they cannot (yet).
 
-| Source | Scenes | Backgrounds, transitions | Examples |
-|---|---|---|---|
-| `kit/` | 10 | 1 | brand card, key word, 1 · 2 · 3 steps, before / after, up and down, quote, big number, line with stops, wall of cards, end card; light pool |
-| `remotion/` | 15 | 3 + 6 + 1 | headline (layout-utils), kinetic lines, flow (paths), bars and percent ring (shapes), marked sentence (rough-notation), words in time (captions), change one line of code (prismjs), formula (KaTeX), prompt and click (mac-cursors), ask and answer (rounded-text-box), word with a trail (motion-blur), letters from the middle (gsap), stack of plates (svg-3d-engine), 3D solid (three); contour lines and breathing dots (noise), slow rays (starburst); fade, push, wipe, flip, clock wipe, iris (transitions); light leak over the cut (light-leaks) |
-| `hyperframes/` | 7 | | title card, circle stat, pill stat, shape label from the warm-grain template (unchanged copies); scramble title, words rise, ring counter (our blocks in the HyperFrames format) |
-| `lottie/` | 3 | | check mark, signal pulse, orbit arcs, each with a word under it |
-| `shader/` | | 2 | flowing gradient, god rays (the `shaders` package, WebGPU, locked to the frame) |
+| Source | Picture scenes | Word scenes | Backgrounds, transitions | Examples |
+|---|---|---|---|---|
+| `kit/` | 28 | 10 | 1 | **your pictures:** photo that moves, two pictures and a line, depth from layers, wall of prints, film strip, word as a window, lens on a picture · **devices:** browser, phone, laptop + phone with your screenshot or clip · **data:** line chart, donut, heat map, Gantt, scatter · **line drawings:** route on a map, skyline, any SVG path · **diagrams:** node graph, orbit, flow chart, flat to solid, isometric city, learning on a grid · code and its result, one-shape character, pixel game, line with stops · brand card, key word, steps, before / after, quote, big number, letters that fall, end card; light pool |
+| `remotion/` | 9 | 9 | 3 + 6 + 1 | your .glb model on a turntable, your stills as panels in 3D space, 3D solid (three), stack of plates (svg-3d-engine), flow (paths), bars and percent ring (shapes), change one line of code (prismjs), prompt and click (mac-cursors) · extruded 3D words (three), headline, kinetic lines, marked sentence (rough-notation), words in time (captions), formula (KaTeX), ask and answer, word with a trail (motion-blur), letters from the middle (gsap); contour lines and breathing dots (noise), slow rays (starburst); fade, push, wipe, flip, clock wipe, iris; light leak over the cut |
+| `hyperframes/` | | 7 | | title card, circle stat, pill stat, shape label from the warm-grain template (unchanged copies); scramble title, words rise, ring counter (our blocks in the HyperFrames format) |
+| `lottie/` | | 3 | | check mark, signal pulse, orbit arcs, each with a word under it |
+| `shader/` | | | 6 | flowing gradient, god rays, curtains of light, studio wall, liquid colour, dark stone (the `shaders` package, WebGPU, locked to the frame) |
+
+**Pictures first.** Every scene says in its `meta.json` what carries it: `"lead": "picture"` (an object, a drawing, a chart, a device, a photo, 3D) or `"lead": "type"` (the words are the picture). 37 of the 66 scenes are pictures. `catalog --lead picture` lists them, the catalog page shows them first, and check points at three word scenes in a row.
+
+**Your pictures.** "No footage" means you do not need to film, not that you may not show anything. A scene that shows a file lists the field in `"media"`, and the path is looked up from your project folder:
+
+```json
+{"say": "This is the page.",        "kind": "kit/device-browser", "src": "input/my-page.png", "page": true, "text": "The page"}
+{"say": "Reality and virtual mix.", "kind": "kit/photo-wipe", "src": "input/room.jpg", "wire": true, "label": "Reality", "label2": "Virtual"}
+{"say": "Made in Blender.",         "kind": "remotion/three-model", "src": "input/robot.glb", "wire": true, "text": "Blender"}
+```
+
+The small files the examples use are in `examples/media/` (photos cut from CC0 Poly Haven panoramas, a CC0 model, our own stills; see its CREDITS.md) and are called as `kit:examples/media/photo-1.jpg`.
 
 Each item is a folder `catalog/<source>/<name>/` with the component (or `block.html` / `anim.json`) and a `meta.json`:
 
@@ -105,6 +123,7 @@ Each item is a folder `catalog/<source>/<name>/` with the component (or `block.h
   "license": "MIT",
   "role": "scene",
   "use": "emphasis",
+  "lead": "type",
   "props": {"text": "the sentence", "hi": "the phrase to mark", "mark": "highlight | circle | underline"},
   "needs": ["text", "hi"],
   "changes": [0, 0.4],
@@ -114,7 +133,7 @@ Each item is a folder `catalog/<source>/<name>/` with the component (or `block.h
 }
 ```
 
-`role` is scene, bg, transition or sweep. `changes` tells the rhythm check when the scene itself brings something new. `family` is what "each design once" counts. `status` is `ok`, `unsupported` or `needs-download`, with `reasons`.
+`role` is scene, bg, transition or sweep. `lead` is picture or type. `media` lists the fields that hold your files. `changes` tells the rhythm check when the scene itself brings something new. `family` is what "each design once" counts. `status` is `ok`, `unsupported` or `needs-download`, with `reasons`.
 
 Listed but not playable here: the full HyperFrames registry (456 items, a download; `hf-import` then turns each block into a scene and lists the ones that cannot play frame by frame), Remocn components and remotion-bits parts (install them in your project and call them as custom scenes).
 
@@ -170,7 +189,7 @@ npx connect-ai-motion check [folder]       --short also checks 9:16, --measure a
 npx connect-ai-motion sheet [folder]       stills only: one per beat
 npx connect-ai-motion run [folder]         check, render, check the film   --short  --square  --only <beat>  --seconds 1  --force
 npx connect-ai-motion preview [folder]     Remotion Studio with your storyboard
-npx connect-ai-motion catalog              --use number  --role bg  --props  --json
+npx connect-ai-motion catalog              --lead picture  --use chart  --role bg  --props  --json
 npx connect-ai-motion gallery [folder]     the catalog itself as a film   --role scene | bg | transition  --source remotion  --sheet  --clips
 npx connect-ai-motion hf-import <folder>   HyperFrames blocks to scenes
 npx connect-ai-motion doctor
@@ -183,9 +202,10 @@ Sound: `"sound": "tones"` adds one soft code-made tone per cut (no samples, noth
 
 ## Where it stops
 
-- It does not film, generate footage or generate images. Every pixel is drawn by code.
+- It does not film, generate footage or generate images. It draws with code and frames the pictures, clips and 3D models you give it.
 - It does not write your script and it does not add claims: the screen shows words of the line, and check enforces that.
 - It is not for graphics on top of a person talking: that is [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion). A beat rendered with `--only` can be cut into such a video as a full-frame insert in any editor.
+- 3D scenes use WebGL and are for one to three moments in a film, not every beat.
 - Shader backgrounds need WebGPU on the computer that renders. Without it the layer stays empty and the plain background shows.
 - The first render downloads the Inter font (Google Fonts) and, once, the browser Remotion renders with.
 

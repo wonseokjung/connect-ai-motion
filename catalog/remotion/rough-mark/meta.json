@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "emphasis",
+  "lead": "type",
   "props": {"text": "the sentence (up to 12 words)", "hi": "the phrase to mark (must be inside text)", "mark": "highlight | circle | underline", "color": "colour of the mark", "cues": "{\"mark\": time} when the pen moves"},
   "needs": ["text", "hi"],
   "changes": [0, 0.4],

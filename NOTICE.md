@@ -15,6 +15,13 @@ connect-ai-motion is CONNECT AI LAB's code (MIT, see LICENSE), built on Remotion
 | `src/adapters/Shader.tsx` (frame-locked `createRendererFromJSON`) and `catalog/shader/*` presets | `shaders` 4.0.2 (shader-effects-inc/shaders), `shaders/core` | MIT | Used as it is; the adapter is ours. `shaders/react` is not used |
 | `catalog/lottie/*/anim.json` | ours, made by code for connect-ai-video-motion | MIT | Ours |
 | `src/adapters/Lottie.tsx` | @remotion/lottie 4.0.529 + lottie-web 5.13.0 | Remotion License / MIT | Used as they are |
+| `examples/media/photo-1..4.jpg` (pictures for the examples) | Poly Haven HDRIs "Misty Pines", "Table Mountain 1", "The Sky Is On Fire", "Alps Field" (polyhaven.com): one view cut from each panorama and tone-mapped by us | CC0 | Changed copies; no credit needed, listed in `examples/media/CREDITS.md` |
+| `examples/media/model-rover.glb` (model for `remotion/three-model`) | Quaternius "Rover" (poly.pizza/m/tzOLXetacM) | CC0 | Unchanged copy |
+| `examples/media/layer-*.svg`, `shot-*.jpg` | ours (a landscape drawn by a script; stills of this kit's own scenes) | MIT | Ours |
+| Letters of `remotion/three-type` | Droid Sans Bold typeface data inside the three package, `three/examples/fonts/droid/droid_sans_bold.typeface.json` (The Android Open Source Project) | Apache-2.0 | Used as it is: imported from the installed three package, not copied into this kit |
+| `remotion/three-model` loader | `three/examples/jsm/loaders/GLTFLoader.js` (three 0.170) | MIT | Used as it is |
+| `kit/code-result` syntax colours | prismjs 1.30 | MIT | Used as it is |
+| the picture scenes (`kit/photo-*`, `kit/device-*`, `kit/chart-*`, `kit/draw-*`, diagrams, `kit/actor`, `kit/pixel-run`, `kit/grid-path`, `kit/type-*`), `src/parts/Picture.tsx`, `src/parts/Devices.tsx` | ours | MIT | Ours; device frames are plain boxes with no brand marks |
 | Storyboard as "at this moment, show this" | feicaiclub/video-spec-builder (through the plan file of connect-ai-video-motion) | MIT | Idea; our own format |
 | `lib/install.mjs` skill installer | connect-ai-video-motion / rea-biz-kit (CONNECT AI LAB) | MIT | Ours |
 | `lib/ffmpeg.mjs`, `src/core/words.mjs`, `src/core/contrast.mjs`, `src/parts/Atmos.tsx` | connect-ai-video-motion (CONNECT AI LAB) | MIT | Ours, copied |
@@ -34,9 +41,9 @@ connect-ai-motion is CONNECT AI LAB's code (MIT, see LICENSE), built on Remotion
 | @remotion/noise | MIT | `remotion/bg-noise-contour`, `remotion/bg-noise-dots` |
 | @remotion/motion-blur | MIT | `remotion/motion-blur-slam` |
 | @remotion/gsap | MIT | `remotion/gsap-split` |
-| @remotion/three | MIT | `remotion/three-solid` |
+| @remotion/three | MIT | `remotion/three-solid`, `remotion/three-model`, `remotion/three-type`, `remotion/three-screens` |
 | @remotion/google-fonts | MIT (Inter itself: SIL Open Font License) | the type of every scene |
-| @remotion/svg-3d-engine | Remotion License | `remotion/svg3d-stack` |
+| @remotion/svg-3d-engine | Remotion License | `remotion/svg3d-stack`, `kit/flat-to-solid` |
 | @remotion/light-leaks | Remotion License | `remotion/sweep-light-leak` |
 | @remotion/starburst | Remotion License | `remotion/bg-starburst` |
 | @remotion/mac-cursors | Remotion License | `remotion/cursor-prompt` |
@@ -47,10 +54,10 @@ connect-ai-motion is CONNECT AI LAB's code (MIT, see LICENSE), built on Remotion
 | Package | Licence | Where |
 |---|---|---|
 | gsap 3.15.0 and its plugins (SplitText, ScrambleTextPlugin, DrawSVGPlugin) | GreenSock standard no-charge license, https://gsap.com/standard-license (not an OSI licence) | `remotion/gsap-split`, HyperFrames blocks. Always the installed package, never a CDN |
-| three 0.170.0, @react-three/fiber 9.3.0 | MIT | `remotion/three-solid` |
+| three 0.170.0, @react-three/fiber 9.3.0 | MIT | `remotion/three-solid`, `remotion/three-model`, `remotion/three-type`, `remotion/three-screens` |
 | lottie-web 5.13.0 | MIT | `lottie/*` |
 | shaders 4.0.2 | MIT | `shader/*` |
-| prismjs 1.30.0 | MIT | `remotion/code-swap` (syntax colours) |
+| prismjs 1.30.0 | MIT | `remotion/code-swap`, `kit/code-result` (syntax colours) |
 | katex 0.16.22 | MIT (its fonts: SIL Open Font License) | `remotion/katex-formula` |
 | react 19.1.0, react-dom 19.1.0 | MIT | everything |
 

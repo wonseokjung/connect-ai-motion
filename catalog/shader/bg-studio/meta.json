@@ -1,0 +1,24 @@
+{
+  "kind": "shader/bg-studio",
+  "title": "Studio wall (shader)",
+  "description": "A dark studio backdrop: a soft key light, a fill and a back light breathe slowly on the wall, like a night set (shaders StudioBackground, WebGPU, locked to the frame).",
+  "source": {
+    "type": "shader",
+    "package": "shaders",
+    "version": "4.0.2",
+    "repo": "shader-effects-inc/shaders",
+    "component": "StudioBackground"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+    "color": "colour of the lights (the style's accent)",
+    "x": "0-1 (0.5)",
+    "y": "0-1 (0.72)",
+    "speed": "0-10 (2)",
+    "strength": "0-1 (0.9)"
+  },
+  "family": "shader-studio",
+  "example": {}
+}

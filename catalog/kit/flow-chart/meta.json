@@ -1,0 +1,18 @@
+{
+  "kind": "kit/flow-chart",
+  "title": "Flow chart",
+  "description": "Boxes and arrows build one step at a time as you name them (left to right, top to bottom in 9:16). One step can be a decision, drawn as a diamond, with a way forward and a dashed way back to the step before. A dot walks the path: around the loop once, then on to the end, and each box lights up when it arrives. Plain SVG.",
+  "source": {"type": "kit", "path": "catalog/kit/flow-chart/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "flow",
+  "lead": "picture",
+  "props": {"items": "3-6 steps, 1-3 words each (or {text, at, color})", "branch": "number of the step that is a decision (counted from 1; optional)", "label": "word on the way forward from the decision (optional)", "label2": "word on the way back (optional)", "color": "colour of the steps (default: one colour per step)", "color2": "colour of the decision and the way back (coral)", "cues": "{\"back\": time} when the way back draws", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 20,
+  "dur": 5,
+  "maxDur": 11,
+  "family": "flow-chart",
+  "example": {"items": ["Script", "Storyboard", "Check", "Render"], "branch": 3, "label": "pass", "label2": "fix"}
+}

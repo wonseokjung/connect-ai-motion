@@ -2,11 +2,12 @@
 // Same contract as connect-ai-video-motion's GraphicProps (it, r, lf, dur, st, ink, scrim, u, fps, W, H), so a
 // graphic written for one kit can be used in the other. In this kit `r` is the safe box of the whole frame.
 import React from 'react';
-import {Easing, interpolate, random} from 'remotion';
+import {Easing, interpolate, random, staticFile} from 'remotion';
 import {fitText, measureText} from '@remotion/layout-utils';
 import {FONT, MONO} from '../brand';
-import {HUE as HUES} from '../styles/presets.mjs';
+import {HUE as HUES, STAGE as STAGES} from '../styles/presets.mjs';
 import {itemFrames, itemText} from '../core/timeline.mjs';
+import {mediaName} from '../core/assets.mjs';
 
 export type SceneProps = {
   it: any; // the storyboard line (text, sub, value, items ...) + it.meta (the catalog meta.json)
@@ -28,6 +29,11 @@ export type GraphicProps = SceneProps;
 
 export {FONT, MONO, itemText};
 export const HUE = HUES as Record<string, string>;
+export const STAGE = STAGES as Record<string, string>;
+/** ground colour of a picture scene: "stage" in the storyboard (a name from STAGE or any colour), else `d`, else nothing */
+export const stageOf = (it: any, d: string | null = null) => (it.stage ? STAGE[it.stage] || it.stage : d ? STAGE[d] || d : null);
+/** URL of a picture / clip / model a storyboard line points to (the field must be listed in the scene's meta "media") */
+export const media = (src: any) => staticFile('fm-assets/' + mediaName(String(src && typeof src === 'object' ? src.src : src)));
 export const hueOf = (it: any, d: string, field = 'color') => (it[field] && HUE[it[field]]) || it[field] || d;
 export const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 export const OUT = Easing.bezier(0.16, 1, 0.3, 1);

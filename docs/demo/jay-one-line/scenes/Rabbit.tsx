@@ -29,7 +29,9 @@ const Rabbit: React.FC<SceneProps> = ({it, r, lf, dur, st, ink, u, tall}) => {
   const aAt = cueAt(it, 'first', 99999), bAt = cueAt(it, 'second', 99999);
   const a = k01(lf, aAt, aAt + 10), b = k01(lf, bAt, bAt + 10);
   // "mode": "big" shows the text as one large word under the card instead of colour chips
-  const big = it.mode === 'big' || it.mode === 'wait' ? String(it.text || '') : '';
+  const big = it.mode === 'big' || it.mode === 'wait' || it.mode === 'wish' ? String(it.text || '') : '';
+  // "mode": "wish": the colour he would like comes in from the right, up to the middle (a wish, not yet the video)
+  const wishAt = cueAt(it, 'wish', 12), wishK = it.mode === 'wish' ? k01(lf, wishAt, wishAt + 16) : 0;
   const label = big ? '' : String(it.text || ''), label2 = String(it.sub || '');
   const cw = tall ? r[2] : Math.min(r[2] * 0.82, ((r[3] - (label || big ? 150 * u : 0)) * 16) / 9), ch = (cw * 9) / 16;
   const below = label || big ? (tall ? 190 : 150) * u : 0;
@@ -49,6 +51,8 @@ const Rabbit: React.FC<SceneProps> = ({it, r, lf, dur, st, ink, u, tall}) => {
   return (
     <Box r={r}>
       <div style={{position: 'absolute', left: x, top: y, width: cw, height: ch, borderRadius: 22 * u, overflow: 'hidden', background: screen, border: `${Math.max(1, 1.5 * u)}px solid ${st.cardLine}`, boxShadow: `0 ${30 * u}px ${90 * u}px rgba(0,0,0,0.55)`, opacity: inK, transform: `scale(${0.96 + 0.04 * inK})`}}>
+        {it.mode === 'wish' && next && <div style={{position: 'absolute', right: 0, top: 0, width: `${wishK * 50}%`, height: '100%', background: next}} />}
+        {it.mode === 'wish' && <div style={{position: 'absolute', right: `${wishK * 50}%`, top: 0, width: Math.max(2, 3 * u), height: '100%', background: '#F6F1E7', opacity: wishK > 0 ? 1 : 0}} />}
         <svg width={cw} height={ch} viewBox="0 0 800 450" style={{position: 'absolute'}}>
           {!wait && Array.from({length: 9}, (_, i) => <line key={i} x1={i * 120 - dash} y1={352} x2={i * 120 - dash + 54} y2={352} stroke="#F6F1E7" strokeOpacity={0.3} strokeWidth={3} strokeLinecap="round" />)}
           <g transform="translate(215 62)" opacity={wait ? 0.18 : 1}><Bunny f={wait ? 3 : f} color="#F6F1E7" eye={screen} /></g>

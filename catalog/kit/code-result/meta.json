@@ -1,0 +1,18 @@
+{
+  "kind": "kit/code-result",
+  "title": "Code and its result",
+  "description": "Two panels fill the frame: the code and what it makes (shapes that keep hopping on a small stage). At the cue one value is retyped in the code and the result changes with it at once: the ground colour, the shape, or how many there are. Syntax colours by prismjs.",
+  "source": {"type": "kit", "path": "catalog/kit/code-result/index.tsx", "also": "prismjs 1.30 (MIT)"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "code",
+  "lead": "picture",
+  "props": {"code": "3-7 short lines of code", "from": "the value in the code that changes", "to": "what it becomes", "prop": "what that value drives in the result: color | shape | count (color)", "shape": "circle | square | triangle | star", "count": "how many shapes (1)", "fill": "colour of the shapes (white)", "ground": "ground colour when prop is not color", "label": "small caps on the code panel (optional)", "label2": "small caps on the result panel (optional)", "color": "colour of the changed value", "cues": "{\"swap\": time} when the value changes"},
+  "needs": ["code", "from", "to"],
+  "changes": [0, 0.5],
+  "maxWords": 8,
+  "dur": 3.8,
+  "family": "code-result",
+  "draft": false,
+  "example": {"code": "const scene = {\n  ground: \"black\",\n  shape: \"circle\",\n  count: 3,\n};\nrender(scene);", "from": "black", "to": "red", "prop": "color", "count": 3, "label": "code", "label2": "result", "color": "coral"}
+}

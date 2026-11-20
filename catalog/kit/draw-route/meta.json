@@ -1,0 +1,18 @@
+{
+  "kind": "kit/draw-route",
+  "title": "Route on a map",
+  "description": "A route draws itself across an abstract map (faint contour rings made with @remotion/noise, a dotted grid; not a real place): a pin drops on every stop as you name it, the line runs on to the next one (@remotion/paths) and the last pin is gold. The terrain drifts a little under the route.",
+  "source": {"type": "kit", "path": "catalog/kit/draw-route/index.tsx", "uses": "@remotion/paths, @remotion/noise"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "map",
+  "lead": "picture",
+  "props": {"items": "2-6 stops, 1-3 words each (or {text, at, x, y, color}; x and y from 0 to 1 place the pin yourself)", "color": "colour of the route (coral)", "seed": "any word or number: another seed, another terrain", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 15,
+  "dur": 4.4,
+  "maxDur": 10,
+  "family": "draw-route",
+  "example": {"items": ["Script", "Draft", "Check", "Render"], "color": "coral"}
+}

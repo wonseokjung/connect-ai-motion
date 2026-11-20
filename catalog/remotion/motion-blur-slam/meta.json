@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "keyword",
+  "lead": "type",
   "props": {"text": "1-3 words", "sub": "small caps line (optional)", "color": "colour of the word"},
   "needs": ["text"],
   "changes": [0, 0.35],

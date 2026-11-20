@@ -6,11 +6,13 @@
   "license": "MIT",
   "role": "scene",
   "use": "code",
+  "lead": "picture",
   "props": {"code": "2-7 short lines of code (not checked against the script)", "from": "the value that changes (must be in code)", "to": "what it becomes", "text": "small caps label on the card (optional)", "lang": "javascript | css | python | json (javascript)", "color": "colour of the new value", "cues": "{\"focus\": time the line lights up, \"swap\": time it changes}"},
   "needs": ["code", "from", "to"],
   "changes": [0, 0.35, 0.5],
   "maxWords": 8,
   "dur": 4,
   "family": "code-swap",
+  "draft": false,
   "example": {"code": "const rabbit = {\n  color: \"black\",\n  speed: 3,\n};\nrender(rabbit);", "from": "black", "to": "red", "text": "one line", "color": "red"}
 }

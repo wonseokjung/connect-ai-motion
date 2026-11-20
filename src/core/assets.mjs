@@ -9,3 +9,11 @@ export function assetName(kind, file) {
   if (kind === 'hyperframes' || kind === 'lottie' || kind === 'clip') return `user_${kind}_${hash(String(file))}.${ext}`;
   return `${String(kind).replace(/[^a-z0-9-]+/gi, '__')}__${String(file).replace(/[^a-z0-9.-]+/gi, '_')}`;
 }
+
+// Pictures, clips and models a scene shows ("media" fields of a catalog scene): work/fm-assets/media_<hash>.<ext>.
+// A path that starts with "kit:" is a file that ships with the kit (kit:examples/media/photo-1.jpg); any other path
+// is looked up from your project folder.
+export function mediaName(file) {
+  const ext = String(file).split('?')[0].split('.').pop().toLowerCase();
+  return `media_${hash(String(file))}.${ext}`;
+}

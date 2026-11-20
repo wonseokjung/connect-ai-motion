@@ -1,0 +1,50 @@
+{
+  "kind": "kit/chart-heatmap",
+  "title": "Heat map",
+  "description": "A grid of cells lights up in a wave from left to right; the stronger the colour, the higher the value, and the highest cells turn gold. After the wave a quiet scan keeps walking over the columns. The values are yours: a table, a week of hours, or the pixels of a picture. Plain SVG.",
+  "source": {
+    "type": "kit",
+    "path": "catalog/kit/chart-heatmap/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "data",
+  "lead": "picture",
+  "props": {
+    "values": "your numbers: rows of numbers [[..], [..]], or one flat list with \"cols\"",
+    "cols": "cells per row when values is one flat list",
+    "items": "row labels (optional)",
+    "lines": "column labels (optional)",
+    "text": "small heading (optional)",
+    "numbers": "true = print each value in its cell",
+    "hi": "[row, column] of one cell to ring (counted from 0)",
+    "color": "colour of the cells (coral)",
+    "color2": "colour of the highest cells (gold)",
+    "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+    "values"
+  ],
+  "changes": [0, 0.2, 0.4, 0.6],
+  "maxWords": 30,
+  "dur": 4.2,
+  "maxDur": 9,
+  "family": "chart-heatmap",
+  "draft": false,
+  "example": {
+    "text": "A picture is numbers",
+    "numbers": true,
+    "color": "coral",
+    "values": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1],
+      [2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 2, 2, 2],
+      [2, 2, 2, 2, 2, 2, 2, 3, 4, 6, 6, 6, 4, 3, 2, 2],
+      [3, 3, 3, 3, 3, 3, 3, 4, 6, 8, 9, 8, 6, 4, 3, 3],
+      [3, 3, 3, 3, 3, 3, 4, 5, 7, 9, 9, 9, 7, 5, 4, 3],
+      [3, 3, 3, 3, 3, 4, 4, 5, 6, 8, 9, 8, 6, 5, 4, 4],
+      [1, 1, 1, 1, 1, 1, 1, 1, 2, 5, 6, 5, 2, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 5, 4, 3, 2, 1, 1],
+      [1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 3, 3, 2, 2, 1]
+    ]
+  }
+}

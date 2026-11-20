@@ -1,0 +1,20 @@
+{
+  "kind": "kit/photo-collage",
+  "title": "Collage of prints",
+  "description": "Your pictures land one by one like prints dropped on a table, each at a slightly different angle, and build a wall that fills the frame. Each one can land on the word you say, and can carry a short caption on its paper edge.",
+  "source": {"type": "kit", "path": "catalog/kit/photo-collage/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["items"],
+  "props": {"items": "3-6 pictures: {src: your picture, text: caption on the paper edge (optional, 1-2 words), at: when it lands}", "seed": "any word: other angles"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 12,
+  "dur": 3.6,
+  "maxDur": 9,
+  "family": "photo-collage",
+  "draft": false,
+  "example": {"items": [{"src": "kit:examples/media/photo-1.jpg"}, {"src": "kit:examples/media/photo-3.jpg"}, {"src": "kit:examples/media/photo-2.jpg"}, {"src": "kit:examples/media/photo-4.jpg"}, {"src": "kit:examples/media/shot-1.jpg"}]}
+}

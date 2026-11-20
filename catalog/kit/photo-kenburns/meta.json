@@ -1,0 +1,20 @@
+{
+  "kind": "kit/photo-kenburns",
+  "title": "Photo, slowly moving",
+  "description": "Your picture fills the frame and the camera drifts across it (push in, pull out, or pan). A thin caption and a short gold rule sit on a soft shade at the bottom. No footage needed: one still becomes a shot.",
+  "source": {"type": "kit", "path": "catalog/kit/photo-kenburns/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["src"],
+  "props": {"src": "your picture (jpg, png, webp), path from the project folder", "move": "in | out | left | right | up (in)", "focus": "which part stays in view, CSS position (50% 50%)", "text": "caption, 1-5 words (optional)", "sub": "small caps over it (optional)", "cues": "{\"words\": time} when the caption comes in"},
+  "needs": ["src"],
+  "changes": [0, 0.3],
+  "maxWords": 9,
+  "dur": 3.2,
+  "push": false,
+  "family": "photo-kenburns",
+  "draft": false,
+  "example": {"src": "kit:examples/media/photo-1.jpg", "move": "in", "text": "One still becomes a shot", "sub": "your picture"}
+}

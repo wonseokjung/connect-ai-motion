@@ -8,9 +8,11 @@
 import {METAS} from '../catalog/metas.generated.mjs';
 
 export const ROLES = ['scene', 'bg', 'transition', 'sweep'];
-export const USES = ['brand', 'title', 'statement', 'keyword', 'number', 'chart', 'steps', 'flow', 'timeline', 'list', 'compare', 'quote', 'emphasis', 'code', 'formula', 'prompt', 'dialogue', 'hero3d', 'icon', 'voice', 'end', 'background', 'transition', 'clip'];
+export const USES = ['brand', 'title', 'statement', 'keyword', 'number', 'chart', 'steps', 'flow', 'timeline', 'list', 'compare', 'quote', 'emphasis', 'code', 'formula', 'prompt', 'dialogue', 'hero3d', 'icon', 'voice', 'end', 'background', 'transition', 'clip', 'picture', 'device', 'map', 'diagram', 'data', 'character'];
 export const SOURCES = ['kit', 'remotion', 'hyperframes', 'lottie', 'shader', 'custom', 'clip'];
 export const STATUS = ['ok', 'needs-download', 'unsupported'];
+// what carries a scene: a picture (object, drawing, chart, diagram, photo, 3D) or type (words are the picture)
+export const LEADS = ['picture', 'type'];
 // fields of a storyboard line that put words on screen (checked against "say"); code and tex are not checked
 export const TEXT_FIELDS = ['text', 'sub', 'label', 'label2', 'value', 'unit', 'from', 'to', 'by'];
 export const LIST_FIELDS = ['items', 'lines'];
@@ -41,6 +43,7 @@ export function metaFor(it, metas = METAS) {
       text: m.text || null,
       changes: m.changes || null,
       maxWords: m.maxWords || 14,
+      lead: m.lead || (kind === 'clip' || kind === 'custom' || kind === 'lottie' ? 'picture' : null),
       user: true,
       status: 'ok',
     };
@@ -67,8 +70,26 @@ export function validateMeta(m, dirName = '') {
   if (playable && m.role === 'scene' && !m.example) e.push('a scene needs "example": {field: value} so the gallery can play it');
   if (m.changes != null && !(m.changes === 'items' || m.changes === 'words' || (Array.isArray(m.changes) && m.changes.every((x) => x >= 0 && x <= 1)))) e.push('changes must be "items", "words" or a list of fractions of the scene (0-1)');
   if (m.maxWords != null && !(m.maxWords > 0)) e.push('maxWords must be a number > 0');
+  if (playable && m.role === 'scene' && !LEADS.includes(m.lead)) e.push('a scene needs "lead": "picture" (an object, drawing, chart, photo or 3D carries it) or "type" (words carry it)');
+  if (m.media != null && !(Array.isArray(m.media) && m.media.every((x) => typeof x === 'string'))) e.push('media must be a list of field names that hold files, for example ["src"]');
   return e;
 }
 
 export const listCatalog = (metas = METAS) => Object.values(metas).sort((a, b) => (a.kind < b.kind ? -1 : 1));
 export const playable = (m) => m && (!m.status || m.status === 'ok');
+/** 'picture' | 'type' | null (unknown: your own block) */
+export const leadOf = (m) => (m && LEADS.includes(m.lead) ? m.lead : null);
+
+/** the files a storyboard line points to, through the fields its scene lists in "media" (a path, a list of paths, or a list of {src}) */
+export function mediaOf(it, meta) {
+  const out = [];
+  for (const f of meta?.media || []) {
+    const v = it?.[f];
+    const list = Array.isArray(v) ? v : v == null || v === '' ? [] : [v];
+    for (const x of list) {
+      const s = x && typeof x === 'object' ? x.src : x;
+      if (typeof s === 'string' && s) out.push(s);
+    }
+  }
+  return out;
+}

@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "timeline",
+  "lead": "picture",
   "props": {"items": "3-6 stops: \"label\" or {text, sub, at}", "text": "small heading (optional)"},
   "needs": ["items"],
   "changes": "items",

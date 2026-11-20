@@ -1,0 +1,20 @@
+{
+  "kind": "kit/type-mask",
+  "title": "Word as a window",
+  "description": "A very big word is a window: your picture is bright inside the letters and far back and dark around them, and it keeps moving. At the cue the word opens and the picture fills the frame (SVG clipPath on text, exact on every frame).",
+  "source": {"type": "kit", "path": "catalog/kit/type-mask/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["src"],
+  "props": {"src": "the picture behind the word", "text": "1-2 short words (they are set in capitals)", "sub": "small caps line under it (optional)", "focus": "which part of the picture stays in view, CSS position (50% 50%)", "open": "false: stay on the word, do not open it", "gain": "how bright the picture is inside the letters (1.25)", "cues": "{\"open\": time} when the camera goes through the word"},
+  "needs": ["src", "text"],
+  "changes": [0, 0.62],
+  "maxWords": 6,
+  "dur": 3.4,
+  "push": false,
+  "family": "type-mask",
+  "draft": false,
+  "example": {"src": "kit:examples/media/photo-3.jpg", "focus": "50% 78%", "text": "Visual", "sub": "what people see"}
+}

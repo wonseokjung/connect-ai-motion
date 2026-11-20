@@ -6,6 +6,7 @@
   "license": "Remotion License",
   "role": "scene",
   "use": "prompt",
+  "lead": "picture",
   "props": {"text": "what is typed (3-9 words)", "sub": "what comes back (1-3 words)", "label": "word on the button (default: an arrow)", "cues": "{\"click\": time}"},
   "needs": ["text"],
   "changes": [0, 0.55],

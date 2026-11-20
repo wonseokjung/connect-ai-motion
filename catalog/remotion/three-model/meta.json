@@ -1,0 +1,21 @@
+{
+  "kind": "remotion/three-model",
+  "title": "3D model on a turntable",
+  "description": "Your .glb model turns slowly on a turntable under studio light, in real 3D (@remotion/three: React Three Fiber + three.js GLTFLoader, WebGL). With the shade cue it starts as a wireframe on clay and the finished material rises through it from the ground up: the model is built in front of you. A few words can stand next to it.",
+  "source": {"type": "remotion", "package": "@remotion/three", "version": "4.0.529", "also": "three 0.170 (MIT) with GLTFLoader, @react-three/fiber 9 (MIT). Example model: Rover by Quaternius (CC0), examples/media/model-rover.glb"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "hero3d",
+  "lead": "picture",
+  "media": ["src"],
+  "props": {"src": "your model (.glb, textures inside the file; no Draco compression)", "text": "1-4 words next to the model (optional)", "sub": "small caps over them (optional)", "wire": "true: start as a wireframe and get the material at 45 % of the scene (or time it with the cue)", "color": "colour of the wireframe, the ring and the back light (teal)", "cues": "{\"shade\": time} when the material rises through the wireframe; {\"words\": time} when the words come in"},
+  "needs": ["src"],
+  "changes": [0, 0.45],
+  "maxWords": 8,
+  "dur": 4,
+  "maxDur": 9,
+  "push": false,
+  "family": "three-model",
+  "draft": false,
+  "example": {"src": "kit:examples/media/model-rover.glb", "wire": true, "text": "From wireframe to render", "sub": "three.js", "color": "teal"}
+}

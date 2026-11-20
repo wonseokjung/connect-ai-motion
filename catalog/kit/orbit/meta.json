@@ -1,0 +1,20 @@
+{
+  "kind": "kit/orbit",
+  "title": "Orbit",
+  "description": "One thing in the middle and two to six others circling it on tilted rings, each at its own distance and speed, for as long as the beat lasts. A body that passes in front grows and covers the centre; behind it is smaller and dimmer. Each ring draws when you name its body. Plain SVG.",
+  "source": {"type": "kit", "path": "catalog/kit/orbit/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "diagram",
+  "lead": "picture",
+  "props": {"text": "the thing in the middle, 1-2 words", "items": "2-6 things in orbit, 1-2 words each (or {text, at, color})", "color": "colour of the centre (gold)", "seed": "any word or number: other starting places", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": ["text", "items"],
+  "changes": "items",
+  "maxWords": 16,
+  "dur": 4.6,
+  "maxDur": 12,
+  "push": false,
+  "family": "orbit",
+  "draft": false,
+  "example": {"text": "Storyboard", "items": ["Remotion", "HyperFrames", "Lottie", "Shaders", "three.js"]}
+}

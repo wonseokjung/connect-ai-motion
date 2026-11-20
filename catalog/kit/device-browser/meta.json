@@ -1,0 +1,21 @@
+{
+  "kind": "kit/device-browser",
+  "title": "Browser window",
+  "description": "Your screenshot inside a plain browser window that fills the frame. The page scrolls slowly, a cursor travels in and clicks, and the page answers by scrolling on. The address bar shows only the text you give it. A caption can sit under the window.",
+  "source": {"type": "kit", "path": "catalog/kit/device-browser/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "device",
+  "lead": "picture",
+  "media": ["src"],
+  "props": {"src": "your screenshot (jpg, png, webp)", "label": "text in the address bar (optional; empty if you give none)", "text": "caption under the window, 1-5 words (optional)", "sub": "small caps over the caption (optional)", "at": "[x, y] where the cursor clicks, in % of the page area ([60, 60])", "scroll": "how far the page travels, share of its height (0.24)", "page": "true: a long page screenshot, shown at full width and scrolled", "color": "colour of the click mark and the small caps", "cues": "{\"click\": time} when the cursor clicks"},
+  "needs": ["src"],
+  "changes": [0, 0.55],
+  "maxWords": 10,
+  "dur": 3.6,
+  "maxDur": 8,
+  "push": false,
+  "family": "device-browser",
+  "draft": false,
+  "example": {"src": "kit:examples/media/photo-4.jpg", "text": "Your page, in motion", "sub": "screenshot", "color": "teal"}
+}

@@ -11,6 +11,7 @@
   "src": "anim.json",
   "role": "scene",
   "use": "icon",
+  "lead": "type",
   "props": {
     "text": "1-3 words under the animation (optional)",
     "sub": "small caps line (optional)",

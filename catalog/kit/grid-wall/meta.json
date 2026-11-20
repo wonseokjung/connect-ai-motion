@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "list",
+  "lead": "type",
   "props": {"items": "4-12 short labels", "hi": "the label to light up (optional)", "color": "its colour"},
   "needs": ["items"],
   "changes": "items",

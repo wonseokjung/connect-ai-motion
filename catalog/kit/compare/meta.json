@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "compare",
+  "lead": "type",
   "props": {"text": "the first thing (1-4 words)", "sub": "the second thing (1-4 words)", "label": "small caps over the first", "label2": "small caps over the second", "color": "colour of the second half", "cues": "{\"swap\": time} when the second lights up"},
   "needs": ["text", "sub"],
   "changes": [0, 0.45],

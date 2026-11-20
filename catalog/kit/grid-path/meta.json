@@ -1,0 +1,17 @@
+{
+  "kind": "kit/grid-path",
+  "title": "Learning on a grid",
+  "description": "A grid with walls, a start and a goal. Three tries wander and stop (faint dashed lines with a cross); at the cue the last try goes straight to the goal and its cells light up. A picture of trial and error: a simulator, a search, a route. The way is found by a real breadth-first search; the world is the same on every render.",
+  "source": {"type": "kit", "path": "catalog/kit/grid-path/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "diagram",
+  "lead": "picture",
+  "props": {"text": "1-4 words (optional)", "sub": "small caps over them (optional)", "color": "colour of the way that works (teal)", "seed": "a word: another word, another grid", "stage": "ground colour: a name from STAGE, any colour, or none", "cues": "{\"solve\": time} when the last try starts"},
+  "changes": [0, 0.18, 0.35, 0.52, 0.75],
+  "maxWords": 7,
+  "dur": 4.4,
+  "maxDur": 9,
+  "family": "grid-path",
+  "example": {"text": "Try, fail, find the way", "sub": "a simulator", "color": "teal", "seed": "link"}
+}

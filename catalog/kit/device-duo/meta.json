@@ -1,0 +1,21 @@
+{
+  "kind": "kit/device-duo",
+  "title": "Laptop and phone",
+  "description": "A laptop lid opens on your wide screenshot, then a phone slides in front with your tall one: a website and its app, one after the other, each on the word you say. Both float a little and the pictures drift inside. Small names under the devices are optional.",
+  "source": {"type": "kit", "path": "catalog/kit/device-duo/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "device",
+  "lead": "picture",
+  "media": ["src", "src2"],
+  "props": {"src": "wide screenshot or clip for the laptop", "src2": "tall screenshot or clip for the phone", "items": "two entries, laptop then phone: a name under each (1-2 words) or {text, at} to time them; leave out for no names", "color": "colour of the phone's name"},
+  "needs": ["src", "src2"],
+  "changes": "items",
+  "maxWords": 6,
+  "dur": 3.6,
+  "maxDur": 8,
+  "push": false,
+  "family": "device-duo",
+  "draft": false,
+  "example": {"src": "kit:examples/media/photo-2.jpg", "src2": "kit:examples/media/photo-1.jpg", "items": ["Website", "App"], "color": "teal"}
+}

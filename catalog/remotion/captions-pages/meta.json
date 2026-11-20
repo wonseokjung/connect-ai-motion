@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "voice",
+  "lead": "type",
   "props": {"text": "the line as it is said (up to about 20 words)", "color": "colour of the lit word", "group": "how long one page of words lasts, in ms (900)"},
   "needs": ["text"],
   "changes": "words",

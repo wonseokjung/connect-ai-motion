@@ -1,0 +1,19 @@
+{
+  "kind": "kit/chart-donut",
+  "title": "Donut",
+  "description": "A donut chart: each slice sweeps into the ring when you name it, in its own colour, while the ring turns very slowly. A word or a value sits in the middle and every slice has a line in the legend with its number counting up. Plain SVG arcs.",
+  "source": {"type": "kit", "path": "catalog/kit/chart-donut/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {"items": "2-8 slices: {text: label, value: number as you say it, color, at}", "text": "word or value in the middle (optional)", "sub": "small caps under it (optional)", "hi": "label of the slice to lift", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 24,
+  "dur": 4.4,
+  "maxDur": 10,
+  "family": "chart-donut",
+  "draft": false,
+  "example": {"text": "Lessons", "sub": "per unit", "items": [{"text": "Motion", "value": "2"}, {"text": "Slides and web", "value": "2"}, {"text": "three.js", "value": "2"}, {"text": "Blender", "value": "2"}, {"text": "Library", "value": "1"}]}
+}

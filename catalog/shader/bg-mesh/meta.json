@@ -1,0 +1,23 @@
+{
+  "kind": "shader/bg-mesh",
+  "title": "Liquid colour (shader)",
+  "description": "A slow liquid mesh of the dark base and two subject colours (shaders MeshGradient, WebGPU, locked to the frame).",
+  "source": {
+    "type": "shader",
+    "package": "shaders",
+    "version": "4.0.2",
+    "repo": "shader-effects-inc/shaders",
+    "component": "MeshGradient"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+    "color": "first colour (indigo)",
+    "color2": "second colour (the style's accent)",
+    "speed": "0-2 (0.6)",
+    "strength": "0-1 (0.42)"
+  },
+  "family": "shader-mesh",
+  "example": {}
+}

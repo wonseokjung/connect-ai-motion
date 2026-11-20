@@ -1,0 +1,17 @@
+{
+  "kind": "kit/type-drop",
+  "title": "Letters that fall",
+  "description": "Big letters behave like objects: each one falls, lands on a floor line with a bounce and a small tilt, and settles. One word can take a colour.",
+  "source": {"type": "kit", "path": "catalog/kit/type-drop/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "keyword",
+  "lead": "type",
+  "props": {"text": "1-3 short words", "hi": "one of the words, in colour (optional)", "color": "its colour", "sub": "small caps line under the floor (optional)"},
+  "needs": ["text"],
+  "changes": "words",
+  "maxWords": 6,
+  "dur": 2.8,
+  "family": "type-drop",
+  "example": {"text": "Made by code", "hi": "code", "color": "coral", "sub": "letters are objects"}
+}

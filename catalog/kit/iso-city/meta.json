@@ -1,0 +1,17 @@
+{
+  "kind": "kit/iso-city",
+  "title": "Isometric city",
+  "description": "A city seen from above at an angle: blocks rise from a ground grid, back rows first, and their windows come on one by one. With items, the values you said become towers in a colour, each with its number and label, growing when you say them. Plain SVG with three shaded faces per block.",
+  "source": {"type": "kit", "path": "catalog/kit/iso-city/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {"items": "0-4 towers: {text: label, value: number as you say it (sets the height; optional), color, at}; without items it is a quiet skyline", "text": "small heading, top left (optional)", "sub": "small caps over it (optional)", "stage": "ground colour: night | deep | slate | wine | moss | plum, or none", "seed": "any word: another city"},
+  "changes": "items",
+  "maxWords": 14,
+  "dur": 3.8,
+  "maxDur": 9,
+  "family": "iso-city",
+  "example": {"stage": "night", "sub": "Visual Vibe Coding", "items": [{"text": "Motion", "color": "teal"}, {"text": "three.js", "color": "coral"}, {"text": "Blender", "color": "sky"}]}
+}

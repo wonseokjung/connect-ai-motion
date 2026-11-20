@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "statement",
+  "lead": "type",
   "props": {"text": "2-5 words", "hi": "word to turn gold", "sub": "small caps line (optional)"},
   "needs": ["text"],
   "changes": [0, 0.4],

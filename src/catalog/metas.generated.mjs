@@ -13,6 +13,7 @@ export const METAS = {
   "src": "block.html",
   "role": "scene",
   "use": "title",
+  "lead": "type",
   "props": {
    "text": "title (1-3 words)",
    "sub": "small caps above"
@@ -77,6 +78,7 @@ export const METAS = {
   "src": "block.html",
   "role": "scene",
   "use": "number",
+  "lead": "type",
   "props": {
    "value": "number",
    "unit": "word after it"
@@ -120,6 +122,7 @@ export const METAS = {
   "src": "block.html",
   "role": "scene",
   "use": "statement",
+  "lead": "type",
   "props": {
    "text": "3-5 words"
   },
@@ -162,6 +165,7 @@ export const METAS = {
   "src": "block.html",
   "role": "scene",
   "use": "number",
+  "lead": "type",
   "props": {
    "value": "number as you say it",
    "text": "what it counts (1-2 words)"
@@ -213,6 +217,7 @@ export const METAS = {
   "src": "block.html",
   "role": "scene",
   "use": "number",
+  "lead": "type",
   "props": {
    "value": "number or short value"
   },
@@ -261,6 +266,7 @@ export const METAS = {
   "src": "block.html",
   "role": "scene",
   "use": "keyword",
+  "lead": "type",
   "props": {
    "text": "1-2 words"
   },
@@ -310,6 +316,7 @@ export const METAS = {
   "src": "block.html",
   "role": "scene",
   "use": "title",
+  "lead": "type",
   "props": {
    "text": "title (1-3 words)",
    "sub": "line under it"
@@ -346,6 +353,43 @@ export const METAS = {
   "dir": "catalog/hyperframes/warm-grain-title-card",
   "component": null
  },
+ "kit/actor": {
+  "kind": "kit/actor",
+  "title": "One-shape character",
+  "description": "A character drawn from one shape you choose (circle, square, triangle or pill), with two eyes and two thin legs. It walks in, and at the cue it jumps, waves or looks around; it blinks and never stands still. A stand-in you colour yourself, drawn with SVG and moved by the frame.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/actor/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "character",
+  "lead": "picture",
+  "props": {
+   "shape": "circle | square | triangle | pill (circle)",
+   "color": "its colour (coral)",
+   "action": "jump | wave | look (jump)",
+   "text": "1-4 words next to it (optional)",
+   "sub": "small caps over them (optional)",
+   "cues": "{\"act\": time} when it does the action"
+  },
+  "changes": [
+   0,
+   0.45
+  ],
+  "maxWords": 7,
+  "dur": 3.6,
+  "family": "actor",
+  "example": {
+   "shape": "circle",
+   "color": "coral",
+   "action": "jump",
+   "text": "A character, from code",
+   "sub": "one shape"
+  },
+  "dir": "catalog/kit/actor",
+  "component": "index.tsx"
+ },
  "kit/bg-pool": {
   "kind": "kit/bg-pool",
   "title": "Light pool",
@@ -378,6 +422,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "number",
+  "lead": "type",
   "props": {
    "value": "the number as you say it (10, 1.5K, 40%, $9)",
    "unit": "small word after it (optional)",
@@ -402,6 +447,538 @@ export const METAS = {
   "dir": "catalog/kit/big-number",
   "component": "index.tsx"
  },
+ "kit/chart-donut": {
+  "kind": "kit/chart-donut",
+  "title": "Donut",
+  "description": "A donut chart: each slice sweeps into the ring when you name it, in its own colour, while the ring turns very slowly. A word or a value sits in the middle and every slice has a line in the legend with its number counting up. Plain SVG arcs.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/chart-donut/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {
+   "items": "2-8 slices: {text: label, value: number as you say it, color, at}",
+   "text": "word or value in the middle (optional)",
+   "sub": "small caps under it (optional)",
+   "hi": "label of the slice to lift",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 24,
+  "dur": 4.4,
+  "maxDur": 10,
+  "family": "chart-donut",
+  "draft": false,
+  "example": {
+   "text": "Lessons",
+   "sub": "per unit",
+   "items": [
+    {
+     "text": "Motion",
+     "value": "2"
+    },
+    {
+     "text": "Slides and web",
+     "value": "2"
+    },
+    {
+     "text": "three.js",
+     "value": "2"
+    },
+    {
+     "text": "Blender",
+     "value": "2"
+    },
+    {
+     "text": "Library",
+     "value": "1"
+    }
+   ]
+  },
+  "dir": "catalog/kit/chart-donut",
+  "component": "index.tsx"
+ },
+ "kit/chart-gantt": {
+  "kind": "kit/chart-gantt",
+  "title": "Gantt bars",
+  "description": "A plan on one axis: each row's bar grows from its start to its end when you name it, in its own colour, and a now line walks across the frame for the whole beat; what it has passed turns to full colour. Plain SVG.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/chart-gantt/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {
+   "items": "2-8 rows: {text: label, from: where the bar starts, to: where it ends (plain numbers on one axis), color, at}",
+   "lines": "labels for the steps of the axis, from the first step on (optional)",
+   "text": "small heading (optional)",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 30,
+  "dur": 4.6,
+  "maxDur": 10,
+  "family": "chart-gantt",
+  "draft": false,
+  "example": {
+   "text": "Lessons",
+   "items": [
+    {
+     "text": "Motion",
+     "from": 2,
+     "to": 4
+    },
+    {
+     "text": "Slides and web",
+     "from": 4,
+     "to": 6
+    },
+    {
+     "text": "three.js",
+     "from": 6,
+     "to": 8
+    },
+    {
+     "text": "Blender",
+     "from": 8,
+     "to": 10
+    },
+    {
+     "text": "Library",
+     "from": 10,
+     "to": 11
+    }
+   ],
+   "lines": [
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+   ]
+  },
+  "dir": "catalog/kit/chart-gantt",
+  "component": "index.tsx"
+ },
+ "kit/chart-heatmap": {
+  "kind": "kit/chart-heatmap",
+  "title": "Heat map",
+  "description": "A grid of cells lights up in a wave from left to right; the stronger the colour, the higher the value, and the highest cells turn gold. After the wave a quiet scan keeps walking over the columns. The values are yours: a table, a week of hours, or the pixels of a picture. Plain SVG.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/chart-heatmap/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "data",
+  "lead": "picture",
+  "props": {
+   "values": "your numbers: rows of numbers [[..], [..]], or one flat list with \"cols\"",
+   "cols": "cells per row when values is one flat list",
+   "items": "row labels (optional)",
+   "lines": "column labels (optional)",
+   "text": "small heading (optional)",
+   "numbers": "true = print each value in its cell",
+   "hi": "[row, column] of one cell to ring (counted from 0)",
+   "color": "colour of the cells (coral)",
+   "color2": "colour of the highest cells (gold)",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "values"
+  ],
+  "changes": [
+   0,
+   0.2,
+   0.4,
+   0.6
+  ],
+  "maxWords": 30,
+  "dur": 4.2,
+  "maxDur": 9,
+  "family": "chart-heatmap",
+  "draft": false,
+  "example": {
+   "text": "A picture is numbers",
+   "numbers": true,
+   "color": "coral",
+   "values": [
+    [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     2,
+     2,
+     2,
+     1,
+     1,
+     1,
+     1
+    ],
+    [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     3,
+     3,
+     3,
+     3,
+     3,
+     2,
+     2,
+     2
+    ],
+    [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     3,
+     4,
+     6,
+     6,
+     6,
+     4,
+     3,
+     2,
+     2
+    ],
+    [
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     4,
+     6,
+     8,
+     9,
+     8,
+     6,
+     4,
+     3,
+     3
+    ],
+    [
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     4,
+     5,
+     7,
+     9,
+     9,
+     9,
+     7,
+     5,
+     4,
+     3
+    ],
+    [
+     3,
+     3,
+     3,
+     3,
+     3,
+     4,
+     4,
+     5,
+     6,
+     8,
+     9,
+     8,
+     6,
+     5,
+     4,
+     4
+    ],
+    [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     2,
+     5,
+     6,
+     5,
+     2,
+     1,
+     1,
+     1
+    ],
+    [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     2,
+     3,
+     4,
+     5,
+     4,
+     3,
+     2,
+     1,
+     1
+    ],
+    [
+     1,
+     1,
+     1,
+     1,
+     1,
+     1,
+     2,
+     2,
+     3,
+     3,
+     4,
+     3,
+     3,
+     2,
+     2,
+     1
+    ]
+   ]
+  },
+  "dir": "catalog/kit/chart-heatmap",
+  "component": "index.tsx"
+ },
+ "kit/chart-line": {
+  "kind": "kit/chart-line",
+  "title": "Line chart, drawn",
+  "description": "A line chart that draws itself: the line grows from point to point as you name them, a head dot rides the curve, the big number counts along and the area under the line fills in (@remotion/paths getLength and getPointAtLength). Every number on screen is one of your values; there are no made-up ticks.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/chart-line/index.tsx",
+   "uses": "@remotion/paths"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {
+   "items": "2-12 points in order: {text: label under the point, value: number as you say it, at}",
+   "text": "small heading (optional)",
+   "unit": "unit after the big number (optional)",
+   "color": "colour of the line (teal)",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 26,
+  "dur": 4.6,
+  "maxDur": 12,
+  "family": "chart-line",
+  "draft": false,
+  "example": {
+   "text": "Lesson",
+   "items": [
+    {
+     "text": "Motion",
+     "value": "3"
+    },
+    {
+     "text": "Slides and web",
+     "value": "5"
+    },
+    {
+     "text": "three.js",
+     "value": "7"
+    },
+    {
+     "text": "Blender",
+     "value": "9"
+    },
+    {
+     "text": "Library",
+     "value": "10"
+    }
+   ],
+   "color": "teal"
+  },
+  "dir": "catalog/kit/chart-line",
+  "component": "index.tsx"
+ },
+ "kit/chart-scatter": {
+  "kind": "kit/chart-scatter",
+  "title": "Scatter and trend",
+  "description": "Dots settle on the plane from left to right, then the trend line (least squares, worked out from your points) draws through them and thin stems show how far each dot sits from it. The dots keep floating a little. Plain SVG; no numbers are printed, the picture is the shape of the cloud.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/chart-scatter/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {
+   "points": "your pairs: [[x, y], ...] (up to 80)",
+   "label": "name of the x axis (optional)",
+   "label2": "name of the y axis (optional)",
+   "color": "colour of the dots (sky)",
+   "color2": "colour of the trend line (coral)",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "points"
+  ],
+  "changes": [
+   0,
+   0.25,
+   0.52,
+   0.76
+  ],
+  "maxWords": 8,
+  "dur": 4.4,
+  "maxDur": 9,
+  "family": "chart-scatter",
+  "draft": false,
+  "example": {
+   "label": "words in the line",
+   "label2": "seconds on screen",
+   "points": [
+    [
+     7,
+     2.4
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     2.8
+    ],
+    [
+     14,
+     3.8
+    ],
+    [
+     8,
+     3.6
+    ],
+    [
+     10,
+     2.8
+    ],
+    [
+     6,
+     2.2
+    ],
+    [
+     11,
+     3.4
+    ],
+    [
+     10,
+     2.8
+    ],
+    [
+     6,
+     3.2
+    ]
+   ]
+  },
+  "dir": "catalog/kit/chart-scatter",
+  "component": "index.tsx"
+ },
+ "kit/code-result": {
+  "kind": "kit/code-result",
+  "title": "Code and its result",
+  "description": "Two panels fill the frame: the code and what it makes (shapes that keep hopping on a small stage). At the cue one value is retyped in the code and the result changes with it at once: the ground colour, the shape, or how many there are. Syntax colours by prismjs.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/code-result/index.tsx",
+   "also": "prismjs 1.30 (MIT)"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "code",
+  "lead": "picture",
+  "props": {
+   "code": "3-7 short lines of code",
+   "from": "the value in the code that changes",
+   "to": "what it becomes",
+   "prop": "what that value drives in the result: color | shape | count (color)",
+   "shape": "circle | square | triangle | star",
+   "count": "how many shapes (1)",
+   "fill": "colour of the shapes (white)",
+   "ground": "ground colour when prop is not color",
+   "label": "small caps on the code panel (optional)",
+   "label2": "small caps on the result panel (optional)",
+   "color": "colour of the changed value",
+   "cues": "{\"swap\": time} when the value changes"
+  },
+  "needs": [
+   "code",
+   "from",
+   "to"
+  ],
+  "changes": [
+   0,
+   0.5
+  ],
+  "maxWords": 8,
+  "dur": 3.8,
+  "family": "code-result",
+  "draft": false,
+  "example": {
+   "code": "const scene = {\n  ground: \"black\",\n  shape: \"circle\",\n  count: 3,\n};\nrender(scene);",
+   "from": "black",
+   "to": "red",
+   "prop": "color",
+   "count": 3,
+   "label": "code",
+   "label2": "result",
+   "color": "coral"
+  },
+  "dir": "catalog/kit/code-result",
+  "component": "index.tsx"
+ },
  "kit/compare": {
   "kind": "kit/compare",
   "title": "Before / after",
@@ -413,6 +990,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "compare",
+  "lead": "type",
   "props": {
    "text": "the first thing (1-4 words)",
    "sub": "the second thing (1-4 words)",
@@ -442,6 +1020,280 @@ export const METAS = {
   "dir": "catalog/kit/compare",
   "component": "index.tsx"
  },
+ "kit/device-browser": {
+  "kind": "kit/device-browser",
+  "title": "Browser window",
+  "description": "Your screenshot inside a plain browser window that fills the frame. The page scrolls slowly, a cursor travels in and clicks, and the page answers by scrolling on. The address bar shows only the text you give it. A caption can sit under the window.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/device-browser/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "device",
+  "lead": "picture",
+  "media": [
+   "src"
+  ],
+  "props": {
+   "src": "your screenshot (jpg, png, webp)",
+   "label": "text in the address bar (optional; empty if you give none)",
+   "text": "caption under the window, 1-5 words (optional)",
+   "sub": "small caps over the caption (optional)",
+   "at": "[x, y] where the cursor clicks, in % of the page area ([60, 60])",
+   "scroll": "how far the page travels, share of its height (0.24)",
+   "page": "true: a long page screenshot, shown at full width and scrolled",
+   "color": "colour of the click mark and the small caps",
+   "cues": "{\"click\": time} when the cursor clicks"
+  },
+  "needs": [
+   "src"
+  ],
+  "changes": [
+   0,
+   0.55
+  ],
+  "maxWords": 10,
+  "dur": 3.6,
+  "maxDur": 8,
+  "push": false,
+  "family": "device-browser",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/photo-4.jpg",
+   "text": "Your page, in motion",
+   "sub": "screenshot",
+   "color": "teal"
+  },
+  "dir": "catalog/kit/device-browser",
+  "component": "index.tsx"
+ },
+ "kit/device-duo": {
+  "kind": "kit/device-duo",
+  "title": "Laptop and phone",
+  "description": "A laptop lid opens on your wide screenshot, then a phone slides in front with your tall one: a website and its app, one after the other, each on the word you say. Both float a little and the pictures drift inside. Small names under the devices are optional.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/device-duo/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "device",
+  "lead": "picture",
+  "media": [
+   "src",
+   "src2"
+  ],
+  "props": {
+   "src": "wide screenshot or clip for the laptop",
+   "src2": "tall screenshot or clip for the phone",
+   "items": "two entries, laptop then phone: a name under each (1-2 words) or {text, at} to time them; leave out for no names",
+   "color": "colour of the phone's name"
+  },
+  "needs": [
+   "src",
+   "src2"
+  ],
+  "changes": "items",
+  "maxWords": 6,
+  "dur": 3.6,
+  "maxDur": 8,
+  "push": false,
+  "family": "device-duo",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/photo-2.jpg",
+   "src2": "kit:examples/media/photo-1.jpg",
+   "items": [
+    "Website",
+    "App"
+   ],
+   "color": "teal"
+  },
+  "dir": "catalog/kit/device-duo",
+  "component": "index.tsx"
+ },
+ "kit/device-phone": {
+  "kind": "kit/device-phone",
+  "title": "Phone",
+  "description": "Your vertical screenshot (or a clip) inside a phone that tilts in, settles and floats, with a soft light passing over the glass. In 16:9 a few words stand next to it; in 9:16 the phone takes the frame.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/device-phone/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "device",
+  "lead": "picture",
+  "media": [
+   "src"
+  ],
+  "props": {
+   "src": "your vertical screenshot (jpg, png, webp) or clip (mp4, webm)",
+   "text": "1-5 words next to the phone (optional)",
+   "sub": "small caps over them (optional)",
+   "focus": "which part of the picture stays in view, CSS position (50% 0%)",
+   "color": "colour of the small caps and the rule"
+  },
+  "needs": [
+   "src"
+  ],
+  "changes": [
+   0,
+   0.3
+  ],
+  "maxWords": 9,
+  "dur": 3.2,
+  "maxDur": 7,
+  "push": false,
+  "family": "device-phone",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/photo-3.jpg",
+   "focus": "62% 50%",
+   "text": "Your picture, in a phone",
+   "sub": "no footage needed",
+   "color": "coral"
+  },
+  "dir": "catalog/kit/device-phone",
+  "component": "index.tsx"
+ },
+ "kit/draw-route": {
+  "kind": "kit/draw-route",
+  "title": "Route on a map",
+  "description": "A route draws itself across an abstract map (faint contour rings made with @remotion/noise, a dotted grid; not a real place): a pin drops on every stop as you name it, the line runs on to the next one (@remotion/paths) and the last pin is gold. The terrain drifts a little under the route.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/draw-route/index.tsx",
+   "uses": "@remotion/paths, @remotion/noise"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "map",
+  "lead": "picture",
+  "props": {
+   "items": "2-6 stops, 1-3 words each (or {text, at, x, y, color}; x and y from 0 to 1 place the pin yourself)",
+   "color": "colour of the route (coral)",
+   "seed": "any word or number: another seed, another terrain",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 15,
+  "dur": 4.4,
+  "maxDur": 10,
+  "family": "draw-route",
+  "example": {
+   "items": [
+    "Script",
+    "Draft",
+    "Check",
+    "Render"
+   ],
+   "color": "coral"
+  },
+  "dir": "catalog/kit/draw-route",
+  "component": "index.tsx"
+ },
+ "kit/draw-skyline": {
+  "kind": "kit/draw-skyline",
+  "title": "Skyline in one stroke",
+  "description": "A pen draws the outline of a city from left to right in one stroke; the buildings fill in behind it, a fainter row stands behind, and windows keep switching on until the cut. The city is made from a seed (your word), so the same word always builds the same city. Plain SVG; a word in the sky is optional.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/draw-skyline/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {
+   "text": "1-4 words in the sky (optional)",
+   "sub": "small caps over it (optional)",
+   "seed": "any word or number: another seed, another city",
+   "color": "colour of the lit windows (gold)",
+   "color2": "colour of a few other windows (sky)",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [],
+  "changes": [
+   0,
+   0.2,
+   0.4,
+   0.6,
+   0.8
+  ],
+  "maxWords": 8,
+  "dur": 4,
+  "maxDur": 9,
+  "push": false,
+  "family": "draw-skyline",
+  "example": {
+   "text": "Built with code",
+   "sub": "line by line",
+   "seed": "connect"
+  },
+  "dir": "catalog/kit/draw-skyline",
+  "component": "index.tsx"
+ },
+ "kit/draw-svg": {
+  "kind": "kit/draw-svg",
+  "title": "Any line drawing",
+  "description": "Your SVG paths draw themselves, one stroke after another; when the last one lands the closed shapes fill in softly and the finished drawing floats over its shadow. Bring an icon, a sketch, a diagram, a mark you own: copy the d of each path from the SVG file. The example (a headset) is drawn by us.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/draw-svg/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {
+   "paths": "the strokes in drawing order: SVG path d strings, or {d, color, fill: false}",
+   "viewBox": "the viewBox of your SVG, for example \"0 0 400 260\"",
+   "text": "1-4 words next to the drawing (optional)",
+   "sub": "small caps over them (optional)",
+   "color": "second colour of the strokes and the fill (sky)",
+   "stage": "ground colour: a name from STAGE, any colour, or none",
+   "cues": "{\"words\": time} when the words come in"
+  },
+  "needs": [
+   "paths"
+  ],
+  "changes": [
+   0,
+   0.2,
+   0.4,
+   0.6
+  ],
+  "maxWords": 8,
+  "dur": 4,
+  "maxDur": 9,
+  "family": "draw-svg",
+  "draft": false,
+  "example": {
+   "text": "Draw anything",
+   "sub": "your SVG paths",
+   "color": "sky",
+   "viewBox": "0 0 400 260",
+   "paths": [
+    "M60 110 h280 a26 26 0 0 1 26 26 v60 a26 26 0 0 1 -26 26 h-80 c-18 0 -28 -26 -60 -26 s-42 26 -60 26 h-80 a26 26 0 0 1 -26 -26 v-60 a26 26 0 0 1 26 -26 z",
+    "M72 110 C76 22 324 22 328 110",
+    "M96 160 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0 z",
+    "M236 160 a34 34 0 1 0 68 0 a34 34 0 1 0 -68 0 z",
+    "M34 148 h-16 a6 6 0 0 0 -6 6 v24 a6 6 0 0 0 6 6 h16",
+    "M366 148 h16 a6 6 0 0 1 6 6 v24 a6 6 0 0 1 -6 6 h-16",
+    {
+     "d": "M150 128 h100",
+     "color": "gold"
+    }
+   ]
+  },
+  "dir": "catalog/kit/draw-svg",
+  "component": "index.tsx"
+ },
  "kit/endcard": {
   "kind": "kit/endcard",
   "title": "End card",
@@ -453,6 +1305,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "end",
+  "lead": "type",
   "props": {
    "text": "name or closing words",
    "sub": "action line (optional)",
@@ -481,6 +1334,125 @@ export const METAS = {
   "dir": "catalog/kit/endcard",
   "component": "index.tsx"
  },
+ "kit/flat-to-solid": {
+  "kind": "kit/flat-to-solid",
+  "title": "Flat to solid",
+  "description": "Flat outlines (square, circle, triangle) float in the frame; at the cue they gain thickness and turn into lit solids, one after the other, and keep turning. One label rolls over to the next (2D becomes 3D). Faces are extruded and painted back to front with @remotion/svg-3d-engine, outlines come from @remotion/shapes.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/flat-to-solid/index.tsx",
+   "also": "@remotion/svg-3d-engine (Remotion License), @remotion/shapes and @remotion/paths (MIT)"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "diagram",
+  "lead": "picture",
+  "props": {
+   "from": "label before the cue, 1-2 words (optional)",
+   "to": "label after the cue, 1-2 words (optional)",
+   "shapes": "1-3 of square | circle | triangle (all three)",
+   "colors": "one colour per shape (teal, coral, sky)",
+   "cues": "{\"solid\": time} when the shapes gain depth"
+  },
+  "changes": [
+   0,
+   0.36
+  ],
+  "maxWords": 4,
+  "dur": 3.6,
+  "maxDur": 7,
+  "family": "flat-to-solid",
+  "example": {
+   "from": "2D",
+   "to": "3D"
+  },
+  "dir": "catalog/kit/flat-to-solid",
+  "component": "index.tsx"
+ },
+ "kit/flow-chart": {
+  "kind": "kit/flow-chart",
+  "title": "Flow chart",
+  "description": "Boxes and arrows build one step at a time as you name them (left to right, top to bottom in 9:16). One step can be a decision, drawn as a diamond, with a way forward and a dashed way back to the step before. A dot walks the path: around the loop once, then on to the end, and each box lights up when it arrives. Plain SVG.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/flow-chart/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "flow",
+  "lead": "picture",
+  "props": {
+   "items": "3-6 steps, 1-3 words each (or {text, at, color})",
+   "branch": "number of the step that is a decision (counted from 1; optional)",
+   "label": "word on the way forward from the decision (optional)",
+   "label2": "word on the way back (optional)",
+   "color": "colour of the steps (default: one colour per step)",
+   "color2": "colour of the decision and the way back (coral)",
+   "cues": "{\"back\": time} when the way back draws",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 20,
+  "dur": 5,
+  "maxDur": 11,
+  "family": "flow-chart",
+  "example": {
+   "items": [
+    "Script",
+    "Storyboard",
+    "Check",
+    "Render"
+   ],
+   "branch": 3,
+   "label": "pass",
+   "label2": "fix"
+  },
+  "dir": "catalog/kit/flow-chart",
+  "component": "index.tsx"
+ },
+ "kit/grid-path": {
+  "kind": "kit/grid-path",
+  "title": "Learning on a grid",
+  "description": "A grid with walls, a start and a goal. Three tries wander and stop (faint dashed lines with a cross); at the cue the last try goes straight to the goal and its cells light up. A picture of trial and error: a simulator, a search, a route. The way is found by a real breadth-first search; the world is the same on every render.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/grid-path/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "diagram",
+  "lead": "picture",
+  "props": {
+   "text": "1-4 words (optional)",
+   "sub": "small caps over them (optional)",
+   "color": "colour of the way that works (teal)",
+   "seed": "a word: another word, another grid",
+   "stage": "ground colour: a name from STAGE, any colour, or none",
+   "cues": "{\"solve\": time} when the last try starts"
+  },
+  "changes": [
+   0,
+   0.18,
+   0.35,
+   0.52,
+   0.75
+  ],
+  "maxWords": 7,
+  "dur": 4.4,
+  "maxDur": 9,
+  "family": "grid-path",
+  "example": {
+   "text": "Try, fail, find the way",
+   "sub": "a simulator",
+   "color": "teal",
+   "seed": "link"
+  },
+  "dir": "catalog/kit/grid-path",
+  "component": "index.tsx"
+ },
  "kit/grid-wall": {
   "kind": "kit/grid-wall",
   "title": "Wall of cards",
@@ -492,6 +1464,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "list",
+  "lead": "type",
   "props": {
    "items": "4-12 short labels",
    "hi": "the label to light up (optional)",
@@ -533,6 +1506,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "brand",
+  "lead": "type",
   "props": {
    "text": "name (1-4 words)",
    "sub": "one quiet line under it (optional)"
@@ -555,6 +1529,51 @@ export const METAS = {
   "dir": "catalog/kit/ident",
   "component": "index.tsx"
  },
+ "kit/iso-city": {
+  "kind": "kit/iso-city",
+  "title": "Isometric city",
+  "description": "A city seen from above at an angle: blocks rise from a ground grid, back rows first, and their windows come on one by one. With items, the values you said become towers in a colour, each with its number and label, growing when you say them. Plain SVG with three shaded faces per block.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/iso-city/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {
+   "items": "0-4 towers: {text: label, value: number as you say it (sets the height; optional), color, at}; without items it is a quiet skyline",
+   "text": "small heading, top left (optional)",
+   "sub": "small caps over it (optional)",
+   "stage": "ground colour: night | deep | slate | wine | moss | plum, or none",
+   "seed": "any word: another city"
+  },
+  "changes": "items",
+  "maxWords": 14,
+  "dur": 3.8,
+  "maxDur": 9,
+  "family": "iso-city",
+  "example": {
+   "stage": "night",
+   "sub": "Visual Vibe Coding",
+   "items": [
+    {
+     "text": "Motion",
+     "color": "teal"
+    },
+    {
+     "text": "three.js",
+     "color": "coral"
+    },
+    {
+     "text": "Blender",
+     "color": "sky"
+    }
+   ]
+  },
+  "dir": "catalog/kit/iso-city",
+  "component": "index.tsx"
+ },
  "kit/keyword": {
   "kind": "kit/keyword",
   "title": "Key word",
@@ -566,6 +1585,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "keyword",
+  "lead": "type",
   "props": {
    "text": "1-4 words",
    "sub": "small caps line (optional)",
@@ -585,6 +1605,370 @@ export const METAS = {
   "dir": "catalog/kit/keyword",
   "component": "index.tsx"
  },
+ "kit/node-graph": {
+  "kind": "kit/node-graph",
+  "title": "Node graph",
+  "description": "Nodes appear around a hub as you name them, an edge draws from each one to the hub (or along your own links), and small signals keep travelling along the edges into the hub, which fills as more arrive. Every node floats a little. Plain SVG.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/node-graph/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "diagram",
+  "lead": "picture",
+  "props": {
+   "items": "3-9 nodes, 1-3 words each (or {text, at, color})",
+   "hi": "name of the hub (default: the first node)",
+   "links": "your own edges as pairs of node numbers counted from 0, for example [[1, 0], [2, 0], [2, 3]] (default: every node to the hub)",
+   "color": "colour of the hub (gold)",
+   "seed": "any word or number: another seed, another layout",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 22,
+  "dur": 4.6,
+  "maxDur": 10,
+  "family": "node-graph",
+  "example": {
+   "items": [
+    "Visual Vibe Coding",
+    "Motion",
+    "Slides and web",
+    "three.js",
+    "Blender",
+    "Library"
+   ],
+   "hi": "Visual Vibe Coding"
+  },
+  "dir": "catalog/kit/node-graph",
+  "component": "index.tsx"
+ },
+ "kit/orbit": {
+  "kind": "kit/orbit",
+  "title": "Orbit",
+  "description": "One thing in the middle and two to six others circling it on tilted rings, each at its own distance and speed, for as long as the beat lasts. A body that passes in front grows and covers the centre; behind it is smaller and dimmer. Each ring draws when you name its body. Plain SVG.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/orbit/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "diagram",
+  "lead": "picture",
+  "props": {
+   "text": "the thing in the middle, 1-2 words",
+   "items": "2-6 things in orbit, 1-2 words each (or {text, at, color})",
+   "color": "colour of the centre (gold)",
+   "seed": "any word or number: other starting places",
+   "stage": "ground colour: a name from STAGE, any colour, or none"
+  },
+  "needs": [
+   "text",
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 16,
+  "dur": 4.6,
+  "maxDur": 12,
+  "push": false,
+  "family": "orbit",
+  "draft": false,
+  "example": {
+   "text": "Storyboard",
+   "items": [
+    "Remotion",
+    "HyperFrames",
+    "Lottie",
+    "Shaders",
+    "three.js"
+   ]
+  },
+  "dir": "catalog/kit/orbit",
+  "component": "index.tsx"
+ },
+ "kit/photo-collage": {
+  "kind": "kit/photo-collage",
+  "title": "Collage of prints",
+  "description": "Your pictures land one by one like prints dropped on a table, each at a slightly different angle, and build a wall that fills the frame. Each one can land on the word you say, and can carry a short caption on its paper edge.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/photo-collage/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "items"
+  ],
+  "props": {
+   "items": "3-6 pictures: {src: your picture, text: caption on the paper edge (optional, 1-2 words), at: when it lands}",
+   "seed": "any word: other angles"
+  },
+  "needs": [
+   "items"
+  ],
+  "changes": "items",
+  "maxWords": 12,
+  "dur": 3.6,
+  "maxDur": 9,
+  "family": "photo-collage",
+  "draft": false,
+  "example": {
+   "items": [
+    {
+     "src": "kit:examples/media/photo-1.jpg"
+    },
+    {
+     "src": "kit:examples/media/photo-3.jpg"
+    },
+    {
+     "src": "kit:examples/media/photo-2.jpg"
+    },
+    {
+     "src": "kit:examples/media/photo-4.jpg"
+    },
+    {
+     "src": "kit:examples/media/shot-1.jpg"
+    }
+   ]
+  },
+  "dir": "catalog/kit/photo-collage",
+  "component": "index.tsx"
+ },
+ "kit/photo-kenburns": {
+  "kind": "kit/photo-kenburns",
+  "title": "Photo, slowly moving",
+  "description": "Your picture fills the frame and the camera drifts across it (push in, pull out, or pan). A thin caption and a short gold rule sit on a soft shade at the bottom. No footage needed: one still becomes a shot.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/photo-kenburns/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "src"
+  ],
+  "props": {
+   "src": "your picture (jpg, png, webp), path from the project folder",
+   "move": "in | out | left | right | up (in)",
+   "focus": "which part stays in view, CSS position (50% 50%)",
+   "text": "caption, 1-5 words (optional)",
+   "sub": "small caps over it (optional)",
+   "cues": "{\"words\": time} when the caption comes in"
+  },
+  "needs": [
+   "src"
+  ],
+  "changes": [
+   0,
+   0.3
+  ],
+  "maxWords": 9,
+  "dur": 3.2,
+  "push": false,
+  "family": "photo-kenburns",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/photo-1.jpg",
+   "move": "in",
+   "text": "One still becomes a shot",
+   "sub": "your picture"
+  },
+  "dir": "catalog/kit/photo-kenburns",
+  "component": "index.tsx"
+ },
+ "kit/photo-parallax": {
+  "kind": "kit/photo-parallax",
+  "title": "Depth from layers",
+  "description": "Two to five flat pictures (back to front; the front ones with transparent parts, PNG / SVG / WebP) slide at different speeds as the camera moves, so the frame gets depth. The words stand between the layers.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/photo-parallax/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "layers"
+  ],
+  "props": {
+   "layers": "2-5 pictures, far to near",
+   "move": "left | right | up (left)",
+   "depth": "how strong, 0-2 (1)",
+   "behind": "the words go behind the layers from this number on (default: only the nearest layer is in front)",
+   "sky": "colour behind everything",
+   "text": "1-4 words (optional)",
+   "sub": "small caps over them (optional)"
+  },
+  "needs": [
+   "layers"
+  ],
+  "changes": [
+   0,
+   0.3
+  ],
+  "maxWords": 8,
+  "dur": 3.6,
+  "push": false,
+  "family": "photo-parallax",
+  "draft": false,
+  "example": {
+   "layers": [
+    "kit:examples/media/layer-1.svg",
+    "kit:examples/media/layer-2.svg",
+    "kit:examples/media/layer-3.svg",
+    "kit:examples/media/layer-4.svg"
+   ],
+   "sky": "#14202B",
+   "text": "Flat layers, real depth",
+   "sub": "parallax",
+   "behind": 2
+  },
+  "dir": "catalog/kit/photo-parallax",
+  "component": "index.tsx"
+ },
+ "kit/photo-strip": {
+  "kind": "kit/photo-strip",
+  "title": "Film strip",
+  "description": "Your stills run through the frame as the frames of a strip of film with sprocket holes, tilted a little; two more strips pass far behind, out of focus, the other way. In 9:16 the film runs top to bottom. The picture for the word video, made from stills.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/photo-strip/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "images"
+  ],
+  "props": {
+   "images": "2-8 pictures, in the order they pass",
+   "text": "caption, 1-5 words (optional)",
+   "sub": "small caps over it (optional)",
+   "speed": "how fast the film runs (1)"
+  },
+  "needs": [
+   "images"
+  ],
+  "changes": [
+   0,
+   0.33,
+   0.66
+  ],
+  "maxWords": 9,
+  "dur": 3.2,
+  "maxDur": 8,
+  "push": false,
+  "family": "photo-strip",
+  "draft": false,
+  "example": {
+   "images": [
+    "kit:examples/media/photo-3.jpg",
+    "kit:examples/media/photo-1.jpg",
+    "kit:examples/media/photo-2.jpg",
+    "kit:examples/media/photo-4.jpg"
+   ],
+   "text": "Stills become a film",
+   "sub": "frame by frame"
+  },
+  "dir": "catalog/kit/photo-strip",
+  "component": "index.tsx"
+ },
+ "kit/photo-wipe": {
+  "kind": "kit/photo-wipe",
+  "title": "Two pictures, one line",
+  "description": "A line sweeps across the frame and the second picture takes over (before and after, real and drawn). With wire: true the second side is the same picture as its own drawing: grey, a tint and a grid whose corners light up. Both sides keep drifting.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/photo-wipe/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "src",
+   "src2"
+  ],
+  "props": {
+   "src": "the first picture",
+   "src2": "the second picture (leave it out and set wire: true to turn the first into a drawing)",
+   "wire": "true: grey + tint + grid on the second side",
+   "label": "small caps under the first side (optional)",
+   "label2": "small caps under the second side (optional)",
+   "color": "tint and grid colour (teal)",
+   "stop": "where the line rests, 0-1 (0.5)",
+   "cues": "{\"wipe\": time} when the line sweeps"
+  },
+  "needs": [
+   "src"
+  ],
+  "changes": [
+   0,
+   0.3
+  ],
+  "maxWords": 6,
+  "dur": 3.6,
+  "push": false,
+  "family": "photo-wipe",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/photo-2.jpg",
+   "wire": true,
+   "label": "Real",
+   "label2": "Virtual",
+   "color": "teal"
+  },
+  "dir": "catalog/kit/photo-wipe",
+  "component": "index.tsx"
+ },
+ "kit/pixel-run": {
+  "kind": "kit/pixel-run",
+  "title": "Pixel game",
+  "description": "A small side-scrolling game drawn with big square pixels: far hills, near hills and the ground scroll at different speeds, and a little hero runs and jumps every block in its way. The same world on every render (the seed is a word).",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/pixel-run/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {
+   "text": "1-4 words (optional)",
+   "sub": "small caps over them (optional)",
+   "color": "the hero (coral)",
+   "ground": "the land (teal)",
+   "sky": "colour of the sky",
+   "seed": "a word: another word, another world"
+  },
+  "changes": [
+   0,
+   0.35,
+   0.7
+  ],
+  "maxWords": 7,
+  "dur": 3.6,
+  "push": false,
+  "family": "pixel-run",
+  "example": {
+   "text": "A game, from code",
+   "sub": "big pixels",
+   "color": "coral",
+   "ground": "teal"
+  },
+  "dir": "catalog/kit/pixel-run",
+  "component": "index.tsx"
+ },
  "kit/quote": {
   "kind": "kit/quote",
   "title": "Quote",
@@ -596,6 +1980,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "quote",
+  "lead": "type",
   "props": {
    "text": "the sentence (up to about 16 words)",
    "by": "who said it (optional)",
@@ -627,6 +2012,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "steps",
+  "lead": "type",
   "props": {
    "items": "2-5 steps, each 1-3 words (or {text, at} to land on a spoken word)",
    "text": "small heading (optional)"
@@ -661,6 +2047,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "timeline",
+  "lead": "picture",
   "props": {
    "items": "3-6 stops: \"label\" or {text, sub, at}",
    "text": "small heading (optional)"
@@ -712,6 +2099,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "compare",
+  "lead": "type",
   "props": {
    "items": "2-4 rows: {text: the thing, dir: \"up\" | \"down\", at}; the words up / down are shown only if you put them in sub",
    "color": "colour of the arrows going up",
@@ -744,6 +2132,133 @@ export const METAS = {
   "dir": "catalog/kit/trend",
   "component": "index.tsx"
  },
+ "kit/type-drop": {
+  "kind": "kit/type-drop",
+  "title": "Letters that fall",
+  "description": "Big letters behave like objects: each one falls, lands on a floor line with a bounce and a small tilt, and settles. One word can take a colour.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/type-drop/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "keyword",
+  "lead": "type",
+  "props": {
+   "text": "1-3 short words",
+   "hi": "one of the words, in colour (optional)",
+   "color": "its colour",
+   "sub": "small caps line under the floor (optional)"
+  },
+  "needs": [
+   "text"
+  ],
+  "changes": "words",
+  "maxWords": 6,
+  "dur": 2.8,
+  "family": "type-drop",
+  "example": {
+   "text": "Made by code",
+   "hi": "code",
+   "color": "coral",
+   "sub": "letters are objects"
+  },
+  "dir": "catalog/kit/type-drop",
+  "component": "index.tsx"
+ },
+ "kit/type-mask": {
+  "kind": "kit/type-mask",
+  "title": "Word as a window",
+  "description": "A very big word is a window: your picture is bright inside the letters and far back and dark around them, and it keeps moving. At the cue the word opens and the picture fills the frame (SVG clipPath on text, exact on every frame).",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/type-mask/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "src"
+  ],
+  "props": {
+   "src": "the picture behind the word",
+   "text": "1-2 short words (they are set in capitals)",
+   "sub": "small caps line under it (optional)",
+   "focus": "which part of the picture stays in view, CSS position (50% 50%)",
+   "open": "false: stay on the word, do not open it",
+   "gain": "how bright the picture is inside the letters (1.25)",
+   "cues": "{\"open\": time} when the camera goes through the word"
+  },
+  "needs": [
+   "src",
+   "text"
+  ],
+  "changes": [
+   0,
+   0.62
+  ],
+  "maxWords": 6,
+  "dur": 3.4,
+  "push": false,
+  "family": "type-mask",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/photo-3.jpg",
+   "focus": "50% 78%",
+   "text": "Visual",
+   "sub": "what people see"
+  },
+  "dir": "catalog/kit/type-mask",
+  "component": "index.tsx"
+ },
+ "kit/zoom-lens": {
+  "kind": "kit/zoom-lens",
+  "title": "Lens on a picture",
+  "description": "Your screenshot or picture fills the frame; a round glass travels to one spot and shows it bigger while the rest steps back. For pointing at one thing in a screen without a recording.",
+  "source": {
+   "type": "kit",
+   "path": "catalog/kit/zoom-lens/index.tsx"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "src"
+  ],
+  "props": {
+   "src": "your screenshot or picture",
+   "x": "where the lens goes, 0-1 from the left (0.62)",
+   "y": "0-1 from the top (0.42)",
+   "zoom": "how much bigger (2.2)",
+   "text": "1-5 words (optional)",
+   "sub": "small caps over them (optional)",
+   "cues": "{\"look\": time} when the lens arrives"
+  },
+  "needs": [
+   "src"
+  ],
+  "changes": [
+   0,
+   0.28
+  ],
+  "maxWords": 8,
+  "dur": 3.4,
+  "push": false,
+  "family": "zoom-lens",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/shot-2.jpg",
+   "x": 0.22,
+   "y": 0.36,
+   "zoom": 2.3,
+   "text": "Look at one line",
+   "sub": "a lens, no recording"
+  },
+  "dir": "catalog/kit/zoom-lens",
+  "component": "index.tsx"
+ },
  "lottie/arc-orbit": {
   "kind": "lottie/arc-orbit",
   "title": "Orbit arcs (Lottie)",
@@ -757,6 +2272,7 @@ export const METAS = {
   "src": "anim.json",
   "role": "scene",
   "use": "icon",
+  "lead": "type",
   "props": {
    "text": "1-3 words under the animation (optional)",
    "sub": "small caps line (optional)",
@@ -789,6 +2305,7 @@ export const METAS = {
   "src": "anim.json",
   "role": "scene",
   "use": "icon",
+  "lead": "type",
   "props": {
    "text": "1-3 words under the animation (optional)",
    "sub": "small caps line (optional)",
@@ -821,6 +2338,7 @@ export const METAS = {
   "src": "anim.json",
   "role": "scene",
   "use": "icon",
+  "lead": "type",
   "props": {
    "text": "1-3 words under the animation (optional)",
    "sub": "small caps line (optional)",
@@ -916,6 +2434,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "voice",
+  "lead": "type",
   "props": {
    "text": "the line as it is said (up to about 20 words)",
    "color": "colour of the lit word",
@@ -948,6 +2467,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "code",
+  "lead": "picture",
   "props": {
    "code": "2-7 short lines of code (not checked against the script)",
    "from": "the value that changes (must be in code)",
@@ -970,6 +2490,7 @@ export const METAS = {
   "maxWords": 8,
   "dur": 4,
   "family": "code-swap",
+  "draft": false,
   "example": {
    "code": "const rabbit = {\n  color: \"black\",\n  speed: 3,\n};\nrender(rabbit);",
    "from": "black",
@@ -992,6 +2513,7 @@ export const METAS = {
   "license": "Remotion License",
   "role": "scene",
   "use": "prompt",
+  "lead": "picture",
   "props": {
    "text": "what is typed (3-9 words)",
    "sub": "what comes back (1-3 words)",
@@ -1028,6 +2550,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "statement",
+  "lead": "type",
   "props": {
    "text": "2-5 words",
    "hi": "word to turn gold",
@@ -1063,6 +2586,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "formula",
+  "lead": "type",
   "props": {
    "tex": "the formula in LaTeX (not checked against the script)",
    "text": "plain words under it (1-6 words)",
@@ -1097,6 +2621,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "statement",
+  "lead": "type",
   "props": {
    "lines": "2-4 lines, 1-3 words each (or {text, at})",
    "hi": "number of the line to colour (1 = first)",
@@ -1132,6 +2657,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "keyword",
+  "lead": "type",
   "props": {
    "text": "1-3 words",
    "sub": "small caps line (optional)",
@@ -1167,6 +2693,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "flow",
+  "lead": "picture",
   "props": {
    "items": "2-5 stations, 1-3 words each (or {text, at})",
    "color": "colour of the line"
@@ -1242,6 +2769,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "emphasis",
+  "lead": "type",
   "props": {
    "text": "the sentence (up to 12 words)",
    "hi": "the phrase to mark (must be inside text)",
@@ -1281,6 +2809,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "dialogue",
+  "lead": "type",
   "props": {
    "text": "the question (2-8 words)",
    "sub": "the answer (2-8 words)",
@@ -1318,6 +2847,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "chart",
+  "lead": "picture",
   "props": {
    "items": "2-6 bars: {text: label, value: number as you say it, at}",
    "hi": "label of the bar to colour",
@@ -1366,6 +2896,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "number",
+  "lead": "picture",
   "props": {
    "value": "percent 0-100, as you say it",
    "text": "what it is (1-4 words)",
@@ -1403,6 +2934,7 @@ export const METAS = {
   "license": "Remotion License",
   "role": "scene",
   "use": "list",
+  "lead": "picture",
   "props": {
    "items": "2-4 layers from the bottom up, 1-3 words each (or {text, at})",
    "color": "colour of the top plate"
@@ -1450,6 +2982,107 @@ export const METAS = {
   "dir": "catalog/remotion/sweep-light-leak",
   "component": "index.tsx"
  },
+ "remotion/three-model": {
+  "kind": "remotion/three-model",
+  "title": "3D model on a turntable",
+  "description": "Your .glb model turns slowly on a turntable under studio light, in real 3D (@remotion/three: React Three Fiber + three.js GLTFLoader, WebGL). With the shade cue it starts as a wireframe on clay and the finished material rises through it from the ground up: the model is built in front of you. A few words can stand next to it.",
+  "source": {
+   "type": "remotion",
+   "package": "@remotion/three",
+   "version": "4.0.529",
+   "also": "three 0.170 (MIT) with GLTFLoader, @react-three/fiber 9 (MIT). Example model: Rover by Quaternius (CC0), examples/media/model-rover.glb"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "hero3d",
+  "lead": "picture",
+  "media": [
+   "src"
+  ],
+  "props": {
+   "src": "your model (.glb, textures inside the file; no Draco compression)",
+   "text": "1-4 words next to the model (optional)",
+   "sub": "small caps over them (optional)",
+   "wire": "true: start as a wireframe and get the material at 45 % of the scene (or time it with the cue)",
+   "color": "colour of the wireframe, the ring and the back light (teal)",
+   "cues": "{\"shade\": time} when the material rises through the wireframe; {\"words\": time} when the words come in"
+  },
+  "needs": [
+   "src"
+  ],
+  "changes": [
+   0,
+   0.45
+  ],
+  "maxWords": 8,
+  "dur": 4,
+  "maxDur": 9,
+  "push": false,
+  "family": "three-model",
+  "draft": false,
+  "example": {
+   "src": "kit:examples/media/model-rover.glb",
+   "wire": true,
+   "text": "From wireframe to render",
+   "sub": "three.js",
+   "color": "teal"
+  },
+  "dir": "catalog/remotion/three-model",
+  "component": "index.tsx"
+ },
+ "remotion/three-screens": {
+  "kind": "remotion/three-screens",
+  "title": "Screens in space",
+  "description": "Your stills hang as panels at different depths in real 3D and the camera glides past them, from the first to the last; the panel you are passing is bright and framed in a colour, the far ones sink into the dark (@remotion/three, WebGL). In 9:16 the camera travels down the wall.",
+  "source": {
+   "type": "remotion",
+   "package": "@remotion/three",
+   "version": "4.0.529",
+   "also": "three 0.170 (MIT), @react-three/fiber 9 (MIT)"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": [
+   "images"
+  ],
+  "props": {
+   "images": "3-6 pictures, in the order the camera passes them",
+   "text": "caption, 1-5 words (optional)",
+   "sub": "small caps over it (optional)",
+   "color": "colour of the frame around the panel in front",
+   "reverse": "true: travel the other way"
+  },
+  "needs": [
+   "images"
+  ],
+  "changes": [
+   0,
+   0.33,
+   0.66
+  ],
+  "maxWords": 9,
+  "dur": 4,
+  "maxDur": 9,
+  "push": false,
+  "family": "three-screens",
+  "draft": false,
+  "example": {
+   "images": [
+    "kit:examples/media/photo-2.jpg",
+    "kit:examples/media/shot-1.jpg",
+    "kit:examples/media/photo-1.jpg",
+    "kit:examples/media/photo-3.jpg",
+    "kit:examples/media/photo-4.jpg"
+   ],
+   "text": "A wall of your work",
+   "sub": "stills in space",
+   "color": "teal"
+  },
+  "dir": "catalog/remotion/three-screens",
+  "component": "index.tsx"
+ },
  "remotion/three-solid": {
   "kind": "remotion/three-solid",
   "title": "3D solid",
@@ -1463,6 +3096,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "hero3d",
+  "lead": "picture",
   "props": {
    "text": "1-3 words",
    "sub": "small caps line (optional)",
@@ -1488,6 +3122,48 @@ export const METAS = {
   "dir": "catalog/remotion/three-solid",
   "component": "index.tsx"
  },
+ "remotion/three-type": {
+  "kind": "remotion/three-type",
+  "title": "3D type",
+  "description": "One or two words as real extruded letters with gold sides: they stand up one after the other, catch the light, and the whole word turns to the other side at the cue (@remotion/three: three.js TextGeometry, WebGL). The typeface is Droid Sans Bold, which covers Latin letters, digits and common signs.",
+  "source": {
+   "type": "remotion",
+   "package": "@remotion/three",
+   "version": "4.0.529",
+   "also": "three 0.170 (MIT) TextGeometry + FontLoader; typeface three/examples/fonts/droid/droid_sans_bold.typeface.json (Droid Sans, Apache-2.0, The Android Open Source Project)"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "hero3d",
+  "lead": "type",
+  "props": {
+   "text": "1-3 words (Latin letters and digits; other scripts are skipped)",
+   "hi": "the word whose faces take the colour (optional)",
+   "color": "that colour, and the back light (gold)",
+   "sub": "small caps line under the word (optional)",
+   "cues": "{\"turn\": time} when the word swings to its other side"
+  },
+  "needs": [
+   "text"
+  ],
+  "changes": [
+   0,
+   0.55
+  ],
+  "maxWords": 7,
+  "dur": 3.4,
+  "maxDur": 7,
+  "push": false,
+  "family": "three-type",
+  "example": {
+   "text": "Visual Vibe Coding",
+   "hi": "Vibe",
+   "color": "teal",
+   "sub": "CONNECT AI LAB"
+  },
+  "dir": "catalog/remotion/three-type",
+  "component": "index.tsx"
+ },
  "remotion/title-blur": {
   "kind": "remotion/title-blur",
   "title": "Headline",
@@ -1500,6 +3176,7 @@ export const METAS = {
   "license": "MIT",
   "role": "scene",
   "use": "title",
+  "lead": "type",
   "props": {
    "text": "headline (2-7 words)",
    "hi": "word(s) to colour gold",
@@ -1655,6 +3332,32 @@ export const METAS = {
   "dir": "catalog/remotion/tr-wipe",
   "component": "index.ts"
  },
+ "shader/bg-aurora": {
+  "kind": "shader/bg-aurora",
+  "title": "Curtains of light (shader)",
+  "description": "Soft curtains of light hang from the top of the frame and sway, in two subject colours on the dark base (shaders Aurora, WebGPU, locked to the frame).",
+  "source": {
+   "type": "shader",
+   "package": "shaders",
+   "version": "4.0.2",
+   "repo": "shader-effects-inc/shaders",
+   "component": "Aurora"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+   "color": "first colour (teal)",
+   "color2": "second colour (the style's accent)",
+   "speed": "0-10 (3)",
+   "strength": "0-1 (0.5)",
+   "y": "where the curtains hang from, 0-1 (0.1)"
+  },
+  "family": "shader-aurora",
+  "example": {},
+  "dir": "catalog/shader/bg-aurora",
+  "component": "index.tsx"
+ },
  "shader/bg-flow": {
   "kind": "shader/bg-flow",
   "title": "Flowing gradient (shader)",
@@ -1700,6 +3403,81 @@ export const METAS = {
   "family": "shader-godrays",
   "example": {},
   "dir": "catalog/shader/bg-godrays",
+  "component": "index.tsx"
+ },
+ "shader/bg-marble": {
+  "kind": "shader/bg-marble",
+  "title": "Dark stone (shader)",
+  "description": "Black marble with slow veins of light in one colour (shaders Marble, WebGPU, locked to the frame).",
+  "source": {
+   "type": "shader",
+   "package": "shaders",
+   "version": "4.0.2",
+   "repo": "shader-effects-inc/shaders",
+   "component": "Marble"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+   "color": "colour of the veins (the style's accent)",
+   "speed": "0-1 (0.05)",
+   "strength": "0-1 (0.2)"
+  },
+  "family": "shader-marble",
+  "example": {},
+  "dir": "catalog/shader/bg-marble",
+  "component": "index.tsx"
+ },
+ "shader/bg-mesh": {
+  "kind": "shader/bg-mesh",
+  "title": "Liquid colour (shader)",
+  "description": "A slow liquid mesh of the dark base and two subject colours (shaders MeshGradient, WebGPU, locked to the frame).",
+  "source": {
+   "type": "shader",
+   "package": "shaders",
+   "version": "4.0.2",
+   "repo": "shader-effects-inc/shaders",
+   "component": "MeshGradient"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+   "color": "first colour (indigo)",
+   "color2": "second colour (the style's accent)",
+   "speed": "0-2 (0.6)",
+   "strength": "0-1 (0.42)"
+  },
+  "family": "shader-mesh",
+  "example": {},
+  "dir": "catalog/shader/bg-mesh",
+  "component": "index.tsx"
+ },
+ "shader/bg-studio": {
+  "kind": "shader/bg-studio",
+  "title": "Studio wall (shader)",
+  "description": "A dark studio backdrop: a soft key light, a fill and a back light breathe slowly on the wall, like a night set (shaders StudioBackground, WebGPU, locked to the frame).",
+  "source": {
+   "type": "shader",
+   "package": "shaders",
+   "version": "4.0.2",
+   "repo": "shader-effects-inc/shaders",
+   "component": "StudioBackground"
+  },
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {
+   "color": "colour of the lights (the style's accent)",
+   "x": "0-1 (0.5)",
+   "y": "0-1 (0.72)",
+   "speed": "0-10 (2)",
+   "strength": "0-1 (0.9)"
+  },
+  "family": "shader-studio",
+  "example": {},
+  "dir": "catalog/shader/bg-studio",
   "component": "index.tsx"
  }
 };

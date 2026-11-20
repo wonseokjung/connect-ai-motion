@@ -17,7 +17,7 @@ const PathsFlow: React.FC<SceneProps> = ({it, r, lf, dur, st, ink, u, fps, tall}
   }
   const at = items.map((_, i) => itemAt(it, i, n, dur, fps));
   let prog = 0;
-  for (let i = 1; i < n; i++) prog = Math.max(prog, (i - 1 + k01(lf, at[i] - 14, at[i])) / (n - 1));
+  for (let i = 1; i < n; i++) if (lf >= at[i] - 14) prog = Math.max(prog, (i - 1 + k01(lf, at[i] - 14, at[i])) / (n - 1));
   const ev = evolvePath(Math.max(0.0001, prog), d);
   const head = getPointAtLength(d, getLength(d) * prog);
   const R = (tall ? 62 : 54) * u;

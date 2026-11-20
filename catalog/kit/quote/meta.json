@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "quote",
+  "lead": "type",
   "props": {"text": "the sentence (up to about 16 words)", "by": "who said it (optional)", "hi": "words to colour"},
   "needs": ["text"],
   "changes": "words",

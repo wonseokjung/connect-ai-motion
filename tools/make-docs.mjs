@@ -46,7 +46,8 @@ const card = (m) => {
   const c = clips[m.kind];
   const ok = !m.status || m.status === 'ok';
   const src = m.source?.package || m.source?.repo || (m.kind.startsWith('kit/') ? 'this kit' : m.source?.type);
-  return `<article class="card${ok ? '' : ' off'}" data-role="${m.role === 'sweep' ? 'transition' : m.role}" data-source="${m.kind.split('/')[0]}" data-text="${esc((m.kind + ' ' + m.title + ' ' + m.use + ' ' + m.description).toLowerCase())}">
+  const group = m.role === 'scene' ? (m.lead === 'picture' ? 'picture' : 'type') : m.role === 'sweep' ? 'transition' : m.role;
+  return `<article class="card${ok ? '' : ' off'}" data-role="${group}" data-source="${m.kind.split('/')[0]}" data-text="${esc((m.kind + ' ' + m.title + ' ' + m.use + ' ' + m.description).toLowerCase())}">
   <div class="shot">${c ? `<video muted loop playsinline preload="none" poster="clips/${c.poster}" data-src="clips/${c.file}"></video>` : `<div class="none">${ok ? 'no clip yet' : esc(m.status)}</div>`}</div>
   <div class="meta">
     <div class="row"><h3>${esc(m.title)}</h3><span class="use">${esc(m.use)}</span></div>
@@ -59,13 +60,24 @@ const card = (m) => {
 };
 const playable = all.filter((m) => !m.status || m.status === 'ok');
 const count = (role) => playable.filter((m) => (role === 'transition' ? ['transition', 'sweep'].includes(m.role) : m.role === role)).length;
-const sections = ['kit', 'remotion', 'hyperframes', 'lottie', 'shader']
-  .map((s) => {
-    const list = all.filter((m) => m.kind.startsWith(s + '/'));
-    const order = {scene: 0, bg: 1, transition: 2, sweep: 3};
-    list.sort((a, b) => order[a.role] - order[b.role] || (a.kind < b.kind ? -1 : 1));
-    return `<section data-source="${s}"><h2>${SOURCE[s]} <small>${list.filter((m) => !m.status || m.status === 'ok').length}</small></h2><div class="grid">${list.map(card).join('\n')}</div></section>`;
-  })
+// pictures first: the scenes where an object, a drawing, a chart, a photo or 3D carries the beat; then the word scenes
+const USE = ['hero3d', 'picture', 'device', 'character', 'chart', 'data', 'map', 'diagram', 'flow', 'timeline', 'code', 'prompt', 'number', 'list'];
+// the first rows of the page: one of each kind of picture, the most telling ones
+const FIRST = ['kit/iso-city', 'kit/photo-collage', 'kit/flat-to-solid', 'remotion/three-model', 'kit/chart-donut', 'kit/draw-route', 'kit/pixel-run', 'kit/device-duo', 'kit/photo-parallax', 'kit/grid-path', 'kit/code-result', 'kit/photo-wipe'];
+const useRank = (m) => (FIRST.indexOf(m.kind) >= 0 ? FIRST.indexOf(m.kind) - 100 : USE.indexOf(m.use) < 0 ? 50 : USE.indexOf(m.use));
+const scenes = all.filter((m) => m.role === 'scene');
+const pictures = scenes.filter((m) => m.lead === 'picture' && (!m.status || m.status === 'ok')).sort((x, y) => useRank(x) - useRank(y) || (x.kind < y.kind ? -1 : 1));
+const wordScenes = scenes.filter((m) => m.lead !== 'picture' && (!m.status || m.status === 'ok')).sort((x, y) => (x.kind < y.kind ? -1 : 1));
+const listed = all.filter((m) => m.status && m.status !== 'ok');
+const GROUPS = [
+  ['picture', 'Pictures', '그림이 주인공인 장면', 'an object, a drawing, a chart, a device, a photo or 3D carries the beat', '물체 · 선 그림 · 그래프 · 기기 · 사진 · 3D 가 박자를 끌고 갑니다', pictures],
+  ['type', 'Words', '글자가 주인공인 장면', 'the words are the picture: use them between pictures, not in a row', '글자가 곧 그림인 장면: 그림 사이에, 연달아 쓰지 않습니다', wordScenes],
+  ['bg', 'Backgrounds', '배경', 'behind a whole film or one beat', '영상 전체 또는 한 박자의 뒤', all.filter((m) => m.role === 'bg')],
+  ['transition', 'Transitions', '전환', 'a hard cut needs nothing; these are for a change of topic', '기본은 컷; 주제가 바뀔 때만', all.filter((m) => m.role === 'transition' || m.role === 'sweep')],
+  ['listed', 'Listed, not bundled', '목록만 (내려받기 필요)', 'known sources the kit does not download for you', '키트가 대신 내려받지 않는 출처', listed],
+];
+const sections = GROUPS.filter((g) => g[5].length)
+  .map(([id, en, ko, subEn, subKo, list]) => `<section data-group="${id}"><h2><span data-en="${en}" data-ko="${ko}">${en}</span> <small>${list.length}</small><i data-en="${subEn}" data-ko="${subKo}">${subEn}</i></h2><div class="grid">${list.map(card).join('\n')}</div></section>`)
   .join('\n');
 const agentPrompt = `Use ${KIT_NAME} (npx ${KIT_NAME} install-skill). Make a motion graphics film from my script below, no footage. One beat per line, a different scene for each beat, words on screen only from the line. Run check until it passes, show me the sheet, then render 16:9 and 9:16.\n\n<paste your script here, one line per beat>`;
 const hasDemo = (f) => fs.existsSync(path.join(DOCS, 'demo', f));
@@ -79,6 +91,8 @@ const html = `<!doctype html>
 <meta name="description" content="No footage needed: a script becomes a finished motion-graphics film. ${playable.length} scenes, backgrounds and transitions from Remotion, HyperFrames, Lottie and shaders, each called with one line. Open source by CONNECT AI LAB.">
 <style>
 :root{--bg:#0B0A09;--bg2:#14110E;--ink:#EBE2D2;--dim:rgba(235,226,210,.6);--faint:rgba(235,226,210,.14);--gold:#D6892A;--goldhi:#F2B45A;--teal:#3FB7A6}
+:root[data-theme=paper]{--bg:#F2ECE0;--bg2:#E8E0D0;--ink:#17130F;--dim:rgba(23,19,15,.64);--faint:rgba(23,19,15,.16);--gold:#B56A14;--goldhi:#8A4E0B;--teal:#1F7F72}
+:root[data-theme=paper] .bar{background:rgba(242,236,224,.92)}:root[data-theme=paper] button[data-copy]{background:rgba(181,106,20,.1)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:300;line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:var(--goldhi);text-decoration:none}a:hover{text-decoration:underline}
@@ -110,7 +124,11 @@ button[data-copy]:hover{background:rgba(214,137,42,.26)}button[data-copy].done{b
 .bar .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .chip{background:none;border:1px solid var(--faint);color:var(--dim);border-radius:99px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer}.chip.on{border-color:var(--gold);color:var(--goldhi);background:rgba(214,137,42,.1)}
 .bar input{flex:1;min-width:150px;background:var(--bg2);border:1px solid var(--faint);border-radius:99px;padding:7px 16px;color:var(--ink);font:inherit;font-size:14px;outline:none}
-section h2{font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-weight:400;color:var(--goldhi);margin:34px 0 16px;display:flex;align-items:center;gap:12px}section h2 small{color:var(--dim);letter-spacing:.1em}
+section h2{font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-weight:400;color:var(--goldhi);margin:34px 0 16px;display:flex;align-items:center;gap:12px}section h2 small{color:var(--dim);letter-spacing:.1em}section h2 i{font-style:normal;letter-spacing:.02em;text-transform:none;color:var(--dim);font-size:13.5px;font-weight:300}
+.film .sound{position:absolute;right:14px;bottom:12px;background:rgba(11,10,9,.78);border:1px solid rgba(214,137,42,.6);color:var(--goldhi);border-radius:99px;padding:6px 14px;font:inherit;font-size:12px;cursor:pointer}
+.films{display:grid;grid-template-columns:minmax(0,.5625fr) minmax(0,1.7778fr) minmax(0,1.7778fr);gap:18px;margin:0 0 46px;align-items:start}
+.films figure{margin:0}.films video,.films img{width:100%;display:block;border-radius:14px;border:1px solid var(--faint);background:#000;aspect-ratio:16/9;object-fit:cover}.films figure:first-child video,.films figure:first-child img{aspect-ratio:9/16}
+.films figcaption{font-size:13px;color:var(--dim);margin-top:8px}.films figcaption code{font-family:"SF Mono",Menlo,Consolas,monospace;color:var(--goldhi);font-size:.92em}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
 .card{border:1px solid var(--faint);border-radius:14px;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column}
 .card.off{opacity:.62}
@@ -127,43 +145,50 @@ section h2{font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-wei
 footer{padding:60px 0 70px;color:var(--dim);font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--faint);margin-top:60px}
 footer b{color:var(--ink);font-weight:400;letter-spacing:.24em;text-transform:uppercase;font-size:13px}
 [hidden]{display:none!important}
-@media (max-width:900px){.hero{grid-template-columns:1fr;gap:28px;padding:36px 0 30px}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.how{grid-template-columns:1fr}.agent{grid-template-columns:1fr}.wrap{padding:0 18px}nav a.hide{display:none}}
+.hero>*{min-width:0}.film .tag{right:130px}
+@media (max-width:900px){.film .tag{display:none}.films{grid-template-columns:1fr 1fr}.films figure.wide{grid-column:auto}.films figure:first-child{grid-row:span 2}section h2{flex-wrap:wrap}.hero{grid-template-columns:1fr;gap:28px;padding:36px 0 30px}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.how{grid-template-columns:1fr}.agent{grid-template-columns:1fr}.wrap{padding:0 18px}nav a.hide{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div class="brand"><b>Open source</b> by CONNECT AI LAB</div>
-    <nav><a class="hide" href="https://github.com/wonseokjung/${KIT_NAME}">GitHub</a><a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a><a href="https://www.aicitybuilders.com">aicitybuilders.com</a><button id="lang">한국어</button></nav>
+    <nav><a class="hide" href="https://github.com/wonseokjung/${KIT_NAME}">GitHub</a><a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a><a href="https://www.aicitybuilders.com">aicitybuilders.com</a><button id="theme" data-en="Light" data-ko="밝게">Light</button><button id="lang">한국어</button></nav>
   </header>
   <div class="hero">
     <div>
       <div class="kicker" data-en="Visual Vibe Coding · lesson 3" data-ko="비주얼 바이브코딩 · 3강">Visual Vibe Coding · lesson 3</div>
       <h1 data-en="No footage.<br>A script becomes <em>a finished film.</em>" data-ko="찍은 영상 없이.<br>대본이 <em>완성된 영상</em>이 됩니다.">No footage.<br>A script becomes <em>a finished film.</em></h1>
-      <p class="lead" data-en="Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene, from Remotion, HyperFrames, Lottie, shaders or your own file, all called the same way. It checks its own rhythm." data-ko="하고 싶은 말은 있는데 찍어 둔 영상이 없을 때 씁니다. 대본 한 줄이 화면 가득한 장면 하나가 되고, 장면은 Remotion · HyperFrames · Lottie · 셰이더 · 내 파일 어디서든 같은 방법으로 부릅니다. 리듬은 스스로 검사합니다.">Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene, from Remotion, HyperFrames, Lottie, shaders or your own file, all called the same way. It checks its own rhythm.</p>
+      <p class="lead" data-en="Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene: a chart that draws itself, a line drawing, 3D, your screenshot in a device, a still that moves. Remotion, HyperFrames, Lottie, three.js and shaders are all called the same way, and it checks its own rhythm." data-ko="하고 싶은 말은 있는데 찍어 둔 영상이 없을 때 씁니다. 대본 한 줄이 화면 가득한 장면 하나가 됩니다: 스스로 그려지는 그래프, 선 그림, 3D, 기기 안의 내 스크린샷, 움직이는 사진. Remotion · HyperFrames · Lottie · three.js · 셰이더를 같은 방법으로 부르고, 리듬은 스스로 검사합니다.">Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene: a chart that draws itself, a line drawing, 3D, your screenshot in a device, a still that moves. Remotion, HyperFrames, Lottie, three.js and shaders are all called the same way, and it checks its own rhythm.</p>
       <div class="cmd"><span><i>$</i> npx ${KIT_NAME} demo</span><button data-copy="npx ${KIT_NAME} demo">Copy</button></div>
       <div class="cmd"><span><i>$</i> npx ${KIT_NAME} install-skill</span><button data-copy="npx ${KIT_NAME} install-skill">Copy</button></div>
     </div>
-    <div class="film">${hasDemo('hello.mp4') ? `<video src="demo/hello.mp4" poster="demo/hello_poster.jpg" muted loop autoplay playsinline></video><div class="tag" data-en="made from ten lines of text · this is what demo renders" data-ko="글 열 줄로 만든 영상 · demo 명령이 만드는 것">made from ten lines of text · this is what demo renders</div>` : ''}</div>
+    <div class="film">${hasDemo('flagship.mp4') ? `<video id="heroFilm" src="demo/flagship.mp4" poster="demo/flagship_poster.jpg" muted loop autoplay playsinline></video><button class="sound" id="heroSound" data-en="Sound on" data-ko="소리 켜기">Sound on</button><div class="tag" data-en="No footage in this film: his lecture voice and scenes from this catalog" data-ko="촬영본 없이: 강의 목소리 한 대목과 이 카탈로그의 장면만">No footage in this film: his lecture voice and scenes from this catalog</div>` : hasDemo('hello.mp4') ? `<video src="demo/hello.mp4" poster="demo/hello_poster.jpg" muted loop autoplay playsinline></video>` : ''}</div>
   </div>
   <div class="facts">
-    <div><b>${count('scene')}</b><span data-en="scenes" data-ko="장면">scenes</span></div>
+    <div><b>${count('scene')}</b><span data-en="scenes, ${pictures.length} of them pictures" data-ko="장면, 그중 그림 장면 ${pictures.length}">scenes, ${pictures.length} of them pictures</span></div>
     <div><b>${count('bg')}</b><span data-en="backgrounds" data-ko="배경">backgrounds</span></div>
     <div><b>${count('transition')}</b><span data-en="transitions" data-ko="전환">transitions</span></div>
     <div><b>5</b><span data-en="sources behind one line" data-ko="한 줄 뒤의 출처">sources behind one line</span></div>
   </div>
+  ${hasDemo('flagship.mp4') ? `<div class="films">
+    <figure><video muted loop playsinline preload="none" poster="demo/flagship_9x16_poster.jpg" data-src="demo/flagship_9x16.mp4"></video><figcaption data-en="The same storyboard in 9:16" data-ko="같은 스토리보드의 9:16">The same storyboard in 9:16</figcaption></figure>
+    <figure class="wide"><video muted loop playsinline preload="none" poster="demo/demo_jay_poster.jpg" data-src="demo/demo_jay.mp4"></video><figcaption data-en="“Change one line”: 35 s of a lecture, explained with pictures" data-ko="「한 줄만 바꾸면」: 강의 35초를 그림으로 설명">“Change one line”: 35 s of a lecture, explained with pictures</figcaption></figure>
+    <figure class="wide"><video muted loop playsinline preload="none" poster="demo/hello_poster.jpg" data-src="demo/hello.mp4"></video><figcaption data-en="What <code>demo</code> renders: ten lines of text, no voice" data-ko="<code>demo</code> 가 만드는 것: 글 열 줄, 목소리 없음">What <code>demo</code> renders: ten lines of text, no voice</figcaption></figure>
+  </div>` : ''}
   <div class="how">
     <div><b>1</b><h4 data-en="Write lines" data-ko="줄을 씁니다">Write lines</h4><p data-en="One line of the script is one beat. <code>draft</code> picks a scene for each line and only copies words out of it." data-ko="대본 한 줄이 박자 하나. <code>draft</code> 가 줄마다 장면을 고르고, 그 줄의 낱말만 가져옵니다.">One line of the script is one beat. <code>draft</code> picks a scene for each line and only copies words out of it.</p></div>
-    <div><b>2</b><h4 data-en="Check the rhythm" data-ko="리듬을 검사합니다">Check the rhythm</h4><p data-en="Something new every 3 seconds, each design once, no word the script does not say. Every error says how to fix it." data-ko="3초마다 새로운 것, 디자인은 한 번씩, 대본에 없는 낱말 금지. 오류마다 고치는 법을 알려 줍니다.">Something new every 3 seconds, each design once, no word the script does not say. Every error says how to fix it.</p></div>
+    <div><b>2</b><h4 data-en="Check the rhythm" data-ko="리듬을 검사합니다">Check the rhythm</h4><p data-en="Something new every 3 seconds, each design once, no word the script does not say, no rows of text cards. Every error says how to fix it." data-ko="3초마다 새로운 것, 디자인은 한 번씩, 대본에 없는 낱말 금지, 글자 카드 연속 금지. 오류마다 고치는 법을 알려 줍니다.">Something new every 3 seconds, each design once, no word the script does not say, no rows of text cards. Every error says how to fix it.</p></div>
     <div><b>3</b><h4 data-en="Render both shapes" data-ko="두 화면비로 렌더">Render both shapes</h4><p data-en="16:9 and 9:16 from the same storyboard. With your voice, beats start on your words." data-ko="같은 스토리보드로 16:9 와 9:16. 목소리가 있으면 박자가 내 말에 맞춰 시작합니다.">16:9 and 9:16 from the same storyboard. With your voice, beats start on your words.</p></div>
   </div>
 </div>
 <div class="bar"><div class="wrap">
   <button class="chip on" data-role="all" data-en="All ${playable.length}" data-ko="전체 ${playable.length}">All ${playable.length}</button>
-  <button class="chip" data-role="scene" data-en="Scenes" data-ko="장면">Scenes</button>
+  <button class="chip" data-role="picture" data-en="Pictures ${pictures.length}" data-ko="그림 ${pictures.length}">Pictures ${pictures.length}</button>
+  <button class="chip" data-role="type" data-en="Words ${wordScenes.length}" data-ko="글자 ${wordScenes.length}">Words ${wordScenes.length}</button>
   <button class="chip" data-role="bg" data-en="Backgrounds" data-ko="배경">Backgrounds</button>
   <button class="chip" data-role="transition" data-en="Transitions" data-ko="전환">Transitions</button>
-  <input id="q" type="search" placeholder="number, steps, code, quote ...">
+  <input id="q" type="search" placeholder="chart, 3D, photo, device, map, code ...">
 </div></div>
 <div class="wrap">
 ${sections}
@@ -177,6 +202,7 @@ ${sections}
   </footer>
 </div>
 <script>
+var ko = false;
 // copy buttons
 document.addEventListener('click', function (e) {
   var b = e.target.closest('button[data-copy]');
@@ -186,6 +212,9 @@ document.addEventListener('click', function (e) {
   if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, done);
   else { var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); } catch (x) {} a.remove(); done(); }
 });
+// #still in the address keeps every clip on its poster (for a screenshot or a slow connection)
+var still = location.hash.indexOf('still') >= 0;
+if (still) document.querySelectorAll('video[poster]').forEach(function (v) { var im = document.createElement('img'); im.src = v.getAttribute('poster'); im.alt = ''; im.style.cssText = 'width:100%;height:100%;display:block;object-fit:cover'; im.className = v.className; v.parentNode.replaceChild(im, v); });
 // clips play only while they are on screen
 var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
   es.forEach(function (x) {
@@ -195,21 +224,28 @@ var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (e
   });
 }, {rootMargin: '120px'}) : null;
 document.querySelectorAll('video[data-src]').forEach(function (v) { if (io) io.observe(v); else v.src = v.getAttribute('data-src'); });
+var hs = document.getElementById('heroSound'), hf = document.getElementById('heroFilm');
+if (hs && hf) hs.addEventListener('click', function () { hf.muted = !hf.muted; if (!hf.muted) { hf.currentTime = 0; hf.play(); } hs.textContent = hf.muted ? (ko ? '소리 켜기' : 'Sound on') : (ko ? '소리 끄기' : 'Sound off'); });
 // filter
 var role = 'all', q = '';
 function apply() {
   document.querySelectorAll('.card').forEach(function (c) {
     c.hidden = !((role === 'all' || c.getAttribute('data-role') === role) && (!q || c.getAttribute('data-text').indexOf(q) >= 0));
   });
-  document.querySelectorAll('section[data-source]').forEach(function (s) { s.hidden = !s.querySelector('.card:not([hidden])'); });
+  document.querySelectorAll('section[data-group]').forEach(function (s) { s.hidden = !s.querySelector('.card:not([hidden])'); });
 }
 document.querySelectorAll('.chip').forEach(function (b) { b.addEventListener('click', function () { role = b.getAttribute('data-role'); document.querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === b); }); apply(); }); });
 document.getElementById('q').addEventListener('input', function (e) { q = e.target.value.trim().toLowerCase(); apply(); });
+// light page (the "paper" look) or dark; #paper in the address opens it light
+var th = document.getElementById('theme');
+function setTheme(p) { if (p) document.documentElement.setAttribute('data-theme', 'paper'); else document.documentElement.removeAttribute('data-theme'); th.textContent = p ? (ko ? '어둡게' : 'Dark') : (ko ? '밝게' : 'Light'); }
+th.addEventListener('click', function () { setTheme(!document.documentElement.hasAttribute('data-theme')); });
+if (location.hash.indexOf('paper') >= 0) setTheme(true);
 // language (interface words only; scene names and prompts stay in English)
-var ko = false;
 document.getElementById('lang').addEventListener('click', function () {
   ko = !ko; this.textContent = ko ? 'English' : '한국어'; document.documentElement.lang = ko ? 'ko' : 'en';
   document.querySelectorAll('[data-en]').forEach(function (el) { el.innerHTML = el.getAttribute(ko ? 'data-ko' : 'data-en'); });
+  setTheme(document.documentElement.hasAttribute('data-theme'));
 });
 </script>
 </body>

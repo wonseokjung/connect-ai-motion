@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "number",
+  "lead": "picture",
   "props": {"value": "percent 0-100, as you say it", "text": "what it is (1-4 words)", "color": "colour of the pie"},
   "needs": ["value"],
   "changes": [0, 0.35],

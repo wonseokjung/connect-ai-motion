@@ -1,0 +1,19 @@
+{
+  "kind": "kit/chart-line",
+  "title": "Line chart, drawn",
+  "description": "A line chart that draws itself: the line grows from point to point as you name them, a head dot rides the curve, the big number counts along and the area under the line fills in (@remotion/paths getLength and getPointAtLength). Every number on screen is one of your values; there are no made-up ticks.",
+  "source": {"type": "kit", "path": "catalog/kit/chart-line/index.tsx", "uses": "@remotion/paths"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {"items": "2-12 points in order: {text: label under the point, value: number as you say it, at}", "text": "small heading (optional)", "unit": "unit after the big number (optional)", "color": "colour of the line (teal)", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 26,
+  "dur": 4.6,
+  "maxDur": 12,
+  "family": "chart-line",
+  "draft": false,
+  "example": {"text": "Lesson", "items": [{"text": "Motion", "value": "3"}, {"text": "Slides and web", "value": "5"}, {"text": "three.js", "value": "7"}, {"text": "Blender", "value": "9"}, {"text": "Library", "value": "10"}], "color": "teal"}
+}

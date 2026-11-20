@@ -1,4 +1,5 @@
 // Change one line of code: an editor card, one value swapped at the "swap" cue. Syntax colours by prismjs.
+// While the line is in focus and waiting, a caret blinks after the value, so the picture never stands still.
 import React, {useMemo} from 'react';
 // @ts-ignore prismjs ships no types
 import Prism from 'prismjs';
@@ -63,7 +64,7 @@ const CodeSwap: React.FC<SceneProps> = ({it, r, lf, dur, st, ink, u, tall}) => {
                     <span key={j} style={{color: palette[tk.c] || ink}}>
                       {a}
                       <span style={{position: 'relative', display: 'inline-block'}}>
-                        {done < 1 && <span style={{opacity: 1 - done, position: done > 0 ? 'absolute' : 'relative', left: 0}}>{from}<span style={{position: 'absolute', left: 0, top: '52%', width: `${strike * 100}%`, height: Math.max(2, 3 * u), background: col}} /></span>}
+                        {done < 1 && <span style={{opacity: 1 - done, position: done > 0 ? 'absolute' : 'relative', left: 0}}>{from}<span style={{position: 'absolute', left: 0, top: '52%', width: `${strike * 100}%`, height: Math.max(2, 3 * u), background: col}} />{focus > 0.5 && done <= 0 && <span style={{position: 'absolute', right: -Math.max(3, 5 * u), top: '12%', height: '76%', width: Math.max(2, 3 * u), background: col, opacity: Math.floor(Math.max(0, lf) / 9) % 2 ? 0.15 : 1}} />}</span>}
                         {done > 0 && <span style={{color: col}}>{to.slice(0, typed)}<span style={{opacity: typed < to.length ? 1 : 0, borderRight: `${Math.max(2, 3 * u)}px solid ${col}`}} /></span>}
                       </span>
                       {b}

@@ -1,0 +1,20 @@
+{
+  "kind": "kit/photo-wipe",
+  "title": "Two pictures, one line",
+  "description": "A line sweeps across the frame and the second picture takes over (before and after, real and drawn). With wire: true the second side is the same picture as its own drawing: grey, a tint and a grid whose corners light up. Both sides keep drifting.",
+  "source": {"type": "kit", "path": "catalog/kit/photo-wipe/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "media": ["src", "src2"],
+  "props": {"src": "the first picture", "src2": "the second picture (leave it out and set wire: true to turn the first into a drawing)", "wire": "true: grey + tint + grid on the second side", "label": "small caps under the first side (optional)", "label2": "small caps under the second side (optional)", "color": "tint and grid colour (teal)", "stop": "where the line rests, 0-1 (0.5)", "cues": "{\"wipe\": time} when the line sweeps"},
+  "needs": ["src"],
+  "changes": [0, 0.3],
+  "maxWords": 6,
+  "dur": 3.6,
+  "push": false,
+  "family": "photo-wipe",
+  "draft": false,
+  "example": {"src": "kit:examples/media/photo-2.jpg", "wire": true, "label": "Real", "label2": "Virtual", "color": "teal"}
+}

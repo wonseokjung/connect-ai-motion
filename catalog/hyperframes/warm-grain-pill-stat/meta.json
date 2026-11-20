@@ -13,6 +13,7 @@
   "src": "block.html",
   "role": "scene",
   "use": "number",
+  "lead": "type",
   "props": {
     "value": "number or short value"
   },

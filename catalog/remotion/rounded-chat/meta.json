@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "dialogue",
+  "lead": "type",
   "props": {"text": "the question (2-8 words)", "sub": "the answer (2-8 words)", "color": "colour of the answer", "cues": "{\"answer\": time}"},
   "needs": ["text", "sub"],
   "changes": [0, 0.45],

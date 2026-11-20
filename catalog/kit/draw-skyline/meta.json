@@ -1,0 +1,19 @@
+{
+  "kind": "kit/draw-skyline",
+  "title": "Skyline in one stroke",
+  "description": "A pen draws the outline of a city from left to right in one stroke; the buildings fill in behind it, a fainter row stands behind, and windows keep switching on until the cut. The city is made from a seed (your word), so the same word always builds the same city. Plain SVG; a word in the sky is optional.",
+  "source": {"type": "kit", "path": "catalog/kit/draw-skyline/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "picture",
+  "lead": "picture",
+  "props": {"text": "1-4 words in the sky (optional)", "sub": "small caps over it (optional)", "seed": "any word or number: another seed, another city", "color": "colour of the lit windows (gold)", "color2": "colour of a few other windows (sky)", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": [],
+  "changes": [0, 0.2, 0.4, 0.6, 0.8],
+  "maxWords": 8,
+  "dur": 4,
+  "maxDur": 9,
+  "push": false,
+  "family": "draw-skyline",
+  "example": {"text": "Built with code", "sub": "line by line", "seed": "connect"}
+}

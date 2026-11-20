@@ -1,0 +1,19 @@
+{
+  "kind": "kit/chart-scatter",
+  "title": "Scatter and trend",
+  "description": "Dots settle on the plane from left to right, then the trend line (least squares, worked out from your points) draws through them and thin stems show how far each dot sits from it. The dots keep floating a little. Plain SVG; no numbers are printed, the picture is the shape of the cloud.",
+  "source": {"type": "kit", "path": "catalog/kit/chart-scatter/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "lead": "picture",
+  "props": {"points": "your pairs: [[x, y], ...] (up to 80)", "label": "name of the x axis (optional)", "label2": "name of the y axis (optional)", "color": "colour of the dots (sky)", "color2": "colour of the trend line (coral)", "stage": "ground colour: a name from STAGE, any colour, or none"},
+  "needs": ["points"],
+  "changes": [0, 0.25, 0.52, 0.76],
+  "maxWords": 8,
+  "dur": 4.4,
+  "maxDur": 9,
+  "family": "chart-scatter",
+  "draft": false,
+  "example": {"label": "words in the line", "label2": "seconds on screen", "points": [[7, 2.4], [8, 3.0], [8, 2.8], [14, 3.8], [8, 3.6], [10, 2.8], [6, 2.2], [11, 3.4], [10, 2.8], [6, 3.2]]}
+}

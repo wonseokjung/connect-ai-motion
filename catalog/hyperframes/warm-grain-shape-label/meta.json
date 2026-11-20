@@ -13,6 +13,7 @@
   "src": "block.html",
   "role": "scene",
   "use": "keyword",
+  "lead": "type",
   "props": {
     "text": "1-2 words"
   },

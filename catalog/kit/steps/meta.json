@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "steps",
+  "lead": "type",
   "props": {"items": "2-5 steps, each 1-3 words (or {text, at} to land on a spoken word)", "text": "small heading (optional)"},
   "needs": ["items"],
   "changes": "items",

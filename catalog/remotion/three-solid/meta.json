@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "hero3d",
+  "lead": "picture",
   "props": {"text": "1-3 words", "sub": "small caps line (optional)", "shape": "ico | octa | box | torus | knot", "color": "colour of the solid"},
   "needs": ["text"],
   "changes": [0, 0.4],

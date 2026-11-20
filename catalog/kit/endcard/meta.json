@@ -6,6 +6,7 @@
   "license": "MIT",
   "role": "scene",
   "use": "end",
+  "lead": "type",
   "props": {"text": "name or closing words", "sub": "action line (optional)", "items": "links, up to 3 (optional; they must be in my-info.json links or the script)"},
   "needs": ["text"],
   "changes": [0, 0.3, 0.55],

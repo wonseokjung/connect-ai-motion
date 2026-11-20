@@ -95,9 +95,14 @@ export const Film: React.FC<FilmProps> = ({data, aspect, tl: given, captions, cl
   const [ready, setReady] = useState(false);
   const [handle] = useState(() => delayRender('fonts'));
   useEffect(() => {
-    const go = () => { setReady(true); continueRender(handle); };
+    const go = () => setReady(true);
     fontsReady.then(go, go);
-  }, [handle]);
+  }, []);
+  // the font hold is let go only after the scenes are on the page: a scene that loads something (a model, a texture)
+  // has asked for its own hold by then, so no frame is taken in between
+  useEffect(() => {
+    if (ready) continueRender(handle);
+  }, [ready, handle]);
   const d = data || EMPTY;
   const tl = given || timelineFor(d, aspect);
   const st = getStyle(d.story?.style || d.info?.style);
