@@ -34,7 +34,7 @@ Like mixed martial arts took the best moves of every style and made them work in
 
 | | File | What to look at |
 |---|---|---|
-| A talk, without the footage | [demo_jay.mp4](docs/demo/demo_jay.mp4) | 35 s of the author's own lecture (his voice, Korean) with no camera picture at all: 11 beats that start on his words, one custom scene (the rabbit he talks about), English on screen from his own subtitles |
+| A talk, without the footage | [demo_jay.mp4](docs/demo/demo_jay.mp4) | 35 s of the author's own lecture (his voice, Korean) with no camera picture at all: 11 beats, 9 of them starting on a word he says, one custom scene (the rabbit he talks about), English on screen taken from the English subtitles of that video |
 | The built-in example | [hello.mp4](docs/demo/hello.mp4) · [9:16](docs/demo/hello_9x16.mp4) | 30 s made from ten lines of text, no voice: what `demo` renders on your computer |
 | Scenes | [gallery_scene.mp4](docs/demo/gallery_scene.mp4) · [sheet](docs/demo/gallery_scene_sheet.jpg) | all 35 scenes with their own example, by source |
 | Backgrounds | [gallery_bg.mp4](docs/demo/gallery_bg.mp4) | 6 backgrounds (noise, rays, GPU shaders) |
@@ -81,7 +81,7 @@ Your own film: write a few lines in `my-script.md` and run `npx connect-ai-motio
 | A picture that stands completely still for 1.6 s (measured) | advice |
 | A scene that covers under 2 % of the frame at its fullest (measured) | advice |
 
-"Three" in the script covers "3" on screen. If your voice is Korean and the screen is English, `say` is the English line (your subtitle translation) and the words file is the Korean one: the timing follows what is spoken, the words on screen follow `say`. Whether the two mean the same is for a person to judge.
+"Three" in the script covers "3" on screen. If your voice is Korean and the screen is English, `say` is the English line (your subtitle translation, for example) and the words file is the Korean one: the timing follows what is spoken, the words on screen follow `say`. Whether the two mean the same is for a person to judge.
 
 ## The catalog
 

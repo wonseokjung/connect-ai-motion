@@ -1,7 +1,7 @@
 // Breathing dots (@remotion/noise).
 import React from 'react';
 import {noise3D} from '@remotion/noise';
-import {SceneProps, hueOf} from '../../../src/catalog/ui';
+import {SceneProps, hexA, hueOf} from '../../../src/catalog/ui';
 
 const BgNoiseDots: React.FC<SceneProps> = ({it, lf, st, W, H, u}) => {
   const c = hueOf(it, st.accent);
@@ -14,7 +14,7 @@ const BgNoiseDots: React.FC<SceneProps> = ({it, lf, st, W, H, u}) => {
       dots.push(<circle key={`${i}-${j}`} cx={i * step + step / 2} cy={j * step + step / 2} r={(1.2 + k * 3.6) * u} fill={k > 0.72 ? c : st.ink} fillOpacity={k > 0.72 ? 0.8 : 0.06 + k * 0.16} />);
     }
   return (
-    <div style={{position: 'absolute', left: 0, top: 0, width: W, height: H, background: st.bg}}>
+    <div style={{position: 'absolute', left: 0, top: 0, width: W, height: H, background: `radial-gradient(ellipse 78% 68% at 50% 52%, ${hexA(c, 0.28)} 0%, ${hexA(c, 0.09)} 44%, transparent 78%), ${st.bg}`}}>
       <svg width={W} height={H} style={{position: 'absolute'}}>{dots}</svg>
     </div>
   );

@@ -7,3 +7,4 @@ projects/
 .connect-ai-motion.json
 *.log
 .DS_Store
+src/catalog/user.generated.tsx

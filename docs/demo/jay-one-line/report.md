@@ -8,7 +8,7 @@
 - voice: voice.wav (32.0 s), words from voice.srt (tier B)
 - timing: 0 beats on a spoken word (A), 9 on a subtitle line (B), 2 by reading time or seconds (C)
 - sources: custom 3, kit 3, remotion 5
-- measured from the render: something moves in 81 % of the film, fullest scene covers 65 % of the frame
+- measured from the render: something moves in 79 % of the film, fullest scene covers 65 % of the frame
 
 ## Beats
 

@@ -19,7 +19,7 @@ const BgNoiseContour: React.FC<SceneProps> = ({it, lf, st, W, H, u}) => {
     lines.push(d);
   }
   return (
-    <div style={{position: 'absolute', left: 0, top: 0, width: W, height: H, background: `radial-gradient(ellipse 80% 70% at 50% 50%, ${st.bg2} 0%, ${st.bg} 72%)`}}>
+    <div style={{position: 'absolute', left: 0, top: 0, width: W, height: H, background: `radial-gradient(ellipse 78% 68% at 50% 52%, ${hexA(c, 0.3)} 0%, ${hexA(c, 0.1)} 44%, transparent 78%), ${st.bg}`}}>
       <svg width={W} height={H} style={{position: 'absolute'}}>
         {lines.map((d, j) => <path key={j} d={d} fill="none" stroke={j % 5 === 2 ? hexA(c, 0.5 * s + 0.1) : st.ink} strokeOpacity={j % 5 === 2 ? 1 : 0.05 + 0.1 * s} strokeWidth={Math.max(1, 1.2 * u)} />)}
       </svg>

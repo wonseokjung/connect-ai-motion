@@ -22,7 +22,7 @@
 
 | | 파일 | 볼 것 |
 |---|---|---|
-| 영상 없이 만든 강의 한 대목 | [demo_jay.mp4](docs/demo/demo_jay.mp4) | 만든 사람의 실제 강의 35초(본인 목소리)를 카메라 화면 없이. 박자 11개가 그의 말에 맞춰 시작하고, 직접 만든 장면 하나(그가 말하는 토끼), 화면 글자는 본인 영어 자막에서 |
+| 영상 없이 만든 강의 한 대목 | [demo_jay.mp4](docs/demo/demo_jay.mp4) | 만든 사람의 실제 강의 35초(본인 목소리)를 카메라 화면 없이. 박자 11개 중 9개가 그가 말한 낱말에 맞춰 시작하고, 직접 만든 장면 하나(그가 말하는 토끼), 화면 글자는 그 영상의 영어 자막에서 |
 | 내장 예제 | [hello.mp4](docs/demo/hello.mp4) · [9:16](docs/demo/hello_9x16.mp4) | 글 열 줄로 만든 30초(목소리 없음). `demo` 명령이 내 컴퓨터에서 만드는 것 |
 | 장면 | [gallery_scene.mp4](docs/demo/gallery_scene.mp4) · [시트](docs/demo/gallery_scene_sheet.jpg) | 장면 35개 전부, 출처별 |
 | 배경 | [gallery_bg.mp4](docs/demo/gallery_bg.mp4) | 배경 6개 |

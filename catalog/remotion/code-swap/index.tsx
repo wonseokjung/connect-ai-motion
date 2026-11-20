@@ -37,13 +37,13 @@ const CodeSwap: React.FC<SceneProps> = ({it, r, lf, dur, st, ink, u, tall}) => {
   const lh = fs * 1.6;
   const cardH = bar + pad * 2 + lines.length * lh;
   const x0 = (r[2] - cardW) / 2, y0 = (r[3] - cardH) / 2;
-  const inK = k01(lf, 0, 14);
+  const inK = k01(lf, 0, 10);
   const strike = k01(lf, swap - 8, swap), typed = Math.floor(k01(lf, swap, swap + Math.max(6, to.length * 2), (t) => t) * to.length), done = k01(lf, swap, swap + 8);
   const cw = measure('0', fs, 400, 0, MONO);
   const label = String(it.text || '').toUpperCase();
   return (
     <Box r={r}>
-      <div style={{position: 'absolute', left: x0, top: y0, width: cardW, height: cardH, borderRadius: st.radius * u * 1.4, background: 'rgba(18,15,12,0.92)', border: `${Math.max(1, 1.5 * u)}px solid ${st.cardLine}`, overflow: 'hidden', opacity: inK, transform: `translateY(${(1 - inK) * 26 * u}px)`, boxShadow: `0 ${30 * u}px ${80 * u}px rgba(0,0,0,0.5)`}}>
+      <div style={{position: 'absolute', left: x0, top: y0, width: cardW, height: cardH, borderRadius: st.radius * u * 1.4, background: 'linear-gradient(180deg, rgba(58,45,30,0.94) 0%, rgba(30,24,18,0.94) 34%, rgba(18,15,12,0.94) 100%)', border: `${Math.max(1, 1.5 * u)}px solid ${st.cardLine}`, overflow: 'hidden', opacity: inK, transform: `translateY(${(1 - inK) * 26 * u}px)`, boxShadow: `0 ${30 * u}px ${80 * u}px rgba(0,0,0,0.5)`}}>
         <div style={{position: 'absolute', left: 0, top: 0, right: 0, height: bar, borderBottom: `1px solid ${st.cardLine}`, display: 'flex', alignItems: 'center', paddingLeft: 24 * u, gap: 10 * u}}>
           {[0, 1, 2].map((i) => <div key={i} style={{width: 13 * u, height: 13 * u, borderRadius: 13 * u, background: st.faint}} />)}
           {label && <div style={{...caps(st, 20 * u, st.accentHi), marginLeft: 18 * u, opacity: Math.max(focus, done)}}>{label}</div>}
@@ -51,7 +51,7 @@ const CodeSwap: React.FC<SceneProps> = ({it, r, lf, dur, st, ink, u, tall}) => {
         {hitLine >= 0 && <div style={{position: 'absolute', left: 0, right: 0, top: bar + pad + hitLine * lh - lh * 0.08, height: lh, background: hexA(col, 0.06 * focus + 0.08 * done), borderLeft: `${Math.max(2, 4 * u)}px solid ${hexA(col, Math.max(focus * 0.6, done))}`}} />}
         <div style={{position: 'absolute', left: pad, top: bar + pad, fontFamily: MONO, fontSize: fs, lineHeight: `${lh}px`, whiteSpace: 'pre', color: ink}}>
           {lines.map((l, i) => {
-            const lk = k01(lf, 4 + i * 3, 14 + i * 3);
+            const lk = k01(lf, 1 + i * 2, 9 + i * 2);
             return (
               <div key={i} style={{opacity: lk, height: lh, display: 'flex'}}>
                 <span style={{color: st.faint, width: cw * 3, userSelect: 'none'}}>{String(i + 1).padStart(2, ' ')} </span>

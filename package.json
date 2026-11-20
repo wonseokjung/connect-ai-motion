@@ -55,6 +55,7 @@
     "bin/",
     "lib/",
     "src/",
+    "!src/catalog/user.generated.tsx",
     "catalog/",
     "skill/",
     "licenses/",
