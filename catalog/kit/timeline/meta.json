@@ -1,0 +1,17 @@
+{
+  "kind": "kit/timeline",
+  "title": "Line with stops",
+  "description": "A line runs across the frame (down the frame in 9:16) and stops at each point: a ring, its label, a small caps note. The line reaches each stop on its own beat.",
+  "source": {"type": "kit", "path": "catalog/kit/timeline/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "timeline",
+  "props": {"items": "3-6 stops: \"label\" or {text, sub, at}", "text": "small heading (optional)"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 32,
+  "dur": 5,
+  "maxDur": 10,
+  "family": "timeline",
+  "example": {"text": "Visual vibe coding", "items": [{"text": "Motion on video", "sub": "lesson 2"}, {"text": "Motion only", "sub": "lesson 3"}, {"text": "Slides and web", "sub": "lessons 4-5"}, {"text": "three.js", "sub": "lessons 6-7"}, {"text": "Blender", "sub": "lessons 8-9"}]}
+}

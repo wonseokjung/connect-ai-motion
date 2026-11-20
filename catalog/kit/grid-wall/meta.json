@@ -1,0 +1,17 @@
+{
+  "kind": "kit/grid-wall",
+  "title": "Wall of cards",
+  "description": "Up to twelve small cards fill the frame one after another like a wall; one of them can be lit in a colour.",
+  "source": {"type": "kit", "path": "catalog/kit/grid-wall/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "list",
+  "props": {"items": "4-12 short labels", "hi": "the label to light up (optional)", "color": "its colour"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 30,
+  "dur": 3.6,
+  "maxDur": 8,
+  "family": "grid-wall",
+  "example": {"items": ["Remotion", "HyperFrames", "Lottie", "GSAP", "three.js", "Shaders", "Your own", "Clips"], "hi": "Your own", "color": "teal"}
+}

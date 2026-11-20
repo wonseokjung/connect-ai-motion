@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/shapes-pie",
+  "title": "Percent ring",
+  "description": "A pie fills to the percent you said inside a ring of ticks (@remotion/shapes makePie, makeCircle); the number counts with it and what it means sits beside it.",
+  "source": {"type": "remotion", "package": "@remotion/shapes", "version": "4.0.529"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "number",
+  "props": {"value": "percent 0-100, as you say it", "text": "what it is (1-4 words)", "color": "colour of the pie"},
+  "needs": ["value"],
+  "changes": [0, 0.35],
+  "maxWords": 7,
+  "dur": 3,
+  "family": "pie",
+  "example": {"value": "100%", "text": "made with code", "color": "teal"}
+}

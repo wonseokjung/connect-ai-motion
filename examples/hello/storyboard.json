@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "title": "connect-ai-motion in ten lines",
+  "style": "connect",
+  "bg": "remotion/bg-noise-contour",
+  "sound": "tones",
+  "allow": [
+    "CONNECT AI LAB"
+  ],
+  "beats": [
+    {
+      "id": "open",
+      "say": "CONNECT AI LAB. AI education for everyone.",
+      "kind": "kit/ident",
+      "text": "CONNECT AI LAB",
+      "sub": "AI education for everyone",
+      "dur": 2.4
+    },
+    {
+      "id": "promise",
+      "say": "No footage. Only a script. A finished film.",
+      "kind": "remotion/kinetic-lines",
+      "lines": [
+        "No footage",
+        "Only a script",
+        "A finished film"
+      ],
+      "hi": 3,
+      "dur": 3.0
+    },
+    {
+      "id": "one",
+      "say": "One line of your script is one scene.",
+      "kind": "remotion/rough-mark",
+      "text": "One line is one scene",
+      "hi": "one scene",
+      "mark": "highlight",
+      "color": "coral",
+      "dur": 2.8
+    },
+    {
+      "id": "sources",
+      "say": "Scenes come from Remotion, HyperFrames, Lottie, GSAP, three.js, shaders, or your own file.",
+      "kind": "kit/grid-wall",
+      "items": [
+        "Remotion",
+        "HyperFrames",
+        "Lottie",
+        "GSAP",
+        "three.js",
+        "Shaders",
+        "Your own file"
+      ],
+      "hi": "Your own file",
+      "color": "teal",
+      "dur": 3.8
+    },
+    {
+      "id": "flow",
+      "say": "Write the script, pick the scenes, check, render.",
+      "kind": "remotion/paths-flow",
+      "items": [
+        "Script",
+        "Scenes",
+        "Check",
+        "Render"
+      ],
+      "color": "teal",
+      "dur": 3.6
+    },
+    {
+      "id": "rhythm",
+      "say": "The check keeps the rhythm: something new every three seconds.",
+      "kind": "hyperframes/ring-count",
+      "value": "3",
+      "unit": "seconds",
+      "dur": 2.8
+    },
+    {
+      "id": "check",
+      "say": "It checks itself before it renders.",
+      "kind": "lottie/gold-check",
+      "text": "Check",
+      "sub": "before it renders",
+      "dur": 2.2
+    },
+    {
+      "id": "agent",
+      "say": "Or just ask your agent: make a film from this script.",
+      "kind": "remotion/cursor-prompt",
+      "text": "Make a film from this script",
+      "dur": 3.4
+    },
+    {
+      "id": "shapes",
+      "say": "16:9 and 9:16 come from the same storyboard.",
+      "kind": "remotion/gsap-split",
+      "text": "16:9 and 9:16",
+      "sub": "the same storyboard",
+      "dur": 2.8
+    },
+    {
+      "id": "end",
+      "say": "Open source by CONNECT AI LAB.",
+      "kind": "kit/endcard",
+      "text": "CONNECT AI LAB",
+      "sub": "Open source",
+      "items": [
+        "youtube.com/@CONNECT-AI-LAB",
+        "aicitybuilders.com"
+      ],
+      "in": "remotion/tr-fade",
+      "dur": 3.2
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "remotion/bg-noise-dots",
+  "title": "Breathing dots",
+  "description": "A grid of small dots whose size follows a slow wave of noise (@remotion/noise noise3D); a band of them turns to the accent colour.",
+  "source": {"type": "remotion", "package": "@remotion/noise", "version": "4.0.529"},
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {"color": "colour of the lit dots (default: the style's accent)"},
+  "family": "bg-dots",
+  "example": {}
+}

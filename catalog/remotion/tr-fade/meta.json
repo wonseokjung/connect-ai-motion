@@ -1,0 +1,13 @@
+{
+  "kind": "remotion/tr-fade",
+  "title": "Fade",
+  "description": "The next scene fades in over the last one (@remotion/transitions fade).",
+  "source": {"type": "remotion", "package": "@remotion/transitions", "version": "4.0.529", "licenseNote": "ships under the Remotion License like remotion itself"},
+  "license": "Remotion License",
+  "role": "transition",
+  "use": "transition",
+  "props": {"dur": "seconds (0.5)"},
+  "dur": 0.5,
+  "family": "tr-fade",
+  "example": {}
+}

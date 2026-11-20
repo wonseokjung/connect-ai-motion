@@ -1,0 +1,38 @@
+{
+  "kind": "hyperframes/split-words-rise",
+  "title": "Words rise (GSAP SplitText)",
+  "description": "Words rise out of a mask one after another (GSAP SplitText). A block in the HyperFrames format.",
+  "source": {
+    "type": "hyperframes",
+    "note": "our own block in the HyperFrames format (HTML + CSS + paused GSAP timeline); GSAP plugins come from the installed gsap package",
+    "path": "catalog/hyperframes/split-words-rise/block.html"
+  },
+  "license": "MIT",
+  "src": "block.html",
+  "role": "scene",
+  "use": "statement",
+  "props": {
+    "text": "3-5 words"
+  },
+  "text": {
+    ".line": "text"
+  },
+  "canvas": [
+    1400,
+    420
+  ],
+  "window": [
+    0,
+    2.5
+  ],
+  "changes": [
+    0,
+    0.4
+  ],
+  "maxWords": 8,
+  "dur": 3.1,
+  "family": "hf-split",
+  "example": {
+    "text": "Make it with words"
+  }
+}

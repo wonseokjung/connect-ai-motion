@@ -1,0 +1,30 @@
+{
+  "kind": "lottie/signal-pulse",
+  "title": "Signal pulse (Lottie)",
+  "description": "Rings pulse out from a point like a signal, with your word under it.",
+  "source": {
+    "type": "lottie",
+    "path": "catalog/lottie/signal-pulse/anim.json",
+    "note": "our own Lottie file (made by code), played by @remotion/lottie + lottie-web"
+  },
+  "license": "MIT",
+  "src": "anim.json",
+  "role": "scene",
+  "use": "icon",
+  "props": {
+    "text": "1-3 words under the animation (optional)",
+    "sub": "small caps line (optional)",
+    "scale": "size of the animation, 0-1"
+  },
+  "changes": [
+    0,
+    0.4
+  ],
+  "maxWords": 8,
+  "dur": 2.8,
+  "family": "lottie-signal-pulse",
+  "example": {
+    "text": "Live",
+    "sub": "on air"
+  }
+}

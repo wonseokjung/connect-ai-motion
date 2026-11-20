@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "title": "Change one line (from the Visual Vibe Coding intro)",
+  "style": "connect",
+  "bg": "remotion/bg-noise-contour",
+  "voice": "input/voice.wav",
+  "sound": false,
+  "allow": [
+    "CONNECT AI LAB",
+    "Visual Vibe Coding"
+  ],
+  "beats": [
+    {
+      "id": "rabbit",
+      "at": 0,
+      "say": "But then, looking at it: not black, I'd actually like it red.",
+      "kind": "custom",
+      "component": "./scenes/Rabbit.tsx",
+      "meta": {
+        "family": "rabbit",
+        "changes": [
+          0,
+          0.5,
+          0.8
+        ],
+        "maxWords": 4
+      },
+      "screen": "#050505",
+      "next": "red",
+      "text": "black",
+      "sub": "red",
+      "cues": {
+        "first": {
+          "text": "검은색이",
+          "near": 2.7
+        },
+        "second": {
+          "text": "빨간색으로",
+          "near": 4.2
+        }
+      }
+    },
+    {
+      "id": "red",
+      "at": {
+        "text": "바꿨으면",
+        "near": 5.3
+      },
+      "say": "Not black: I'd actually like it changed to red.",
+      "kind": "kit/keyword",
+      "text": "Actually, red",
+      "sub": "not black",
+      "color": "red"
+    },
+    {
+      "id": "regenerate",
+      "at": {
+        "text": "영상을",
+        "near": 7.5
+      },
+      "say": "Then you have to regenerate this video, right?",
+      "kind": "remotion/motion-blur-slam",
+      "text": "Regenerate",
+      "sub": "this video",
+      "color": "coral"
+    },
+    {
+      "id": "ask",
+      "at": {
+        "text": "야",
+        "near": 9.8
+      },
+      "say": "Hey, not this, not black: make it red.",
+      "kind": "remotion/cursor-prompt",
+      "text": "Not black. Make it red.",
+      "cues": {
+        "click": {
+          "text": "고쳐줘",
+          "near": 12.3
+        }
+      }
+    },
+    {
+      "id": "wait",
+      "at": {
+        "text": "이렇게",
+        "near": 12.84
+      },
+      "say": "And then you wait again.",
+      "kind": "custom",
+      "text": "Wait again",
+      "component": "./scenes/Rabbit.tsx",
+      "meta": {
+        "family": "rabbit-wait",
+        "changes": [
+          0,
+          0.3
+        ],
+        "maxWords": 3
+      },
+      "screen": "#050505",
+      "mode": "wait"
+    },
+    {
+      "id": "coding",
+      "at": {
+        "text": "코딩했다는",
+        "near": 14.7
+      },
+      "say": "Coding means that once it's made,",
+      "kind": "remotion/title-blur",
+      "text": "Once it's made",
+      "hi": "made",
+      "sub": "coding"
+    },
+    {
+      "id": "swap",
+      "at": {
+        "text": "이",
+        "near": 17.1
+      },
+      "say": "you just swap the code for black to red,",
+      "kind": "remotion/code-swap",
+      "code": "const video = {\n  screen: \"black\",\n  rabbit: \"running\",\n};\nrender(video);",
+      "from": "black",
+      "to": "red",
+      "text": "swap the code",
+      "color": "red",
+      "cues": {
+        "focus": {
+          "text": "해당하는",
+          "near": 18.6
+        },
+        "swap": {
+          "text": "빨간색으로",
+          "near": 21.0
+        }
+      }
+    },
+    {
+      "id": "instant",
+      "at": {
+        "text": "하면",
+        "near": 21.8
+      },
+      "say": "and it's generated instantly.",
+      "kind": "custom",
+      "component": "./scenes/Rabbit.tsx",
+      "meta": {
+        "family": "rabbit-red",
+        "changes": [
+          0,
+          0.3
+        ],
+        "maxWords": 3
+      },
+      "screen": "red",
+      "text": "Instantly",
+      "mode": "big"
+    },
+    {
+      "id": "cost",
+      "at": {
+        "text": "여기서",
+        "near": 23.8
+      },
+      "say": "So the cost that goes into it is almost nothing.",
+      "kind": "remotion/gsap-split",
+      "text": "Almost nothing",
+      "hi": "nothing",
+      "sub": "the cost"
+    },
+    {
+      "id": "three",
+      "at": {
+        "text": "영상을",
+        "near": 26.6
+      },
+      "say": "The cost of making video goes down, the time goes down, and accuracy goes up.",
+      "kind": "kit/trend",
+      "items": [
+        {
+          "text": "Cost",
+          "dir": "down",
+          "at": {
+            "text": "영상을",
+            "near": 26.6
+          }
+        },
+        {
+          "text": "Time",
+          "dir": "down",
+          "at": {
+            "text": "시간도",
+            "near": 28.7
+          }
+        },
+        {
+          "text": "Accuracy",
+          "dir": "up",
+          "at": {
+            "text": "정확성",
+            "near": 29.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand",
+      "at": 32.3,
+      "dur": 2.6,
+      "say": "CONNECT AI LAB. Visual Vibe Coding.",
+      "kind": "kit/ident",
+      "text": "CONNECT AI LAB",
+      "sub": "Visual Vibe Coding",
+      "in": "remotion/tr-fade"
+    }
+  ]
+}

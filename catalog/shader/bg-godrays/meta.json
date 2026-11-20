@@ -1,0 +1,12 @@
+{
+  "kind": "shader/bg-godrays",
+  "title": "God rays (shader)",
+  "description": "Soft rays of light fall from a corner of the frame, drawn on the GPU by the shaders package (Godrays, WebGPU) and locked to the frame.",
+  "source": {"type": "shader", "package": "shaders", "version": "4.0.2", "repo": "shader-effects-inc/shaders"},
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {"color": "ray colour (default: the style's accent)", "x": "0-1 where the light comes from (1)", "y": "0-1 (0)", "strength": "0-1 (0.7)"},
+  "family": "shader-godrays",
+  "example": {}
+}

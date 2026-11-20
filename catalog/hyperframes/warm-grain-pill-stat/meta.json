@@ -1,0 +1,46 @@
+{
+  "kind": "hyperframes/warm-grain-pill-stat",
+  "title": "Pill stat (HyperFrames)",
+  "description": "A number in a rounded pill from the HyperFrames warm-grain template.",
+  "source": {
+    "type": "hyperframes",
+    "repo": "heygen-com/hyperframes",
+    "package": "hyperframes@0.8.86",
+    "note": "unchanged copy; the adapter plays a part of its timeline",
+    "path": "dist/templates/warm-grain/compositions/graphics.html"
+  },
+  "license": "Apache-2.0",
+  "src": "block.html",
+  "role": "scene",
+  "use": "number",
+  "props": {
+    "value": "number or short value"
+  },
+  "text": {
+    "#moment-2 .stat-text": "value"
+  },
+  "canvas": [
+    1920,
+    1080
+  ],
+  "window": [
+    4.4,
+    8.2
+  ],
+  "changes": [
+    0,
+    0.4
+  ],
+  "maxWords": 8,
+  "dur": 3.0,
+  "family": "hf-pill",
+  "example": {
+    "value": "16:9"
+  },
+  "crop": [
+    690,
+    70,
+    540,
+    260
+  ]
+}

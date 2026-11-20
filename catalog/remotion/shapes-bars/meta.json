@@ -1,0 +1,17 @@
+{
+  "kind": "remotion/shapes-bars",
+  "title": "Bars",
+  "description": "Two to six bars grow from a base line to the numbers you said (@remotion/shapes makeRect), each with its value on top and its label under it; the one you choose is in a colour.",
+  "source": {"type": "remotion", "package": "@remotion/shapes", "version": "4.0.529"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "chart",
+  "props": {"items": "2-6 bars: {text: label, value: number as you say it, at}", "hi": "label of the bar to colour", "color": "its colour", "text": "small heading (optional)"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 20,
+  "dur": 4,
+  "maxDur": 9,
+  "family": "shapes-bars",
+  "example": {"text": "Lessons per unit", "items": [{"text": "Motion", "value": "3"}, {"text": "three.js", "value": "2"}, {"text": "Blender", "value": "2"}], "hi": "Motion", "color": "teal"}
+}

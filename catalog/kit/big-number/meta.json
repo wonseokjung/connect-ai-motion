@@ -1,0 +1,16 @@
+{
+  "kind": "kit/big-number",
+  "title": "Big number",
+  "description": "A number counts up as large as the frame allows, tick marks fill under it, the unit and what it counts sit beside it.",
+  "source": {"type": "kit", "path": "catalog/kit/big-number/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "number",
+  "props": {"value": "the number as you say it (10, 1.5K, 40%, $9)", "unit": "small word after it (optional)", "text": "what it counts (1-4 words)", "color": "colour of the number"},
+  "needs": ["value"],
+  "changes": [0, 0.35],
+  "maxWords": 8,
+  "dur": 2.8,
+  "family": "big-number",
+  "example": {"value": "10", "unit": "lessons", "text": "one open-source tool each"}
+}

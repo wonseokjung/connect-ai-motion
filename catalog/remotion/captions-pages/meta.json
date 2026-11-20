@@ -1,0 +1,17 @@
+{
+  "kind": "remotion/captions-pages",
+  "title": "Words in time",
+  "description": "The line itself, a few words at a time, large; the word being said is lit (@remotion/captions createTikTokStyleCaptions). With a voice it follows the word times, without one it follows reading speed.",
+  "source": {"type": "remotion", "package": "@remotion/captions", "version": "4.0.529"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "voice",
+  "props": {"text": "the line as it is said (up to about 20 words)", "color": "colour of the lit word", "group": "how long one page of words lasts, in ms (900)"},
+  "needs": ["text"],
+  "changes": "words",
+  "maxWords": 26,
+  "dur": 4,
+  "maxDur": 9,
+  "family": "captions-pages",
+  "example": {"text": "A script goes in and a finished film comes out"}
+}

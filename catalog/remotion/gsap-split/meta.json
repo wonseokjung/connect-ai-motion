@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/gsap-split",
+  "title": "Letters from the middle",
+  "description": "A line of letters unfolds from the middle outwards and one word turns gold: a GSAP timeline that Remotion seeks frame by frame (@remotion/gsap useGsapTimeline).",
+  "source": {"type": "remotion", "package": "@remotion/gsap", "version": "4.0.529", "also": "gsap 3.15 (GreenSock standard no-charge license)"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "statement",
+  "props": {"text": "2-5 words", "hi": "word to turn gold", "sub": "small caps line (optional)"},
+  "needs": ["text"],
+  "changes": [0, 0.4],
+  "maxWords": 9,
+  "dur": 2.8,
+  "family": "gsap-split",
+  "example": {"text": "Motion not slides", "hi": "Motion"}
+}

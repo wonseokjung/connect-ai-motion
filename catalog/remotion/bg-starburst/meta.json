@@ -1,0 +1,12 @@
+{
+  "kind": "remotion/bg-starburst",
+  "title": "Slow rays",
+  "description": "Wide soft rays turn slowly from a point (@remotion/starburst, WebGL), dark on dark, fading to the edges.",
+  "source": {"type": "remotion", "package": "@remotion/starburst", "version": "4.0.529"},
+  "license": "Remotion License",
+  "role": "bg",
+  "use": "background",
+  "props": {"color": "ray colour (default: the style's accent)", "x": "0-100 (50)", "y": "0-100 (60)", "strength": "0-1 (0.35)"},
+  "family": "bg-rays",
+  "example": {}
+}

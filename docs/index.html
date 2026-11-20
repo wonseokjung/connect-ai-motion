@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>connect-ai-motion · catalog</title>
+<meta name="description" content="No footage needed: a script becomes a finished motion-graphics film. 48 scenes, backgrounds and transitions from Remotion, HyperFrames, Lottie and shaders, each called with one line. Open source by CONNECT AI LAB.">
+<style>
+:root{--bg:#0B0A09;--bg2:#14110E;--ink:#EBE2D2;--dim:rgba(235,226,210,.6);--faint:rgba(235,226,210,.14);--gold:#D6892A;--goldhi:#F2B45A;--teal:#3FB7A6}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:300;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--goldhi);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1320px;margin:0 auto;padding:0 28px}
+header{padding:34px 0 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-size:13px;letter-spacing:.3em;text-transform:uppercase;font-weight:400}.brand b{color:var(--goldhi);font-weight:400}
+nav{display:flex;gap:22px;font-size:14px;align-items:center}
+nav button{background:none;border:1px solid var(--faint);color:var(--dim);border-radius:99px;padding:4px 12px;font:inherit;font-size:12px;cursor:pointer}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:center;padding:56px 0 40px}
+.kicker{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--goldhi);font-weight:400;display:flex;align-items:center;gap:14px}
+.kicker:before{content:"";width:40px;height:1.5px;background:var(--gold)}
+h1{font-size:clamp(38px,5.4vw,76px);font-weight:200;letter-spacing:-.02em;line-height:1.04;margin:18px 0 18px}
+h1 em{font-style:normal;color:var(--goldhi)}
+.lead{font-size:clamp(16px,1.4vw,20px);color:var(--dim);max-width:34em;margin:0 0 26px}
+.cmd{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--faint);border-radius:12px;padding:12px 12px 12px 18px;font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:clamp(13px,1.2vw,16px);max-width:560px;margin-bottom:12px}
+.cmd span{flex:1;overflow-x:auto;white-space:nowrap}.cmd i{color:var(--gold);font-style:normal}
+button[data-copy]{background:rgba(214,137,42,.14);border:1px solid rgba(214,137,42,.5);color:var(--goldhi);border-radius:8px;padding:6px 12px;font:inherit;font-size:12px;font-weight:400;letter-spacing:.04em;cursor:pointer;white-space:nowrap}
+button[data-copy]:hover{background:rgba(214,137,42,.26)}button[data-copy].done{border-color:var(--teal);color:var(--teal);background:rgba(63,183,166,.12)}
+.film{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--faint);background:#000;aspect-ratio:16/9;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.film video{width:100%;height:100%;display:block;object-fit:cover}
+.film .tag{position:absolute;left:14px;bottom:12px;font-size:12px;letter-spacing:.06em;color:var(--dim);background:rgba(11,10,9,.7);padding:4px 10px;border-radius:99px}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--faint);border:1px solid var(--faint);border-radius:14px;overflow:hidden;margin:8px 0 46px}
+.facts div{background:var(--bg);padding:20px 22px}.facts b{display:block;font-size:34px;font-weight:200;color:var(--ink);line-height:1.1}.facts span{font-size:13px;color:var(--dim)}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:54px}
+.how div{border:1px solid var(--faint);border-radius:14px;padding:22px;background:var(--bg2)}
+.how b{font-size:40px;font-weight:200;color:var(--gold);display:block;line-height:1}.how h4{margin:12px 0 6px;font-size:18px;font-weight:400}.how p{margin:0;color:var(--dim);font-size:14.5px}
+.how code,.card p code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.9em;color:var(--goldhi)}
+.bar{position:sticky;top:0;z-index:5;background:rgba(11,10,9,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--faint);padding:12px 0;margin-bottom:26px}
+.bar .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.chip{background:none;border:1px solid var(--faint);color:var(--dim);border-radius:99px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer}.chip.on{border-color:var(--gold);color:var(--goldhi);background:rgba(214,137,42,.1)}
+.bar input{flex:1;min-width:150px;background:var(--bg2);border:1px solid var(--faint);border-radius:99px;padding:7px 16px;color:var(--ink);font:inherit;font-size:14px;outline:none}
+section h2{font-size:14px;letter-spacing:.28em;text-transform:uppercase;font-weight:400;color:var(--goldhi);margin:34px 0 16px;display:flex;align-items:center;gap:12px}section h2 small{color:var(--dim);letter-spacing:.1em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{border:1px solid var(--faint);border-radius:14px;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column}
+.card.off{opacity:.62}
+.shot{aspect-ratio:16/9;background:#000;position:relative}.shot video{width:100%;height:100%;display:block;object-fit:cover}
+.shot .none{position:absolute;inset:0;display:grid;place-items:center;color:var(--dim);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.meta{padding:14px 16px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.row h3{margin:0;font-size:17px;font-weight:400}
+.use{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.kind{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;color:var(--goldhi)}
+.card p{margin:0;color:var(--dim);font-size:13.5px}.card p.why{color:#E0605A;font-size:12.5px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:8px;font-size:11.5px;color:var(--dim);flex-wrap:wrap}.btns{display:flex;gap:6px}
+.agent{border:1px solid var(--faint);border-radius:14px;padding:22px;background:var(--bg2);margin:54px 0 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:start}
+.agent pre{margin:8px 0 0;white-space:pre-wrap;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;color:var(--dim)}
+footer{padding:60px 0 70px;color:var(--dim);font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--faint);margin-top:60px}
+footer b{color:var(--ink);font-weight:400;letter-spacing:.24em;text-transform:uppercase;font-size:13px}
+[hidden]{display:none!important}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:28px;padding:36px 0 30px}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.how{grid-template-columns:1fr}.agent{grid-template-columns:1fr}.wrap{padding:0 18px}nav a.hide{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><b>Open source</b> by CONNECT AI LAB</div>
+    <nav><a class="hide" href="https://github.com/wonseokjung/connect-ai-motion">GitHub</a><a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a><a href="https://www.aicitybuilders.com">aicitybuilders.com</a><button id="lang">한국어</button></nav>
+  </header>
+  <div class="hero">
+    <div>
+      <div class="kicker" data-en="Visual Vibe Coding · lesson 3" data-ko="비주얼 바이브코딩 · 3강">Visual Vibe Coding · lesson 3</div>
+      <h1 data-en="No footage.<br>A script becomes <em>a finished film.</em>" data-ko="찍은 영상 없이.<br>대본이 <em>완성된 영상</em>이 됩니다.">No footage.<br>A script becomes <em>a finished film.</em></h1>
+      <p class="lead" data-en="Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene, from Remotion, HyperFrames, Lottie, shaders or your own file, all called the same way. It checks its own rhythm." data-ko="하고 싶은 말은 있는데 찍어 둔 영상이 없을 때 씁니다. 대본 한 줄이 화면 가득한 장면 하나가 되고, 장면은 Remotion · HyperFrames · Lottie · 셰이더 · 내 파일 어디서든 같은 방법으로 부릅니다. 리듬은 스스로 검사합니다.">Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene, from Remotion, HyperFrames, Lottie, shaders or your own file, all called the same way. It checks its own rhythm.</p>
+      <div class="cmd"><span><i>$</i> npx connect-ai-motion demo</span><button data-copy="npx connect-ai-motion demo">Copy</button></div>
+      <div class="cmd"><span><i>$</i> npx connect-ai-motion install-skill</span><button data-copy="npx connect-ai-motion install-skill">Copy</button></div>
+    </div>
+    <div class="film"><video src="demo/hello.mp4" poster="demo/hello_poster.jpg" muted loop autoplay playsinline></video><div class="tag" data-en="made from ten lines of text · this is what demo renders" data-ko="글 열 줄로 만든 영상 · demo 명령이 만드는 것">made from ten lines of text · this is what demo renders</div></div>
+  </div>
+  <div class="facts">
+    <div><b>35</b><span data-en="scenes" data-ko="장면">scenes</span></div>
+    <div><b>6</b><span data-en="backgrounds" data-ko="배경">backgrounds</span></div>
+    <div><b>7</b><span data-en="transitions" data-ko="전환">transitions</span></div>
+    <div><b>5</b><span data-en="sources behind one line" data-ko="한 줄 뒤의 출처">sources behind one line</span></div>
+  </div>
+  <div class="how">
+    <div><b>1</b><h4 data-en="Write lines" data-ko="줄을 씁니다">Write lines</h4><p data-en="One line of the script is one beat. <code>draft</code> picks a scene for each line and only copies words out of it." data-ko="대본 한 줄이 박자 하나. <code>draft</code> 가 줄마다 장면을 고르고, 그 줄의 낱말만 가져옵니다.">One line of the script is one beat. <code>draft</code> picks a scene for each line and only copies words out of it.</p></div>
+    <div><b>2</b><h4 data-en="Check the rhythm" data-ko="리듬을 검사합니다">Check the rhythm</h4><p data-en="Something new every 3 seconds, each design once, no word the script does not say. Every error says how to fix it." data-ko="3초마다 새로운 것, 디자인은 한 번씩, 대본에 없는 낱말 금지. 오류마다 고치는 법을 알려 줍니다.">Something new every 3 seconds, each design once, no word the script does not say. Every error says how to fix it.</p></div>
+    <div><b>3</b><h4 data-en="Render both shapes" data-ko="두 화면비로 렌더">Render both shapes</h4><p data-en="16:9 and 9:16 from the same storyboard. With your voice, beats start on your words." data-ko="같은 스토리보드로 16:9 와 9:16. 목소리가 있으면 박자가 내 말에 맞춰 시작합니다.">16:9 and 9:16 from the same storyboard. With your voice, beats start on your words.</p></div>
+  </div>
+</div>
+<div class="bar"><div class="wrap">
+  <button class="chip on" data-role="all" data-en="All 48" data-ko="전체 48">All 48</button>
+  <button class="chip" data-role="scene" data-en="Scenes" data-ko="장면">Scenes</button>
+  <button class="chip" data-role="bg" data-en="Backgrounds" data-ko="배경">Backgrounds</button>
+  <button class="chip" data-role="transition" data-en="Transitions" data-ko="전환">Transitions</button>
+  <input id="q" type="search" placeholder="number, steps, code, quote ...">
+</div></div>
+<div class="wrap">
+<section data-source="kit"><h2>connect-ai-motion <small>11</small></h2><div class="grid"><article class="card" data-role="scene" data-source="kit" data-text="kit/big-number big number number a number counts up as large as the frame allows, tick marks fill under it, the unit and what it counts sit beside it.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-big-number.jpg" data-src="clips/kit-big-number.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Big number</h3><span class="use">number</span></div>
+    <code class="kind">kit/big-number</code>
+    <p>A number counts up as large as the frame allows, tick marks fill under it, the unit and what it counts sit beside it.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;one open-source tool each. 10. lessons.&quot;,&quot;kind&quot;:&quot;kit/big-number&quot;,&quot;value&quot;:&quot;10&quot;,&quot;unit&quot;:&quot;lessons&quot;,&quot;text&quot;:&quot;one open-source tool each&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/big-number&quot; (Big number). Fields: value = the number as you say it (10, 1.5K, 40%, $9); unit = small word after it (optional); text = what it counts (1-4 words); color = colour of the number. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/compare before / after compare two halves (stacked in 9:16). the first is there, then a line crosses it out and the second half lights up in a colour.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-compare.jpg" data-src="clips/kit-compare.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Before / after</h3><span class="use">compare</span></div>
+    <code class="kind">kit/compare</code>
+    <p>Two halves (stacked in 9:16). The first is there, then a line crosses it out and the second half lights up in a colour.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Generate again. Change one line.&quot;,&quot;kind&quot;:&quot;kit/compare&quot;,&quot;text&quot;:&quot;Generate again&quot;,&quot;sub&quot;:&quot;Change one line&quot;,&quot;label&quot;:&quot;video model&quot;,&quot;label2&quot;:&quot;code&quot;,&quot;color&quot;:&quot;teal&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/compare&quot; (Before / after). Fields: text = the first thing (1-4 words); sub = the second thing (1-4 words); label = small caps over the first; label2 = small caps over the second; color = colour of the second half; cues = {&quot;swap&quot;: time} when the second lights up. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/endcard end card end the name large and thin, one action line in gold caps, your links in a quiet row. the words rise one after another.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-endcard.jpg" data-src="clips/kit-endcard.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>End card</h3><span class="use">end</span></div>
+    <code class="kind">kit/endcard</code>
+    <p>The name large and thin, one action line in gold caps, your links in a quiet row. The words rise one after another.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;CONNECT AI LAB. AI education for everyone. youtube.com/@CONNECT-AI-LAB. aicitybuilders.com.&quot;,&quot;kind&quot;:&quot;kit/endcard&quot;,&quot;text&quot;:&quot;CONNECT AI LAB&quot;,&quot;sub&quot;:&quot;AI education for everyone&quot;,&quot;items&quot;:[&quot;youtube.com/@CONNECT-AI-LAB&quot;,&quot;aicitybuilders.com&quot;]}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/endcard&quot; (End card). Fields: text = name or closing words; sub = action line (optional); items = links, up to 3 (optional; they must be in my-info.json links or the script). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/grid-wall wall of cards list up to twelve small cards fill the frame one after another like a wall; one of them can be lit in a colour.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-grid-wall.jpg" data-src="clips/kit-grid-wall.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Wall of cards</h3><span class="use">list</span></div>
+    <code class="kind">kit/grid-wall</code>
+    <p>Up to twelve small cards fill the frame one after another like a wall; one of them can be lit in a colour.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Remotion. HyperFrames. Lottie. GSAP. three.js. Shaders. Your own. Clips.&quot;,&quot;kind&quot;:&quot;kit/grid-wall&quot;,&quot;items&quot;:[&quot;Remotion&quot;,&quot;HyperFrames&quot;,&quot;Lottie&quot;,&quot;GSAP&quot;,&quot;three.js&quot;,&quot;Shaders&quot;,&quot;Your own&quot;,&quot;Clips&quot;],&quot;hi&quot;:&quot;Your own&quot;,&quot;color&quot;:&quot;teal&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/grid-wall&quot; (Wall of cards). Fields: items = 4-12 short labels; hi = the label to light up (optional); color = its colour. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/ident brand card brand a small wide-tracked name decodes letter by letter, a thin gold rule draws under it, one quiet line below. the calm opening card.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-ident.jpg" data-src="clips/kit-ident.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Brand card</h3><span class="use">brand</span></div>
+    <code class="kind">kit/ident</code>
+    <p>A small wide-tracked name decodes letter by letter, a thin gold rule draws under it, one quiet line below. The calm opening card.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;CONNECT AI LAB. AI education for everyone.&quot;,&quot;kind&quot;:&quot;kit/ident&quot;,&quot;text&quot;:&quot;CONNECT AI LAB&quot;,&quot;sub&quot;:&quot;AI education for everyone&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/ident&quot; (Brand card). Fields: text = name (1-4 words); sub = one quiet line under it (optional). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/keyword key word keyword one word or short phrase as big as the frame allows, each word coming into focus; a small caps line with a gold tick under it.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-keyword.jpg" data-src="clips/kit-keyword.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Key word</h3><span class="use">keyword</span></div>
+    <code class="kind">kit/keyword</code>
+    <p>One word or short phrase as big as the frame allows, each word coming into focus; a small caps line with a gold tick under it.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;One line. is one scene.&quot;,&quot;kind&quot;:&quot;kit/keyword&quot;,&quot;text&quot;:&quot;One line&quot;,&quot;sub&quot;:&quot;is one scene&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/keyword&quot; (Key word). Fields: text = 1-4 words; sub = small caps line (optional); color = colour of the word (gold, teal, coral, blue, violet, leaf). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/quote quote quote a sentence set large on up to four lines, word after word, with a thin gold bar beside it and the speaker in small caps.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-quote.jpg" data-src="clips/kit-quote.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Quote</h3><span class="use">quote</span></div>
+    <code class="kind">kit/quote</code>
+    <p>A sentence set large on up to four lines, word after word, with a thin gold bar beside it and the speaker in small caps.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Once it is code, you change one line.. AI Mentor Jay.&quot;,&quot;kind&quot;:&quot;kit/quote&quot;,&quot;text&quot;:&quot;Once it is code, you change one line.&quot;,&quot;by&quot;:&quot;AI Mentor Jay&quot;,&quot;hi&quot;:&quot;one line&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/quote&quot; (Quote). Fields: text = the sentence (up to about 16 words); by = who said it (optional); hi = words to colour. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/steps 1 · 2 · 3 steps steps two to five steps side by side (stacked in 9:16): a large thin numeral, its label, a rule between. each step arrives on its own beat, the newest is brightest.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-steps.jpg" data-src="clips/kit-steps.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>1 · 2 · 3 steps</h3><span class="use">steps</span></div>
+    <code class="kind">kit/steps</code>
+    <p>Two to five steps side by side (stacked in 9:16): a large thin numeral, its label, a rule between. Each step arrives on its own beat, the newest is brightest.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;How it works. Write a script. Pick a scene. Render.&quot;,&quot;kind&quot;:&quot;kit/steps&quot;,&quot;text&quot;:&quot;How it works&quot;,&quot;items&quot;:[&quot;Write a script&quot;,&quot;Pick a scene&quot;,&quot;Render&quot;]}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/steps&quot; (1 · 2 · 3 steps). Fields: items = 2-5 steps, each 1-3 words (or {text, at} to land on a spoken word); text = small heading (optional). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/timeline line with stops timeline a line runs across the frame (down the frame in 9:16) and stops at each point: a ring, its label, a small caps note. the line reaches each stop on its own beat.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-timeline.jpg" data-src="clips/kit-timeline.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Line with stops</h3><span class="use">timeline</span></div>
+    <code class="kind">kit/timeline</code>
+    <p>A line runs across the frame (down the frame in 9:16) and stops at each point: a ring, its label, a small caps note. The line reaches each stop on its own beat.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Visual vibe coding. Motion on video. Motion only. Slides and web. three.js. Blender.&quot;,&quot;kind&quot;:&quot;kit/timeline&quot;,&quot;text&quot;:&quot;Visual vibe coding&quot;,&quot;items&quot;:[{&quot;text&quot;:&quot;Motion on video&quot;,&quot;sub&quot;:&quot;lesson 2&quot;},{&quot;text&quot;:&quot;Motion only&quot;,&quot;sub&quot;:&quot;lesson 3&quot;},{&quot;text&quot;:&quot;Slides and web&quot;,&quot;sub&quot;:&quot;lessons 4-5&quot;},{&quot;text&quot;:&quot;three.js&quot;,&quot;sub&quot;:&quot;lessons 6-7&quot;},{&quot;text&quot;:&quot;Blender&quot;,&quot;sub&quot;:&quot;lessons 8-9&quot;}]}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/timeline&quot; (Line with stops). Fields: items = 3-6 stops: &quot;label&quot; or {text, sub, at}; text = small heading (optional). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="kit" data-text="kit/trend up and down compare two to four things, each with an arrow that draws itself up or down beside the word. for 'this goes down, that goes up'.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-trend.jpg" data-src="clips/kit-trend.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Up and down</h3><span class="use">compare</span></div>
+    <code class="kind">kit/trend</code>
+    <p>Two to four things, each with an arrow that draws itself up or down beside the word. For 'this goes down, that goes up'.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Cost. Time. Accuracy.&quot;,&quot;kind&quot;:&quot;kit/trend&quot;,&quot;items&quot;:[{&quot;text&quot;:&quot;Cost&quot;,&quot;dir&quot;:&quot;down&quot;},{&quot;text&quot;:&quot;Time&quot;,&quot;dir&quot;:&quot;down&quot;},{&quot;text&quot;:&quot;Accuracy&quot;,&quot;dir&quot;:&quot;up&quot;}]}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;kit/trend&quot; (Up and down). Fields: items = 2-4 rows: {text: the thing, dir: &quot;up&quot; | &quot;down&quot;, at}; the words up / down are shown only if you put them in sub; color = colour of the arrows going up; color2 = colour of the arrows going down. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="bg" data-source="kit" data-text="kit/bg-pool light pool background a soft pool of warm light on the dark base and a very faint grid that drifts. the quiet default background.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/kit-bg-pool.jpg" data-src="clips/kit-bg-pool.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Light pool</h3><span class="use">background</span></div>
+    <code class="kind">kit/bg-pool</code>
+    <p>A soft pool of warm light on the dark base and a very faint grid that drifts. The quiet default background.</p>
+    
+    <div class="foot"><span>this kit · MIT</span><span class="btns"><button data-copy="{&quot;bg&quot;:&quot;kit/bg-pool&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Set the background of my film to &quot;kit/bg-pool&quot; (Light pool) in storyboard.json (&quot;bg&quot;), render the sheet and show it to me.">Copy prompt</button></span></div>
+  </div>
+</article></div></section>
+<section data-source="remotion"><h2>Remotion packages <small>25</small></h2><div class="grid"><article class="card" data-role="scene" data-source="remotion" data-text="remotion/captions-pages words in time voice the line itself, a few words at a time, large; the word being said is lit (@remotion/captions createtiktokstylecaptions). with a voice it follows the word times, without one it follows reading speed.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-captions-pages.jpg" data-src="clips/remotion-captions-pages.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Words in time</h3><span class="use">voice</span></div>
+    <code class="kind">remotion/captions-pages</code>
+    <p>The line itself, a few words at a time, large; the word being said is lit (@remotion/captions createTikTokStyleCaptions). With a voice it follows the word times, without one it follows reading speed.</p>
+    
+    <div class="foot"><span>@remotion/captions · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;A script goes in and a finished film comes out.&quot;,&quot;kind&quot;:&quot;remotion/captions-pages&quot;,&quot;text&quot;:&quot;A script goes in and a finished film comes out&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/captions-pages&quot; (Words in time). Fields: text = the line as it is said (up to about 20 words); color = colour of the lit word; group = how long one page of words lasts, in ms (900). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/code-swap change one line of code code a few lines of code in an editor card (syntax colours by prismjs). one value is struck out and the new one is typed in its place; the line is lit. for 'you only change this'.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-code-swap.jpg" data-src="clips/remotion-code-swap.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Change one line of code</h3><span class="use">code</span></div>
+    <code class="kind">remotion/code-swap</code>
+    <p>A few lines of code in an editor card (syntax colours by prismjs). One value is struck out and the new one is typed in its place; the line is lit. For 'you only change this'.</p>
+    
+    <div class="foot"><span>remotion · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;one line. black. red.&quot;,&quot;kind&quot;:&quot;remotion/code-swap&quot;,&quot;code&quot;:&quot;const rabbit = {\n  color: \&quot;black\&quot;,\n  speed: 3,\n};\nrender(rabbit);&quot;,&quot;from&quot;:&quot;black&quot;,&quot;to&quot;:&quot;red&quot;,&quot;text&quot;:&quot;one line&quot;,&quot;color&quot;:&quot;red&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/code-swap&quot; (Change one line of code). Fields: code = 2-7 short lines of code (not checked against the script); from = the value that changes (must be in code); to = what it becomes; text = small caps label on the card (optional); lang = javascript | css | python | json (javascript); color = colour of the new value; cues = {&quot;focus&quot;: time the line lights up, &quot;swap&quot;: time it changes}. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/cursor-prompt prompt and click prompt a prompt box where your sentence is typed, a real macos cursor (@remotion/mac-cursors) glides to the button and clicks, and the answer arrives as a chip. for 'you just ask'.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-cursor-prompt.jpg" data-src="clips/remotion-cursor-prompt.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Prompt and click</h3><span class="use">prompt</span></div>
+    <code class="kind">remotion/cursor-prompt</code>
+    <p>A prompt box where your sentence is typed, a real macOS cursor (@remotion/mac-cursors) glides to the button and clicks, and the answer arrives as a chip. For 'you just ask'.</p>
+    
+    <div class="foot"><span>@remotion/mac-cursors · Remotion License</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Make it red, not black. done.&quot;,&quot;kind&quot;:&quot;remotion/cursor-prompt&quot;,&quot;text&quot;:&quot;Make it red, not black&quot;,&quot;sub&quot;:&quot;done&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/cursor-prompt&quot; (Prompt and click). Fields: text = what is typed (3-9 words); sub = what comes back (1-3 words); label = word on the button (default: an arrow); cues = {&quot;click&quot;: time}. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/gsap-split letters from the middle statement a line of letters unfolds from the middle outwards and one word turns gold: a gsap timeline that remotion seeks frame by frame (@remotion/gsap usegsaptimeline).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-gsap-split.jpg" data-src="clips/remotion-gsap-split.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Letters from the middle</h3><span class="use">statement</span></div>
+    <code class="kind">remotion/gsap-split</code>
+    <p>A line of letters unfolds from the middle outwards and one word turns gold: a GSAP timeline that Remotion seeks frame by frame (@remotion/gsap useGsapTimeline).</p>
+    
+    <div class="foot"><span>@remotion/gsap · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Motion not slides.&quot;,&quot;kind&quot;:&quot;remotion/gsap-split&quot;,&quot;text&quot;:&quot;Motion not slides&quot;,&quot;hi&quot;:&quot;Motion&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/gsap-split&quot; (Letters from the middle). Fields: text = 2-5 words; hi = word to turn gold; sub = small caps line (optional). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/katex-formula formula formula one formula set properly (katex) in the middle of the frame, the parts rising into place; a line of plain words under it.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-katex-formula.jpg" data-src="clips/remotion-katex-formula.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Formula</h3><span class="use">formula</span></div>
+    <code class="kind">remotion/katex-formula</code>
+    <p>One formula set properly (KaTeX) in the middle of the frame, the parts rising into place; a line of plain words under it.</p>
+    
+    <div class="foot"><span>remotion · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;every new try costs again.&quot;,&quot;kind&quot;:&quot;remotion/katex-formula&quot;,&quot;tex&quot;:&quot;\\text{cost} = \\text{tries} \\times \\text{price}&quot;,&quot;text&quot;:&quot;every new try costs again&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/katex-formula&quot; (Formula). Fields: tex = the formula in LaTeX (not checked against the script); text = plain words under it (1-6 words); color = colour of the formula. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/kinetic-lines kinetic lines statement two to four short lines, each one stretched to the full width of the frame (@remotion/layout-utils fittext), sliding in from alternate sides behind a mask; one line in a colour.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-kinetic-lines.jpg" data-src="clips/remotion-kinetic-lines.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Kinetic lines</h3><span class="use">statement</span></div>
+    <code class="kind">remotion/kinetic-lines</code>
+    <p>Two to four short lines, each one stretched to the full width of the frame (@remotion/layout-utils fitText), sliding in from alternate sides behind a mask; one line in a colour.</p>
+    
+    <div class="foot"><span>@remotion/layout-utils · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;No footage. Only a script. A finished film.&quot;,&quot;kind&quot;:&quot;remotion/kinetic-lines&quot;,&quot;lines&quot;:[&quot;No footage&quot;,&quot;Only a script&quot;,&quot;A finished film&quot;],&quot;hi&quot;:3}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/kinetic-lines&quot; (Kinetic lines). Fields: lines = 2-4 lines, 1-3 words each (or {text, at}); hi = number of the line to colour (1 = first); color = its colour. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/motion-blur-slam word with a trail keyword a word shoots in from the side and stops dead, leaving a short motion trail (@remotion/motion-blur trail); a thin line catches it.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-motion-blur-slam.jpg" data-src="clips/remotion-motion-blur-slam.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Word with a trail</h3><span class="use">keyword</span></div>
+    <code class="kind">remotion/motion-blur-slam</code>
+    <p>A word shoots in from the side and stops dead, leaving a short motion trail (@remotion/motion-blur Trail); a thin line catches it.</p>
+    
+    <div class="foot"><span>@remotion/motion-blur · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Instantly. no waiting.&quot;,&quot;kind&quot;:&quot;remotion/motion-blur-slam&quot;,&quot;text&quot;:&quot;Instantly&quot;,&quot;sub&quot;:&quot;no waiting&quot;,&quot;color&quot;:&quot;teal&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/motion-blur-slam&quot; (Word with a trail). Fields: text = 1-3 words; sub = small caps line (optional); color = colour of the word. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/paths-flow flow flow two to five stations joined by one curved line that draws itself from station to station (@remotion/paths evolvepath, getpointatlength); each station lights up when the line arrives.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-paths-flow.jpg" data-src="clips/remotion-paths-flow.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Flow</h3><span class="use">flow</span></div>
+    <code class="kind">remotion/paths-flow</code>
+    <p>Two to five stations joined by one curved line that draws itself from station to station (@remotion/paths evolvePath, getPointAtLength); each station lights up when the line arrives.</p>
+    
+    <div class="foot"><span>@remotion/paths · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Script. Storyboard. Check. Film.&quot;,&quot;kind&quot;:&quot;remotion/paths-flow&quot;,&quot;items&quot;:[&quot;Script&quot;,&quot;Storyboard&quot;,&quot;Check&quot;,&quot;Film&quot;],&quot;color&quot;:&quot;teal&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/paths-flow&quot; (Flow). Fields: items = 2-5 stations, 1-3 words each (or {text, at}); color = colour of the line. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card off" data-role="scene" data-source="remotion" data-text="remotion/remocn-registry remocn components statement remocn (mit) is a shadcn-style registry of remotion components: transitions, backgrounds, scenes, text. a component you add with its cli is a .tsx file, so it plays here as {&quot;kind&quot;: &quot;custom&quot;, &quot;component&quot;: &quot;./path.tsx&quot;}.">
+  <div class="shot"><div class="none">needs-download</div></div>
+  <div class="meta">
+    <div class="row"><h3>Remocn components</h3><span class="use">statement</span></div>
+    <code class="kind">remotion/remocn-registry</code>
+    <p>Remocn (MIT) is a shadcn-style registry of Remotion components: transitions, backgrounds, scenes, text. A component you add with its CLI is a .tsx file, so it plays here as {&quot;kind&quot;: &quot;custom&quot;, &quot;component&quot;: &quot;./path.tsx&quot;}.</p>
+    <p class="why">not shipped: add the components you want with the Remocn CLI in your project, then call each one with kind &quot;custom&quot;. Wrap it so it reads the SceneProps (r, lf, dur, st); the README shows the five lines.</p>
+    <div class="foot"><span>Remocn/remocn · MIT</span></div>
+  </div>
+</article>
+<article class="card off" data-role="scene" data-source="remotion" data-text="remotion/remotion-bits remotion-bits parts statement remotion-bits (mit on npm) is a set of remotion building blocks: text effects, gradient transitions, charts. installed in your project, a part plays here through a small custom scene.">
+  <div class="shot"><div class="none">needs-download</div></div>
+  <div class="meta">
+    <div class="row"><h3>remotion-bits parts</h3><span class="use">statement</span></div>
+    <code class="kind">remotion/remotion-bits</code>
+    <p>remotion-bits (MIT on npm) is a set of Remotion building blocks: text effects, gradient transitions, charts. Installed in your project, a part plays here through a small custom scene.</p>
+    <p class="why">not shipped: npm install remotion-bits in your project and wrap the part you want in a custom scene (kind &quot;custom&quot;). The repository has no LICENSE file (package.json says MIT), so read it before you ship.</p>
+    <div class="foot"><span>remotion-bits · MIT</span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/rough-mark marked sentence emphasis a sentence on up to three lines; one phrase gets a hand-drawn mark (@remotion/rough-notation): a highlighter sweep, a circle, or an underline.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-rough-mark.jpg" data-src="clips/remotion-rough-mark.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Marked sentence</h3><span class="use">emphasis</span></div>
+    <code class="kind">remotion/rough-mark</code>
+    <p>A sentence on up to three lines; one phrase gets a hand-drawn mark (@remotion/rough-notation): a highlighter sweep, a circle, or an underline.</p>
+    
+    <div class="foot"><span>@remotion/rough-notation · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;You only change one line.&quot;,&quot;kind&quot;:&quot;remotion/rough-mark&quot;,&quot;text&quot;:&quot;You only change one line&quot;,&quot;hi&quot;:&quot;one line&quot;,&quot;mark&quot;:&quot;highlight&quot;,&quot;color&quot;:&quot;coral&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/rough-mark&quot; (Marked sentence). Fields: text = the sentence (up to 12 words); hi = the phrase to mark (must be inside text); mark = highlight | circle | underline; color = colour of the mark; cues = {&quot;mark&quot;: time} when the pen moves. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/rounded-chat ask and answer dialogue two message bubbles whose rounded outline hugs each line (@remotion/rounded-text-box + @remotion/layout-utils): the question on the left, then the answer on the right in a colour.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-rounded-chat.jpg" data-src="clips/remotion-rounded-chat.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Ask and answer</h3><span class="use">dialogue</span></div>
+    <code class="kind">remotion/rounded-chat</code>
+    <p>Two message bubbles whose rounded outline hugs each line (@remotion/rounded-text-box + @remotion/layout-utils): the question on the left, then the answer on the right in a colour.</p>
+    
+    <div class="foot"><span>@remotion/rounded-text-box · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Can I change the colour?. Change one line.&quot;,&quot;kind&quot;:&quot;remotion/rounded-chat&quot;,&quot;text&quot;:&quot;Can I change the colour?&quot;,&quot;sub&quot;:&quot;Change one line&quot;,&quot;color&quot;:&quot;blue&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/rounded-chat&quot; (Ask and answer). Fields: text = the question (2-8 words); sub = the answer (2-8 words); color = colour of the answer; cues = {&quot;answer&quot;: time}. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/shapes-bars bars chart two to six bars grow from a base line to the numbers you said (@remotion/shapes makerect), each with its value on top and its label under it; the one you choose is in a colour.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-shapes-bars.jpg" data-src="clips/remotion-shapes-bars.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Bars</h3><span class="use">chart</span></div>
+    <code class="kind">remotion/shapes-bars</code>
+    <p>Two to six bars grow from a base line to the numbers you said (@remotion/shapes makeRect), each with its value on top and its label under it; the one you choose is in a colour.</p>
+    
+    <div class="foot"><span>@remotion/shapes · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Lessons per unit. Motion. three.js. Blender.&quot;,&quot;kind&quot;:&quot;remotion/shapes-bars&quot;,&quot;text&quot;:&quot;Lessons per unit&quot;,&quot;items&quot;:[{&quot;text&quot;:&quot;Motion&quot;,&quot;value&quot;:&quot;3&quot;},{&quot;text&quot;:&quot;three.js&quot;,&quot;value&quot;:&quot;2&quot;},{&quot;text&quot;:&quot;Blender&quot;,&quot;value&quot;:&quot;2&quot;}],&quot;hi&quot;:&quot;Motion&quot;,&quot;color&quot;:&quot;teal&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/shapes-bars&quot; (Bars). Fields: items = 2-6 bars: {text: label, value: number as you say it, at}; hi = label of the bar to colour; color = its colour; text = small heading (optional). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/shapes-pie percent ring number a pie fills to the percent you said inside a ring of ticks (@remotion/shapes makepie, makecircle); the number counts with it and what it means sits beside it.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-shapes-pie.jpg" data-src="clips/remotion-shapes-pie.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Percent ring</h3><span class="use">number</span></div>
+    <code class="kind">remotion/shapes-pie</code>
+    <p>A pie fills to the percent you said inside a ring of ticks (@remotion/shapes makePie, makeCircle); the number counts with it and what it means sits beside it.</p>
+    
+    <div class="foot"><span>@remotion/shapes · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;made with code. 100%.&quot;,&quot;kind&quot;:&quot;remotion/shapes-pie&quot;,&quot;value&quot;:&quot;100%&quot;,&quot;text&quot;:&quot;made with code&quot;,&quot;color&quot;:&quot;teal&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/shapes-pie&quot; (Percent ring). Fields: value = percent 0-100, as you say it; text = what it is (1-4 words); color = colour of the pie. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/svg3d-stack stack of plates list two to four thick plates float one above the other in 3d and settle into a stack, each with its label on a line beside it (@remotion/svg-3d-engine extrude + @remotion/shapes). for layers of one thing.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-svg3d-stack.jpg" data-src="clips/remotion-svg3d-stack.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Stack of plates</h3><span class="use">list</span></div>
+    <code class="kind">remotion/svg3d-stack</code>
+    <p>Two to four thick plates float one above the other in 3D and settle into a stack, each with its label on a line beside it (@remotion/svg-3d-engine extrude + @remotion/shapes). For layers of one thing.</p>
+    
+    <div class="foot"><span>@remotion/svg-3d-engine · Remotion License</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Your script. One storyboard. Every ecosystem.&quot;,&quot;kind&quot;:&quot;remotion/svg3d-stack&quot;,&quot;items&quot;:[&quot;Your script&quot;,&quot;One storyboard&quot;,&quot;Every ecosystem&quot;],&quot;color&quot;:&quot;teal&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/svg3d-stack&quot; (Stack of plates). Fields: items = 2-4 layers from the bottom up, 1-3 words each (or {text, at}); color = colour of the top plate. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/three-solid 3d solid hero3d a faceted solid with thin bright edges turns slowly in real 3d (@remotion/three: react three fiber + three.js, webgl) next to a word. the shape is one prop.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-three-solid.jpg" data-src="clips/remotion-three-solid.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>3D solid</h3><span class="use">hero3d</span></div>
+    <code class="kind">remotion/three-solid</code>
+    <p>A faceted solid with thin bright edges turns slowly in real 3D (@remotion/three: React Three Fiber + three.js, WebGL) next to a word. The shape is one prop.</p>
+    
+    <div class="foot"><span>@remotion/three · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Made with code. three.js.&quot;,&quot;kind&quot;:&quot;remotion/three-solid&quot;,&quot;text&quot;:&quot;Made with code&quot;,&quot;sub&quot;:&quot;three.js&quot;,&quot;shape&quot;:&quot;ico&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/three-solid&quot; (3D solid). Fields: text = 1-3 words; sub = small caps line (optional); shape = ico | octa | box | torus | knot; color = colour of the solid. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="remotion" data-text="remotion/title-blur headline title a headline on one or two lines, sized to the frame (@remotion/layout-utils fittext), each word coming out of a blur; one word in gold, a small caps kicker above.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-title-blur.jpg" data-src="clips/remotion-title-blur.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Headline</h3><span class="use">title</span></div>
+    <code class="kind">remotion/title-blur</code>
+    <p>A headline on one or two lines, sized to the frame (@remotion/layout-utils fitText), each word coming out of a blur; one word in gold, a small caps kicker above.</p>
+    
+    <div class="foot"><span>@remotion/layout-utils · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;The most beautiful way to learn AI. CONNECT AI LAB.&quot;,&quot;kind&quot;:&quot;remotion/title-blur&quot;,&quot;text&quot;:&quot;The most beautiful way to learn AI&quot;,&quot;hi&quot;:&quot;beautiful&quot;,&quot;sub&quot;:&quot;CONNECT AI LAB&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;remotion/title-blur&quot; (Headline). Fields: text = headline (2-7 words); hi = word(s) to colour gold; sub = small caps kicker above (optional). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="bg" data-source="remotion" data-text="remotion/bg-noise-contour contour lines background thin contour lines like a map, slowly flowing (@remotion/noise noise3d). quiet enough to sit under any scene.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-bg-noise-contour.jpg" data-src="clips/remotion-bg-noise-contour.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Contour lines</h3><span class="use">background</span></div>
+    <code class="kind">remotion/bg-noise-contour</code>
+    <p>Thin contour lines like a map, slowly flowing (@remotion/noise noise3D). Quiet enough to sit under any scene.</p>
+    
+    <div class="foot"><span>@remotion/noise · MIT</span><span class="btns"><button data-copy="{&quot;bg&quot;:&quot;remotion/bg-noise-contour&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Set the background of my film to &quot;remotion/bg-noise-contour&quot; (Contour lines) in storyboard.json (&quot;bg&quot;), render the sheet and show it to me.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="bg" data-source="remotion" data-text="remotion/bg-noise-dots breathing dots background a grid of small dots whose size follows a slow wave of noise (@remotion/noise noise3d); a band of them turns to the accent colour.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-bg-noise-dots.jpg" data-src="clips/remotion-bg-noise-dots.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Breathing dots</h3><span class="use">background</span></div>
+    <code class="kind">remotion/bg-noise-dots</code>
+    <p>A grid of small dots whose size follows a slow wave of noise (@remotion/noise noise3D); a band of them turns to the accent colour.</p>
+    
+    <div class="foot"><span>@remotion/noise · MIT</span><span class="btns"><button data-copy="{&quot;bg&quot;:&quot;remotion/bg-noise-dots&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Set the background of my film to &quot;remotion/bg-noise-dots&quot; (Breathing dots) in storyboard.json (&quot;bg&quot;), render the sheet and show it to me.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="bg" data-source="remotion" data-text="remotion/bg-starburst slow rays background wide soft rays turn slowly from a point (@remotion/starburst, webgl), dark on dark, fading to the edges.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-bg-starburst.jpg" data-src="clips/remotion-bg-starburst.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Slow rays</h3><span class="use">background</span></div>
+    <code class="kind">remotion/bg-starburst</code>
+    <p>Wide soft rays turn slowly from a point (@remotion/starburst, WebGL), dark on dark, fading to the edges.</p>
+    
+    <div class="foot"><span>@remotion/starburst · Remotion License</span><span class="btns"><button data-copy="{&quot;bg&quot;:&quot;remotion/bg-starburst&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Set the background of my film to &quot;remotion/bg-starburst&quot; (Slow rays) in storyboard.json (&quot;bg&quot;), render the sheet and show it to me.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="transition" data-source="remotion" data-text="remotion/tr-clock-wipe clock wipe transition a clock hand sweeps round and the next scene is under it (@remotion/transitions clockwipe).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-tr-clock-wipe.jpg" data-src="clips/remotion-tr-clock-wipe.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Clock wipe</h3><span class="use">transition</span></div>
+    <code class="kind">remotion/tr-clock-wipe</code>
+    <p>A clock hand sweeps round and the next scene is under it (@remotion/transitions clockWipe).</p>
+    
+    <div class="foot"><span>@remotion/transitions · Remotion License</span><span class="btns"><button data-copy="{&quot;in&quot;:&quot;remotion/tr-clock-wipe&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Where my script changes topic, bring the next beat in with &quot;remotion/tr-clock-wipe&quot; (Clock wipe) as its &quot;in&quot;. Keep every other cut a hard cut. Run check.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="transition" data-source="remotion" data-text="remotion/tr-fade fade transition the next scene fades in over the last one (@remotion/transitions fade).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-tr-fade.jpg" data-src="clips/remotion-tr-fade.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Fade</h3><span class="use">transition</span></div>
+    <code class="kind">remotion/tr-fade</code>
+    <p>The next scene fades in over the last one (@remotion/transitions fade).</p>
+    
+    <div class="foot"><span>@remotion/transitions · Remotion License</span><span class="btns"><button data-copy="{&quot;in&quot;:&quot;remotion/tr-fade&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Where my script changes topic, bring the next beat in with &quot;remotion/tr-fade&quot; (Fade) as its &quot;in&quot;. Keep every other cut a hard cut. Run check.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="transition" data-source="remotion" data-text="remotion/tr-flip flip transition the frame turns over like a card and the next scene is on its back (@remotion/transitions flip).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-tr-flip.jpg" data-src="clips/remotion-tr-flip.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Flip</h3><span class="use">transition</span></div>
+    <code class="kind">remotion/tr-flip</code>
+    <p>The frame turns over like a card and the next scene is on its back (@remotion/transitions flip).</p>
+    
+    <div class="foot"><span>@remotion/transitions · Remotion License</span><span class="btns"><button data-copy="{&quot;in&quot;:&quot;remotion/tr-flip&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Where my script changes topic, bring the next beat in with &quot;remotion/tr-flip&quot; (Flip) as its &quot;in&quot;. Keep every other cut a hard cut. Run check.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="transition" data-source="remotion" data-text="remotion/tr-iris iris transition a circle opens from the middle onto the next scene (@remotion/transitions iris).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-tr-iris.jpg" data-src="clips/remotion-tr-iris.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Iris</h3><span class="use">transition</span></div>
+    <code class="kind">remotion/tr-iris</code>
+    <p>A circle opens from the middle onto the next scene (@remotion/transitions iris).</p>
+    
+    <div class="foot"><span>@remotion/transitions · Remotion License</span><span class="btns"><button data-copy="{&quot;in&quot;:&quot;remotion/tr-iris&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Where my script changes topic, bring the next beat in with &quot;remotion/tr-iris&quot; (Iris) as its &quot;in&quot;. Keep every other cut a hard cut. Run check.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="transition" data-source="remotion" data-text="remotion/tr-slide push transition the next scene pushes the last one out of the frame (@remotion/transitions slide).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-tr-slide.jpg" data-src="clips/remotion-tr-slide.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Push</h3><span class="use">transition</span></div>
+    <code class="kind">remotion/tr-slide</code>
+    <p>The next scene pushes the last one out of the frame (@remotion/transitions slide).</p>
+    
+    <div class="foot"><span>@remotion/transitions · Remotion License</span><span class="btns"><button data-copy="{&quot;in&quot;:&quot;remotion/tr-slide&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Where my script changes topic, bring the next beat in with &quot;remotion/tr-slide&quot; (Push) as its &quot;in&quot;. Keep every other cut a hard cut. Run check.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="transition" data-source="remotion" data-text="remotion/tr-wipe wipe transition an edge travels across the frame and uncovers the next scene (@remotion/transitions wipe).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-tr-wipe.jpg" data-src="clips/remotion-tr-wipe.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Wipe</h3><span class="use">transition</span></div>
+    <code class="kind">remotion/tr-wipe</code>
+    <p>An edge travels across the frame and uncovers the next scene (@remotion/transitions wipe).</p>
+    
+    <div class="foot"><span>@remotion/transitions · Remotion License</span><span class="btns"><button data-copy="{&quot;in&quot;:&quot;remotion/tr-wipe&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Where my script changes topic, bring the next beat in with &quot;remotion/tr-wipe&quot; (Wipe) as its &quot;in&quot;. Keep every other cut a hard cut. Run check.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="transition" data-source="remotion" data-text="remotion/sweep-light-leak light leak over the cut transition the cut itself stays hard; a warm light leak passes over it (@remotion/light-leaks, webgl, screen blend).">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/remotion-sweep-light-leak.jpg" data-src="clips/remotion-sweep-light-leak.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Light leak over the cut</h3><span class="use">transition</span></div>
+    <code class="kind">remotion/sweep-light-leak</code>
+    <p>The cut itself stays hard; a warm light leak passes over it (@remotion/light-leaks, WebGL, screen blend).</p>
+    
+    <div class="foot"><span>@remotion/light-leaks · Remotion License</span><span class="btns"><button data-copy="{&quot;in&quot;:&quot;remotion/sweep-light-leak&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Where my script changes topic, bring the next beat in with &quot;remotion/sweep-light-leak&quot; (Light leak over the cut) as its &quot;in&quot;. Keep every other cut a hard cut. Run check.">Copy prompt</button></span></div>
+  </div>
+</article></div></section>
+<section data-source="hyperframes"><h2>HyperFrames blocks <small>7</small></h2><div class="grid"><article class="card" data-role="scene" data-source="hyperframes" data-text="hyperframes/gold-scramble-title scramble title (gsap) title a thin title decodes letter by letter (gsap scrambletext), a gold rule draws under it (drawsvg), small caps above. a block in the hyperframes format.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/hyperframes-gold-scramble-title.jpg" data-src="clips/hyperframes-gold-scramble-title.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Scramble title (GSAP)</h3><span class="use">title</span></div>
+    <code class="kind">hyperframes/gold-scramble-title</code>
+    <p>A thin title decodes letter by letter (GSAP ScrambleText), a gold rule draws under it (DrawSVG), small caps above. A block in the HyperFrames format.</p>
+    
+    <div class="foot"><span>hyperframes · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Vibe coding. lesson 03.&quot;,&quot;kind&quot;:&quot;hyperframes/gold-scramble-title&quot;,&quot;text&quot;:&quot;Vibe coding&quot;,&quot;sub&quot;:&quot;lesson 03&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;hyperframes/gold-scramble-title&quot; (Scramble title (GSAP)). Fields: text = title (1-3 words); sub = small caps above. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card off" data-role="scene" data-source="hyperframes" data-text="hyperframes/registry hyperframes registry (456 items) statement the whole block and component registry of hyperframes. after a download, hf-import turns every block into a scene and lists the ones that cannot play frame by frame with the reason.">
+  <div class="shot"><div class="none">needs-download</div></div>
+  <div class="meta">
+    <div class="row"><h3>HyperFrames registry (456 items)</h3><span class="use">statement</span></div>
+    <code class="kind">hyperframes/registry</code>
+    <p>The whole block and component registry of HyperFrames. After a download, hf-import turns every block into a scene and lists the ones that cannot play frame by frame with the reason.</p>
+    <p class="why">download the registry folder of heygen-com/hyperframes (1,685 files, 108 MB; HTML + JSON only is about 10 MB), then run: connect-ai-motion hf-import &lt;folder&gt;. Its images, sounds and 3D files have their own terms, so hf-import copies the block HTML only.</p>
+    <div class="foot"><span>heygen-com/hyperframes · Apache-2.0</span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="hyperframes" data-text="hyperframes/ring-count ring counter (gsap) number a ring draws round while the number counts up inside it (gsap). a block in the hyperframes format.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/hyperframes-ring-count.jpg" data-src="clips/hyperframes-ring-count.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Ring counter (GSAP)</h3><span class="use">number</span></div>
+    <code class="kind">hyperframes/ring-count</code>
+    <p>A ring draws round while the number counts up inside it (GSAP). A block in the HyperFrames format.</p>
+    
+    <div class="foot"><span>hyperframes · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;9. ecosystems.&quot;,&quot;kind&quot;:&quot;hyperframes/ring-count&quot;,&quot;value&quot;:&quot;9&quot;,&quot;unit&quot;:&quot;ecosystems&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;hyperframes/ring-count&quot; (Ring counter (GSAP)). Fields: value = number; unit = word after it. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="hyperframes" data-text="hyperframes/split-words-rise words rise (gsap splittext) statement words rise out of a mask one after another (gsap splittext). a block in the hyperframes format.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/hyperframes-split-words-rise.jpg" data-src="clips/hyperframes-split-words-rise.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Words rise (GSAP SplitText)</h3><span class="use">statement</span></div>
+    <code class="kind">hyperframes/split-words-rise</code>
+    <p>Words rise out of a mask one after another (GSAP SplitText). A block in the HyperFrames format.</p>
+    
+    <div class="foot"><span>hyperframes · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Make it with words.&quot;,&quot;kind&quot;:&quot;hyperframes/split-words-rise&quot;,&quot;text&quot;:&quot;Make it with words&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;hyperframes/split-words-rise&quot; (Words rise (GSAP SplitText)). Fields: text = 3-5 words. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="hyperframes" data-text="hyperframes/warm-grain-circle-stat circle stat (hyperframes) number a number inside a drawn circle from the hyperframes warm-grain template.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/hyperframes-warm-grain-circle-stat.jpg" data-src="clips/hyperframes-warm-grain-circle-stat.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Circle stat (HyperFrames)</h3><span class="use">number</span></div>
+    <code class="kind">hyperframes/warm-grain-circle-stat</code>
+    <p>A number inside a drawn circle from the HyperFrames warm-grain template.</p>
+    
+    <div class="foot"><span>hyperframes@0.8.86 · Apache-2.0</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;lessons. 10.&quot;,&quot;kind&quot;:&quot;hyperframes/warm-grain-circle-stat&quot;,&quot;value&quot;:&quot;10&quot;,&quot;text&quot;:&quot;lessons&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;hyperframes/warm-grain-circle-stat&quot; (Circle stat (HyperFrames)). Fields: value = number as you say it; text = what it counts (1-2 words). Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="hyperframes" data-text="hyperframes/warm-grain-pill-stat pill stat (hyperframes) number a number in a rounded pill from the hyperframes warm-grain template.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/hyperframes-warm-grain-pill-stat.jpg" data-src="clips/hyperframes-warm-grain-pill-stat.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Pill stat (HyperFrames)</h3><span class="use">number</span></div>
+    <code class="kind">hyperframes/warm-grain-pill-stat</code>
+    <p>A number in a rounded pill from the HyperFrames warm-grain template.</p>
+    
+    <div class="foot"><span>hyperframes@0.8.86 · Apache-2.0</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;16:9.&quot;,&quot;kind&quot;:&quot;hyperframes/warm-grain-pill-stat&quot;,&quot;value&quot;:&quot;16:9&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;hyperframes/warm-grain-pill-stat&quot; (Pill stat (HyperFrames)). Fields: value = number or short value. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="hyperframes" data-text="hyperframes/warm-grain-shape-label shape label (hyperframes) keyword a label beside a drawn shape from the hyperframes warm-grain template.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/hyperframes-warm-grain-shape-label.jpg" data-src="clips/hyperframes-warm-grain-shape-label.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Shape label (HyperFrames)</h3><span class="use">keyword</span></div>
+    <code class="kind">hyperframes/warm-grain-shape-label</code>
+    <p>A label beside a drawn shape from the HyperFrames warm-grain template.</p>
+    
+    <div class="foot"><span>hyperframes@0.8.86 · Apache-2.0</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Open source.&quot;,&quot;kind&quot;:&quot;hyperframes/warm-grain-shape-label&quot;,&quot;text&quot;:&quot;Open source&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;hyperframes/warm-grain-shape-label&quot; (Shape label (HyperFrames)). Fields: text = 1-2 words. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="hyperframes" data-text="hyperframes/warm-grain-title-card title card (hyperframes) title the title card of the hyperframes warm-grain template: a serif title rises, a line under it. played by the adapter, your words in its places.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/hyperframes-warm-grain-title-card.jpg" data-src="clips/hyperframes-warm-grain-title-card.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Title card (HyperFrames)</h3><span class="use">title</span></div>
+    <code class="kind">hyperframes/warm-grain-title-card</code>
+    <p>The title card of the HyperFrames warm-grain template: a serif title rises, a line under it. Played by the adapter, your words in its places.</p>
+    
+    <div class="foot"><span>hyperframes@0.8.86 · Apache-2.0</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Visual vibe coding. No footage needed..&quot;,&quot;kind&quot;:&quot;hyperframes/warm-grain-title-card&quot;,&quot;text&quot;:&quot;Visual vibe coding&quot;,&quot;sub&quot;:&quot;No footage needed.&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;hyperframes/warm-grain-title-card&quot; (Title card (HyperFrames)). Fields: text = title (1-3 words); sub = line under it. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article></div></section>
+<section data-source="lottie"><h2>Lottie files <small>3</small></h2><div class="grid"><article class="card" data-role="scene" data-source="lottie" data-text="lottie/arc-orbit orbit arcs (lottie) icon thin arcs orbit a centre at different speeds, with your word under it.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/lottie-arc-orbit.jpg" data-src="clips/lottie-arc-orbit.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Orbit arcs (Lottie)</h3><span class="use">icon</span></div>
+    <code class="kind">lottie/arc-orbit</code>
+    <p>Thin arcs orbit a centre at different speeds, with your word under it.</p>
+    
+    <div class="foot"><span>lottie · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Connected. one catalog.&quot;,&quot;kind&quot;:&quot;lottie/arc-orbit&quot;,&quot;text&quot;:&quot;Connected&quot;,&quot;sub&quot;:&quot;one catalog&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;lottie/arc-orbit&quot; (Orbit arcs (Lottie)). Fields: text = 1-3 words under the animation (optional); sub = small caps line (optional); scale = size of the animation, 0-1. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="lottie" data-text="lottie/gold-check check mark (lottie) icon a gold ring closes and an ivory check draws inside it, with your word under it. any after effects / lottiefiles .json plays the same way.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/lottie-gold-check.jpg" data-src="clips/lottie-gold-check.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Check mark (Lottie)</h3><span class="use">icon</span></div>
+    <code class="kind">lottie/gold-check</code>
+    <p>A gold ring closes and an ivory check draws inside it, with your word under it. Any After Effects / LottieFiles .json plays the same way.</p>
+    
+    <div class="foot"><span>lottie · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Check passed. ready to render.&quot;,&quot;kind&quot;:&quot;lottie/gold-check&quot;,&quot;text&quot;:&quot;Check passed&quot;,&quot;sub&quot;:&quot;ready to render&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;lottie/gold-check&quot; (Check mark (Lottie)). Fields: text = 1-3 words under the animation (optional); sub = small caps line (optional); scale = size of the animation, 0-1. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="scene" data-source="lottie" data-text="lottie/signal-pulse signal pulse (lottie) icon rings pulse out from a point like a signal, with your word under it.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/lottie-signal-pulse.jpg" data-src="clips/lottie-signal-pulse.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Signal pulse (Lottie)</h3><span class="use">icon</span></div>
+    <code class="kind">lottie/signal-pulse</code>
+    <p>Rings pulse out from a point like a signal, with your word under it.</p>
+    
+    <div class="foot"><span>lottie · MIT</span><span class="btns"><button data-copy="{&quot;say&quot;:&quot;Live. on air.&quot;,&quot;kind&quot;:&quot;lottie/signal-pulse&quot;,&quot;text&quot;:&quot;Live&quot;,&quot;sub&quot;:&quot;on air&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. For this line of my script, use the scene &quot;lottie/signal-pulse&quot; (Signal pulse (Lottie)). Fields: text = 1-3 words under the animation (optional); sub = small caps line (optional); scale = size of the animation, 0-1. Take every word on screen from the line itself. Then run check and show me the sheet.">Copy prompt</button></span></div>
+  </div>
+</article></div></section>
+<section data-source="shader"><h2>GPU shaders <small>2</small></h2><div class="grid"><article class="card" data-role="bg" data-source="shader" data-text="shader/bg-flow flowing gradient (shader) background a slow liquid gradient in the film's colours, drawn on the gpu by the shaders package (flowinggradient, webgpu) and locked to the frame, so every render is the same.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/shader-bg-flow.jpg" data-src="clips/shader-bg-flow.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>Flowing gradient (shader)</h3><span class="use">background</span></div>
+    <code class="kind">shader/bg-flow</code>
+    <p>A slow liquid gradient in the film's colours, drawn on the GPU by the shaders package (FlowingGradient, WebGPU) and locked to the frame, so every render is the same.</p>
+    
+    <div class="foot"><span>shaders · MIT</span><span class="btns"><button data-copy="{&quot;bg&quot;:&quot;shader/bg-flow&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Set the background of my film to &quot;shader/bg-flow&quot; (Flowing gradient (shader)) in storyboard.json (&quot;bg&quot;), render the sheet and show it to me.">Copy prompt</button></span></div>
+  </div>
+</article>
+<article class="card" data-role="bg" data-source="shader" data-text="shader/bg-godrays god rays (shader) background soft rays of light fall from a corner of the frame, drawn on the gpu by the shaders package (godrays, webgpu) and locked to the frame.">
+  <div class="shot"><video muted loop playsinline preload="none" poster="clips/shader-bg-godrays.jpg" data-src="clips/shader-bg-godrays.mp4"></video></div>
+  <div class="meta">
+    <div class="row"><h3>God rays (shader)</h3><span class="use">background</span></div>
+    <code class="kind">shader/bg-godrays</code>
+    <p>Soft rays of light fall from a corner of the frame, drawn on the GPU by the shaders package (Godrays, WebGPU) and locked to the frame.</p>
+    
+    <div class="foot"><span>shaders · MIT</span><span class="btns"><button data-copy="{&quot;bg&quot;:&quot;shader/bg-godrays&quot;}">Copy line</button><button data-copy="Use connect-ai-motion. Set the background of my film to &quot;shader/bg-godrays&quot; (God rays (shader)) in storyboard.json (&quot;bg&quot;), render the sheet and show it to me.">Copy prompt</button></span></div>
+  </div>
+</article></div></section>
+  <div class="agent">
+    <div><div class="kicker" data-en="With a coding agent" data-ko="코딩 에이전트와 함께">With a coding agent</div><pre>Use connect-ai-motion (npx connect-ai-motion install-skill). Make a motion graphics film from my script below, no footage. One beat per line, a different scene for each beat, words on screen only from the line. Run check until it passes, show me the sheet, then render 16:9 and 9:16.
+
+&lt;paste your script here, one line per beat&gt;</pre></div>
+    <button data-copy="Use connect-ai-motion (npx connect-ai-motion install-skill). Make a motion graphics film from my script below, no footage. One beat per line, a different scene for each beat, words on screen only from the line. Run check until it passes, show me the sheet, then render 16:9 and 9:16.
+
+&lt;paste your script here, one line per beat&gt;">Copy prompt</button>
+  </div>
+  <footer>
+    <div><b>CONNECT AI LAB</b><br><span data-en="AI education for everyone" data-ko="모두를 위한 AI 교육">AI education for everyone</span></div>
+    <div><a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a> · <a href="https://www.aicitybuilders.com">aicitybuilders.com</a> · <a href="https://github.com/wonseokjung/connect-ai-motion">GitHub</a><br>MIT · <span data-en="runs on Remotion (its own licence)" data-ko="Remotion 위에서 동작(별도 라이선스)">runs on Remotion (its own licence)</span></div>
+  </footer>
+</div>
+<script>
+// copy buttons
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('button[data-copy]');
+  if (!b) return;
+  var t = b.getAttribute('data-copy'), old = b.textContent;
+  var done = function () { b.textContent = 'Copied'; b.classList.add('done'); setTimeout(function () { b.textContent = old; b.classList.remove('done'); }, 1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, done);
+  else { var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); } catch (x) {} a.remove(); done(); }
+});
+// clips play only while they are on screen
+var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+  es.forEach(function (x) {
+    var v = x.target;
+    if (x.isIntersecting) { if (!v.src) v.src = v.getAttribute('data-src'); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    else if (v.src) v.pause();
+  });
+}, {rootMargin: '120px'}) : null;
+document.querySelectorAll('video[data-src]').forEach(function (v) { if (io) io.observe(v); else v.src = v.getAttribute('data-src'); });
+// filter
+var role = 'all', q = '';
+function apply() {
+  document.querySelectorAll('.card').forEach(function (c) {
+    c.hidden = !((role === 'all' || c.getAttribute('data-role') === role) && (!q || c.getAttribute('data-text').indexOf(q) >= 0));
+  });
+  document.querySelectorAll('section[data-source]').forEach(function (s) { s.hidden = !s.querySelector('.card:not([hidden])'); });
+}
+document.querySelectorAll('.chip').forEach(function (b) { b.addEventListener('click', function () { role = b.getAttribute('data-role'); document.querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === b); }); apply(); }); });
+document.getElementById('q').addEventListener('input', function (e) { q = e.target.value.trim().toLowerCase(); apply(); });
+// language (interface words only; scene names and prompts stay in English)
+var ko = false;
+document.getElementById('lang').addEventListener('click', function () {
+  ko = !ko; this.textContent = ko ? 'English' : '한국어'; document.documentElement.lang = ko ? 'ko' : 'en';
+  document.querySelectorAll('[data-en]').forEach(function (el) { el.innerHTML = el.getAttribute(ko ? 'data-ko' : 'data-en'); });
+});
+</script>
+</body>
+</html>

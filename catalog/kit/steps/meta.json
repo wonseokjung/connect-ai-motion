@@ -1,0 +1,17 @@
+{
+  "kind": "kit/steps",
+  "title": "1 · 2 · 3 steps",
+  "description": "Two to five steps side by side (stacked in 9:16): a large thin numeral, its label, a rule between. Each step arrives on its own beat, the newest is brightest.",
+  "source": {"type": "kit", "path": "catalog/kit/steps/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "steps",
+  "props": {"items": "2-5 steps, each 1-3 words (or {text, at} to land on a spoken word)", "text": "small heading (optional)"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 16,
+  "dur": 4,
+  "maxDur": 9,
+  "family": "steps",
+  "example": {"text": "How it works", "items": ["Write a script", "Pick a scene", "Render"]}
+}

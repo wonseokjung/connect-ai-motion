@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/katex-formula",
+  "title": "Formula",
+  "description": "One formula set properly (KaTeX) in the middle of the frame, the parts rising into place; a line of plain words under it.",
+  "source": {"type": "remotion", "package": "remotion", "version": "4.0.529", "also": "katex 0.16 (MIT) sets the formula; its fonts are SIL OFL"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "formula",
+  "props": {"tex": "the formula in LaTeX (not checked against the script)", "text": "plain words under it (1-6 words)", "color": "colour of the formula"},
+  "needs": ["tex"],
+  "changes": [0, 0.4],
+  "maxWords": 8,
+  "dur": 3.4,
+  "family": "katex",
+  "example": {"tex": "\\text{cost} = \\text{tries} \\times \\text{price}", "text": "every new try costs again"}
+}

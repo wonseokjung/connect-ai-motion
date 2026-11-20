@@ -1,0 +1,19 @@
+{
+  "kind": "hyperframes/registry",
+  "title": "HyperFrames registry (456 items)",
+  "description": "The whole block and component registry of HyperFrames. After a download, hf-import turns every block into a scene and lists the ones that cannot play frame by frame with the reason.",
+  "source": {
+    "type": "hyperframes",
+    "repo": "heygen-com/hyperframes",
+    "path": "registry/",
+    "commit": "6bd0b5d870ef197b1ff6d3d50d17944444c31a8f"
+  },
+  "license": "Apache-2.0",
+  "role": "scene",
+  "use": "statement",
+  "family": "hf-registry",
+  "status": "needs-download",
+  "reasons": [
+    "download the registry folder of heygen-com/hyperframes (1,685 files, 108 MB; HTML + JSON only is about 10 MB), then run: connect-ai-motion hf-import <folder>. Its images, sounds and 3D files have their own terms, so hf-import copies the block HTML only."
+  ]
+}

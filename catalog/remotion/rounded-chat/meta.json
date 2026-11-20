@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/rounded-chat",
+  "title": "Ask and answer",
+  "description": "Two message bubbles whose rounded outline hugs each line (@remotion/rounded-text-box + @remotion/layout-utils): the question on the left, then the answer on the right in a colour.",
+  "source": {"type": "remotion", "package": "@remotion/rounded-text-box", "version": "4.0.529"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "dialogue",
+  "props": {"text": "the question (2-8 words)", "sub": "the answer (2-8 words)", "color": "colour of the answer", "cues": "{\"answer\": time}"},
+  "needs": ["text", "sub"],
+  "changes": [0, 0.45],
+  "maxWords": 18,
+  "dur": 3.6,
+  "family": "rounded-chat",
+  "example": {"text": "Can I change the colour?", "sub": "Change one line", "color": "blue"}
+}

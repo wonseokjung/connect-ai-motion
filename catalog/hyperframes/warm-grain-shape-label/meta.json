@@ -1,0 +1,47 @@
+{
+  "kind": "hyperframes/warm-grain-shape-label",
+  "title": "Shape label (HyperFrames)",
+  "description": "A label beside a drawn shape from the HyperFrames warm-grain template.",
+  "source": {
+    "type": "hyperframes",
+    "repo": "heygen-com/hyperframes",
+    "package": "hyperframes@0.8.86",
+    "note": "unchanged copy; the adapter plays a part of its timeline",
+    "path": "dist/templates/warm-grain/compositions/graphics.html"
+  },
+  "license": "Apache-2.0",
+  "src": "block.html",
+  "role": "scene",
+  "use": "keyword",
+  "props": {
+    "text": "1-2 words"
+  },
+  "text": {
+    "#moment-3 .stat-text": "text"
+  },
+  "canvas": [
+    1920,
+    1080
+  ],
+  "window": [
+    8.6,
+    13.4
+  ],
+  "changes": [
+    0,
+    0.4
+  ],
+  "maxWords": 8,
+  "dur": 5.0,
+  "family": "hf-shape-label",
+  "example": {
+    "text": "Open source"
+  },
+  "crop": [
+    55,
+    410,
+    700,
+    260
+  ],
+  "maxDur": 6
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "remotion/remotion-bits",
+  "title": "remotion-bits parts",
+  "description": "remotion-bits (MIT on npm) is a set of Remotion building blocks: text effects, gradient transitions, charts. Installed in your project, a part plays here through a small custom scene.",
+  "source": {
+    "type": "remotion",
+    "repo": "av/remotion-bits",
+    "package": "remotion-bits"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "statement",
+  "family": "remotion-bits",
+  "status": "needs-download",
+  "reasons": [
+    "not shipped: npm install remotion-bits in your project and wrap the part you want in a custom scene (kind \"custom\"). The repository has no LICENSE file (package.json says MIT), so read it before you ship."
+  ]
+}

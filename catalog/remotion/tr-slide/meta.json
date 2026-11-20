@@ -1,0 +1,13 @@
+{
+  "kind": "remotion/tr-slide",
+  "title": "Push",
+  "description": "The next scene pushes the last one out of the frame (@remotion/transitions slide).",
+  "source": {"type": "remotion", "package": "@remotion/transitions", "version": "4.0.529", "licenseNote": "ships under the Remotion License like remotion itself"},
+  "license": "Remotion License",
+  "role": "transition",
+  "use": "transition",
+  "props": {"dur": "seconds (0.5)", "direction": "from-right | from-left | from-top | from-bottom"},
+  "dur": 0.5,
+  "family": "tr-slide",
+  "example": {}
+}

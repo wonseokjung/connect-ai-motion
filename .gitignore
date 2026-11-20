@@ -1,0 +1,9 @@
+node_modules/
+out/
+work/
+*-motion/
+fm-demo/
+projects/
+.connect-ai-motion.json
+*.log
+.DS_Store

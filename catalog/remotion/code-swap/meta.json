@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/code-swap",
+  "title": "Change one line of code",
+  "description": "A few lines of code in an editor card (syntax colours by prismjs). One value is struck out and the new one is typed in its place; the line is lit. For 'you only change this'.",
+  "source": {"type": "remotion", "package": "remotion", "version": "4.0.529", "also": "prismjs 1.30 (MIT) for the syntax colours"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "code",
+  "props": {"code": "2-7 short lines of code (not checked against the script)", "from": "the value that changes (must be in code)", "to": "what it becomes", "text": "small caps label on the card (optional)", "lang": "javascript | css | python | json (javascript)", "color": "colour of the new value", "cues": "{\"focus\": time the line lights up, \"swap\": time it changes}"},
+  "needs": ["code", "from", "to"],
+  "changes": [0, 0.35, 0.5],
+  "maxWords": 8,
+  "dur": 4,
+  "family": "code-swap",
+  "example": {"code": "const rabbit = {\n  color: \"black\",\n  speed: 3,\n};\nrender(rabbit);", "from": "black", "to": "red", "text": "one line", "color": "red"}
+}

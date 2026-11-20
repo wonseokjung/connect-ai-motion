@@ -1,0 +1,16 @@
+{
+  "kind": "kit/quote",
+  "title": "Quote",
+  "description": "A sentence set large on up to four lines, word after word, with a thin gold bar beside it and the speaker in small caps.",
+  "source": {"type": "kit", "path": "catalog/kit/quote/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "quote",
+  "props": {"text": "the sentence (up to about 16 words)", "by": "who said it (optional)", "hi": "words to colour"},
+  "needs": ["text"],
+  "changes": "words",
+  "maxWords": 22,
+  "dur": 4,
+  "family": "quote",
+  "example": {"text": "Once it is code, you change one line.", "by": "AI Mentor Jay", "hi": "one line"}
+}

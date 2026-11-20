@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "title": "my film",
+  "style": "connect",
+  "bg": "kit/bg-pool",
+  "sound": false,
+  "beats": [
+    {"id": "open", "say": "Your name. What you do in one line.", "kind": "kit/ident", "text": "Your name", "sub": "What you do"},
+    {"id": "point", "say": "The one thing you want people to remember.", "kind": "remotion/title-blur", "text": "The one thing", "hi": "one"},
+    {"id": "steps", "say": "First step, second step, third step.", "kind": "kit/steps", "items": ["First step", "Second step", "Third step"]},
+    {"id": "end", "say": "Your name. Where to find you.", "kind": "kit/endcard", "text": "Your name", "sub": "Where to find you"}
+  ]
+}

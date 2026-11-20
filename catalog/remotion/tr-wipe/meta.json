@@ -1,0 +1,13 @@
+{
+  "kind": "remotion/tr-wipe",
+  "title": "Wipe",
+  "description": "An edge travels across the frame and uncovers the next scene (@remotion/transitions wipe).",
+  "source": {"type": "remotion", "package": "@remotion/transitions", "version": "4.0.529", "licenseNote": "ships under the Remotion License like remotion itself"},
+  "license": "Remotion License",
+  "role": "transition",
+  "use": "transition",
+  "props": {"dur": "seconds (0.5)", "direction": "from-left | from-top-left | from-top | from-right ..."},
+  "dur": 0.5,
+  "family": "tr-wipe",
+  "example": {}
+}

@@ -1,0 +1,16 @@
+{
+  "kind": "kit/keyword",
+  "title": "Key word",
+  "description": "One word or short phrase as big as the frame allows, each word coming into focus; a small caps line with a gold tick under it.",
+  "source": {"type": "kit", "path": "catalog/kit/keyword/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "keyword",
+  "props": {"text": "1-4 words", "sub": "small caps line (optional)", "color": "colour of the word (gold, teal, coral, blue, violet, leaf)"},
+  "needs": ["text"],
+  "changes": "words",
+  "maxWords": 8,
+  "dur": 2.2,
+  "family": "keyword",
+  "example": {"text": "One line", "sub": "is one scene"}
+}

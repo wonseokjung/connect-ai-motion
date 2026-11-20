@@ -1,0 +1,17 @@
+{
+  "kind": "kit/trend",
+  "title": "Up and down",
+  "description": "Two to four things, each with an arrow that draws itself up or down beside the word. For 'this goes down, that goes up'.",
+  "source": {"type": "kit", "path": "catalog/kit/trend/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "compare",
+  "props": {"items": "2-4 rows: {text: the thing, dir: \"up\" | \"down\", at}; the words up / down are shown only if you put them in sub", "color": "colour of the arrows going up", "color2": "colour of the arrows going down"},
+  "needs": ["items"],
+  "changes": "items",
+  "maxWords": 12,
+  "dur": 4,
+  "maxDur": 9,
+  "family": "trend",
+  "example": {"items": [{"text": "Cost", "dir": "down"}, {"text": "Time", "dir": "down"}, {"text": "Accuracy", "dir": "up"}]}
+}

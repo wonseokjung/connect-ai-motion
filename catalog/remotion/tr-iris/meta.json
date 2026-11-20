@@ -1,0 +1,13 @@
+{
+  "kind": "remotion/tr-iris",
+  "title": "Iris",
+  "description": "A circle opens from the middle onto the next scene (@remotion/transitions iris).",
+  "source": {"type": "remotion", "package": "@remotion/transitions", "version": "4.0.529", "licenseNote": "ships under the Remotion License like remotion itself"},
+  "license": "Remotion License",
+  "role": "transition",
+  "use": "transition",
+  "props": {"dur": "seconds (0.5)"},
+  "dur": 0.5,
+  "family": "tr-iris",
+  "example": {}
+}

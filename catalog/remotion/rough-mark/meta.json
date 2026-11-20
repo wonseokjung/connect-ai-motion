@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/rough-mark",
+  "title": "Marked sentence",
+  "description": "A sentence on up to three lines; one phrase gets a hand-drawn mark (@remotion/rough-notation): a highlighter sweep, a circle, or an underline.",
+  "source": {"type": "remotion", "package": "@remotion/rough-notation", "version": "4.0.529"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "emphasis",
+  "props": {"text": "the sentence (up to 12 words)", "hi": "the phrase to mark (must be inside text)", "mark": "highlight | circle | underline", "color": "colour of the mark", "cues": "{\"mark\": time} when the pen moves"},
+  "needs": ["text", "hi"],
+  "changes": [0, 0.4],
+  "maxWords": 14,
+  "dur": 3.2,
+  "family": "rough-mark",
+  "example": {"text": "You only change one line", "hi": "one line", "mark": "highlight", "color": "coral"}
+}

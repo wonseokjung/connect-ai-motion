@@ -1,0 +1,16 @@
+{
+  "kind": "kit/compare",
+  "title": "Before / after",
+  "description": "Two halves (stacked in 9:16). The first is there, then a line crosses it out and the second half lights up in a colour.",
+  "source": {"type": "kit", "path": "catalog/kit/compare/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "compare",
+  "props": {"text": "the first thing (1-4 words)", "sub": "the second thing (1-4 words)", "label": "small caps over the first", "label2": "small caps over the second", "color": "colour of the second half", "cues": "{\"swap\": time} when the second lights up"},
+  "needs": ["text", "sub"],
+  "changes": [0, 0.45],
+  "maxWords": 12,
+  "dur": 3.4,
+  "family": "compare",
+  "example": {"text": "Generate again", "sub": "Change one line", "label": "video model", "label2": "code", "color": "teal"}
+}

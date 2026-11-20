@@ -1,0 +1,49 @@
+{
+  "kind": "hyperframes/warm-grain-circle-stat",
+  "title": "Circle stat (HyperFrames)",
+  "description": "A number inside a drawn circle from the HyperFrames warm-grain template.",
+  "source": {
+    "type": "hyperframes",
+    "repo": "heygen-com/hyperframes",
+    "package": "hyperframes@0.8.86",
+    "note": "unchanged copy; the adapter plays a part of its timeline",
+    "path": "dist/templates/warm-grain/compositions/graphics.html"
+  },
+  "license": "Apache-2.0",
+  "src": "block.html",
+  "role": "scene",
+  "use": "number",
+  "props": {
+    "value": "number as you say it",
+    "text": "what it counts (1-2 words)"
+  },
+  "text": {
+    "#moment-1 .stat-text": "value",
+    "#moment-1 .stat-desc": "text"
+  },
+  "canvas": [
+    1920,
+    1080
+  ],
+  "window": [
+    1.6,
+    4.1
+  ],
+  "changes": [
+    0,
+    0.4
+  ],
+  "maxWords": 8,
+  "dur": 3.0,
+  "family": "hf-circle",
+  "example": {
+    "value": "10",
+    "text": "lessons"
+  },
+  "crop": [
+    1100,
+    240,
+    600,
+    600
+  ]
+}

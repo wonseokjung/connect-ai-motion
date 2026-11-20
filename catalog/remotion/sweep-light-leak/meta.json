@@ -1,0 +1,13 @@
+{
+  "kind": "remotion/sweep-light-leak",
+  "title": "Light leak over the cut",
+  "description": "The cut itself stays hard; a warm light leak passes over it (@remotion/light-leaks, WebGL, screen blend).",
+  "source": {"type": "remotion", "package": "@remotion/light-leaks", "version": "4.0.529"},
+  "license": "Remotion License",
+  "role": "sweep",
+  "use": "transition",
+  "props": {"dur": "seconds on each side of the cut (0.5)", "seed": "pattern number", "hue": "hue shift in degrees, 0-360 (14 = amber)", "strength": "0-1 (0.55)"},
+  "dur": 0.5,
+  "family": "sweep-leak",
+  "example": {}
+}

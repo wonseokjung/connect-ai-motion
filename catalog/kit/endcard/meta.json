@@ -1,0 +1,17 @@
+{
+  "kind": "kit/endcard",
+  "title": "End card",
+  "description": "The name large and thin, one action line in gold caps, your links in a quiet row. The words rise one after another.",
+  "source": {"type": "kit", "path": "catalog/kit/endcard/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "end",
+  "props": {"text": "name or closing words", "sub": "action line (optional)", "items": "links, up to 3 (optional; they must be in my-info.json links or the script)"},
+  "needs": ["text"],
+  "changes": [0, 0.3, 0.55],
+  "maxWords": 16,
+  "dur": 3.2,
+  "maxDur": 4.4,
+  "family": "endcard",
+  "example": {"text": "CONNECT AI LAB", "sub": "AI education for everyone", "items": ["youtube.com/@CONNECT-AI-LAB", "aicitybuilders.com"]}
+}

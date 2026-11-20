@@ -1,0 +1,13 @@
+{
+  "kind": "remotion/tr-flip",
+  "title": "Flip",
+  "description": "The frame turns over like a card and the next scene is on its back (@remotion/transitions flip).",
+  "source": {"type": "remotion", "package": "@remotion/transitions", "version": "4.0.529", "licenseNote": "ships under the Remotion License like remotion itself"},
+  "license": "Remotion License",
+  "role": "transition",
+  "use": "transition",
+  "props": {"dur": "seconds (0.5)", "direction": "from-right | from-left | from-top | from-bottom"},
+  "dur": 0.5,
+  "family": "tr-flip",
+  "example": {}
+}

@@ -1,0 +1,17 @@
+{
+  "kind": "kit/ident",
+  "title": "Brand card",
+  "description": "A small wide-tracked name decodes letter by letter, a thin gold rule draws under it, one quiet line below. The calm opening card.",
+  "source": {"type": "kit", "path": "catalog/kit/ident/index.tsx"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "brand",
+  "props": {"text": "name (1-4 words)", "sub": "one quiet line under it (optional)"},
+  "needs": ["text"],
+  "changes": [0, 0.4],
+  "maxWords": 9,
+  "dur": 2.6,
+  "family": "ident",
+  "quiet": true,
+  "example": {"text": "CONNECT AI LAB", "sub": "AI education for everyone"}
+}

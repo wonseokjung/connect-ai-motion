@@ -1,0 +1,12 @@
+{
+  "kind": "shader/bg-flow",
+  "title": "Flowing gradient (shader)",
+  "description": "A slow liquid gradient in the film's colours, drawn on the GPU by the shaders package (FlowingGradient, WebGPU) and locked to the frame, so every render is the same.",
+  "source": {"type": "shader", "package": "shaders", "version": "4.0.2", "repo": "shader-effects-inc/shaders"},
+  "license": "MIT",
+  "role": "bg",
+  "use": "background",
+  "props": {"color": "the bright colour in the flow (default: the style's accent)", "speed": "0-2 (0.5)", "strength": "0-1 (0.55)"},
+  "family": "shader-flow",
+  "example": {}
+}

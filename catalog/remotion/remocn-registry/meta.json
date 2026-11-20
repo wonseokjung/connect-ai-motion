@@ -1,0 +1,17 @@
+{
+  "kind": "remotion/remocn-registry",
+  "title": "Remocn components",
+  "description": "Remocn (MIT) is a shadcn-style registry of Remotion components: transitions, backgrounds, scenes, text. A component you add with its CLI is a .tsx file, so it plays here as {\"kind\": \"custom\", \"component\": \"./path.tsx\"}.",
+  "source": {
+    "type": "remotion",
+    "repo": "Remocn/remocn"
+  },
+  "license": "MIT",
+  "role": "scene",
+  "use": "statement",
+  "family": "remocn",
+  "status": "needs-download",
+  "reasons": [
+    "not shipped: add the components you want with the Remocn CLI in your project, then call each one with kind \"custom\". Wrap it so it reads the SceneProps (r, lf, dur, st); the README shows the five lines."
+  ]
+}

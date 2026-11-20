@@ -1,0 +1,13 @@
+{
+  "kind": "remotion/tr-clock-wipe",
+  "title": "Clock wipe",
+  "description": "A clock hand sweeps round and the next scene is under it (@remotion/transitions clockWipe).",
+  "source": {"type": "remotion", "package": "@remotion/transitions", "version": "4.0.529", "licenseNote": "ships under the Remotion License like remotion itself"},
+  "license": "Remotion License",
+  "role": "transition",
+  "use": "transition",
+  "props": {"dur": "seconds (0.5)"},
+  "dur": 0.5,
+  "family": "tr-clock-wipe",
+  "example": {}
+}

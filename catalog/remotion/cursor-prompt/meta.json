@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/cursor-prompt",
+  "title": "Prompt and click",
+  "description": "A prompt box where your sentence is typed, a real macOS cursor (@remotion/mac-cursors) glides to the button and clicks, and the answer arrives as a chip. For 'you just ask'.",
+  "source": {"type": "remotion", "package": "@remotion/mac-cursors", "version": "4.0.529"},
+  "license": "Remotion License",
+  "role": "scene",
+  "use": "prompt",
+  "props": {"text": "what is typed (3-9 words)", "sub": "what comes back (1-3 words)", "label": "word on the button (default: an arrow)", "cues": "{\"click\": time}"},
+  "needs": ["text"],
+  "changes": [0, 0.55],
+  "maxWords": 14,
+  "dur": 4,
+  "family": "cursor-prompt",
+  "example": {"text": "Make it red, not black", "sub": "done"}
+}

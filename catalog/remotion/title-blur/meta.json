@@ -1,0 +1,16 @@
+{
+  "kind": "remotion/title-blur",
+  "title": "Headline",
+  "description": "A headline on one or two lines, sized to the frame (@remotion/layout-utils fitText), each word coming out of a blur; one word in gold, a small caps kicker above.",
+  "source": {"type": "remotion", "package": "@remotion/layout-utils", "version": "4.0.529"},
+  "license": "MIT",
+  "role": "scene",
+  "use": "title",
+  "props": {"text": "headline (2-7 words)", "hi": "word(s) to colour gold", "sub": "small caps kicker above (optional)"},
+  "needs": ["text"],
+  "changes": "words",
+  "maxWords": 12,
+  "dur": 3,
+  "family": "title-blur",
+  "example": {"text": "The most beautiful way to learn AI", "hi": "beautiful", "sub": "CONNECT AI LAB"}
+}
