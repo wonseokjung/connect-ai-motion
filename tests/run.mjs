@@ -167,6 +167,8 @@ await expectErr(film(beat({kind: 'custom', component: './nope/Scene.tsx'})), 'fi
     assert.deepEqual(notSaid(shown, b.say), [], `${b.id}: draft only uses words of the line`);
   }
   assert.equal(new Set(story.beats.map((b) => metas[b.kind].family)).size, story.beats.length);
+  const open = draftStory(scriptLines('CONNECT AI LAB. AI education for everyone.\nIt takes 3 steps.\n'), metas, info).beats;
+  assert.deepEqual([open[0].kind, open[0].text, open[0].sub, open[1].value, open[1].text], ['kit/ident', 'CONNECT AI LAB', 'AI education for everyone', '3', 'steps']);
   assert.equal(metas[story.beats[2].kind].use, 'number');
   assert.ok(['steps', 'list', 'flow', 'timeline'].includes(metas[story.beats[3].kind].use));
   assert.equal(metas[story.beats[4].kind].use, 'quote');
