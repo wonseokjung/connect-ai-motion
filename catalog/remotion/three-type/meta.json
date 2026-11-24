@@ -9,6 +9,7 @@
   "lead": "type",
   "props": {"text": "1-3 words (Latin letters and digits; other scripts are skipped)", "hi": "the word whose faces take the colour (optional)", "color": "that colour, and the back light (gold)", "sub": "small caps line under the word (optional)", "cues": "{\"turn\": time} when the word swings to its other side"},
   "needs": ["text"],
+  "latinOnly": true,
   "changes": [0, 0.55],
   "maxWords": 7,
   "dur": 3.4,

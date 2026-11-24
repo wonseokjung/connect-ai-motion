@@ -14,6 +14,11 @@
       (function () {
         gsap.registerPlugin(SplitText);
         var root = '[data-composition-id="split-words-rise"] ';
+        // a long line (Korean, a full sentence) shrinks until it fits the canvas, then wraps to two lines; never cut at the edge
+        var el = document.querySelector(root + '.line'), size = 140, room = 1400 - 80;
+        while (el.scrollWidth > room && size > 72) { size -= 4; el.style.fontSize = size + 'px'; }
+        if (el.scrollWidth > room) { el.style.whiteSpace = 'normal'; el.style.width = room + 'px'; }
+        el.style.top = Math.max(0, (420 - el.offsetHeight) / 2) + 'px';
         var split = SplitText.create(root + '.line', { type: 'words', wordsClass: 'w', mask: 'words' });
         split.words[split.words.length - 1].style.color = '#F2B45A';
         var tl = gsap.timeline({ paused: true });

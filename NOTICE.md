@@ -6,12 +6,12 @@ connect-ai-motion is CONNECT AI LAB's code (MIT, see LICENSE), built on Remotion
 
 | Part in this kit | Source (repo, version or commit) | Licence | How |
 |---|---|---|---|
-| `catalog/hyperframes/warm-grain-*` (4 scenes) | heygen-com/hyperframes, npm `hyperframes@0.8.86`, `dist/templates/warm-grain/compositions/intro.html`, `graphics.html` | Apache-2.0, `licenses/hyperframes-Apache-2.0.txt` | Unchanged copies of the HTML; the adapter plays a part of each timeline (window, crop and text slots are in the item's `meta.json`) |
-| `src/adapters/HyperFrames.tsx` (iframe, seek every frame, seeded random, CSS animations held at the frame time) | same idea as @remotion/gsap and the HyperFrames runtime (`window.__timelines`, `data-start`); first written for connect-ai-video-motion | ours, MIT | Idea; our own code |
+| `catalog/hyperframes/warm-grain-*` (4 scenes) | heygen-com/hyperframes, npm [`hyperframes@0.8.86`](https://www.npmjs.com/package/hyperframes/v/0.8.86), [`dist/templates/warm-grain/compositions/intro.html`](https://unpkg.com/hyperframes@0.8.86/dist/templates/warm-grain/compositions/intro.html), [`graphics.html`](https://unpkg.com/hyperframes@0.8.86/dist/templates/warm-grain/compositions/graphics.html) | Apache-2.0, `licenses/hyperframes-Apache-2.0.txt` | Unchanged copies of the HTML; the adapter plays a part of each timeline (window, crop and text slots are in the item's `meta.json`) |
+| `src/adapters/HyperFrames.tsx` (iframe, seek every frame, seeded random, CSS animations held at the frame time, your words in the text slots, a slot the storyboard leaves empty is emptied, long lines made smaller to fit) | same idea as @remotion/gsap and the HyperFrames runtime (`window.__timelines`, `data-start`); first written for connect-ai-video-motion | ours, MIT | Idea; our own code |
 | `lib/hf-import.mjs` | first written for connect-ai-video-motion | ours, MIT | Ours |
 | `catalog/hyperframes/{gold-scramble-title,split-words-rise,ring-count}` | ours, written in the HyperFrames block format | MIT | Ours |
-| `src/core/zones.mjs` 9:16 app zones (top 250, rail from x 940, captions under 1536 of 1080 x 1920) | aaksa/facecammaxxing `remotion/src/lib/layout.ts` @ a9976a70b02c | MIT, `licenses/facecammaxxing-MIT.txt` | Adapted (numbers kept, returned as one safe box) |
-| `src/styles/presets.mjs` timing: enter 12, opacity 6, blur 7, exit 13 frames | Tejashmakwana/motionmaxxing @ 8c8ec0f2a6f6 | Apache-2.0, `licenses/motionmaxxing-Apache-2.0.txt` | Numbers used |
+| `src/core/zones.mjs` 9:16 app zones (top 250, rail from x 940, captions under 1536 of 1080 x 1920) | aaksa/facecammaxxing [`remotion/src/lib/layout.ts` @ a9976a70](https://github.com/aaksa/facecammaxxing/blob/a9976a70b02c8b60bbb7ebf5e055271b79b12db4/remotion/src/lib/layout.ts) | MIT, `licenses/facecammaxxing-MIT.txt` | Adapted (numbers kept, returned as one safe box) |
+| `src/styles/presets.mjs` timing: enter 12, opacity 6, blur 7, exit 13 frames | Tejashmakwana/motionmaxxing [`references/motion.md`, `runtime/motion.js` @ 8c8ec0f2](https://github.com/Tejashmakwana/motionmaxxing/tree/8c8ec0f2a6f6c9a0da15cd24f7b1298ab298368c) | Apache-2.0, `licenses/motionmaxxing-Apache-2.0.txt` | Numbers used |
 | `src/adapters/Shader.tsx` (frame-locked `createRendererFromJSON`) and `catalog/shader/*` presets | `shaders` 4.0.2 (shader-effects-inc/shaders), `shaders/core` | MIT | Used as it is; the adapter is ours. `shaders/react` is not used |
 | `catalog/lottie/*/anim.json` | ours, made by code for connect-ai-video-motion | MIT | Ours |
 | `src/adapters/Lottie.tsx` | @remotion/lottie 4.0.529 + lottie-web 5.13.0 | Remotion License / MIT | Used as they are |
@@ -22,7 +22,7 @@ connect-ai-motion is CONNECT AI LAB's code (MIT, see LICENSE), built on Remotion
 | `remotion/three-model` loader | `three/examples/jsm/loaders/GLTFLoader.js` (three 0.170) | MIT | Used as it is |
 | `kit/code-result` syntax colours | prismjs 1.30 | MIT | Used as it is |
 | the picture scenes (`kit/photo-*`, `kit/device-*`, `kit/chart-*`, `kit/draw-*`, diagrams, `kit/actor`, `kit/pixel-run`, `kit/grid-path`, `kit/type-*`), `src/parts/Picture.tsx`, `src/parts/Devices.tsx` | ours | MIT | Ours; device frames are plain boxes with no brand marks |
-| Storyboard as "at this moment, show this" | feicaiclub/video-spec-builder (through the plan file of connect-ai-video-motion) | MIT | Idea; our own format |
+| Storyboard as "at this moment, show this" | [feicaiclub/video-spec-builder](https://github.com/feicaiclub/video-spec-builder/tree/9e73275b35e827b8f7af4bca900790909d86e63e) (through the plan file of connect-ai-video-motion; link = the repository on 2026-11-25) | MIT | Idea; our own format |
 | `lib/install.mjs` skill installer | connect-ai-video-motion / rea-biz-kit (CONNECT AI LAB) | MIT | Ours |
 | `lib/ffmpeg.mjs`, `src/core/words.mjs`, `src/core/contrast.mjs`, `src/parts/Atmos.tsx` | connect-ai-video-motion (CONNECT AI LAB) | MIT | Ours, copied |
 

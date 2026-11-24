@@ -17,6 +17,9 @@
   "props": {
     "value": "number or short value"
   },
+  "needs": [
+    "value"
+  ],
   "text": {
     "#moment-2 .stat-text": "value"
   },

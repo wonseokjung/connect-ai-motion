@@ -25,14 +25,22 @@ export const gsapPluginsIn = (html: string) => {
   return out;
 };
 
-const prepare = (html: string, gsapUrl: string, pluginUrl: (n: string) => string, text: Record<string, string>, values: Record<string, any>) => {
+// a value written into an inline <script>: "</script>" or a line separator in your words cannot end the script early
+const js = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+
+const prepare = (html: string, gsapUrl: string, pluginUrl: (n: string) => string, text: Record<string, string>, values: Record<string, any>, crop: number[] | null = null) => {
   const plugins = gsapPluginsIn(html);
   const tpl = html.match(/<template[^>]*>([\s\S]*)<\/template>/i);
   let body = tpl ? tpl[1] : (html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? html);
   body = body.replace(/<script[^>]*src=["'][^"']*["'][^>]*>\s*<\/script>/gi, '');
   const head = (html.match(/<head[^>]*>([\s\S]*)<\/head>/i)?.[1] ?? '').replace(/<script[^>]*src=["'][^"']*["'][^>]*>\s*<\/script>/gi, '').replace(/<link[^>]*>/gi, '');
-  const fill = Object.entries(text || {})
-    .map(([sel, field]) => (values[field] == null || values[field] === '' ? '' : `document.querySelectorAll(${JSON.stringify(sel)}).forEach(function(e){e.textContent=${JSON.stringify(String(values[field]))}});`))
+  // every mapped place gets the storyboard's words; a field the beat leaves out is emptied, so the template's own
+  // sample words ("Design simplified.", "47%") never reach the screen. Then a line that is wider than the block's
+  // canvas (a Korean sentence in a slot made for two English words) gets smaller until it fits, and Korean wraps
+  // between words, not inside one.
+  const fitJs = `var fmFit=function(e){var root=e.closest('[data-width]');if(!root)return;var R=root.getBoundingClientRect(),X=${crop ? +crop[0] : 0},W=${crop ? +crop[0] + +crop[2] : 0}||+root.getAttribute('data-width');e.style.wordBreak='keep-all';var f0=parseFloat(getComputedStyle(e).fontSize)||0,f=f0,n=0;var over=function(){var b=e.getBoundingClientRect(),cw=e.clientWidth;return b.width>0&&(b.right-R.left>W-8||b.left-R.left<X-1||(cw>0&&e.scrollWidth>cw+2));};while(f0&&over()&&f>f0*0.4&&n++<40){f*=0.94;e.style.fontSize=f+'px';}};`;
+  const fill = fitJs + Object.entries(text || {})
+    .map(([sel, field]) => `document.querySelectorAll(${js(sel)}).forEach(function(e){e.textContent=${js(values[field] == null ? '' : String(values[field]))};fmFit(e);});`)
     .join('');
   // compositions get their data-width / data-height as their real size (some blocks leave the root to its content), and your
   // words go in before the block's own script runs (so SplitText / scramble / counters use them)
@@ -68,7 +76,7 @@ export const HyperFramesBlock: React.FC<any> = ({it, r: safe, full, lf: lf0, dur
         if (!x.ok) throw new Error(`${file}: ${x.status}`);
         return x.text();
       })
-      .then((t) => setHtml(prepare(t, staticFile('fm-assets/gsap.min.js'), (n) => staticFile(`fm-assets/gsap-${n}.min.js`), mt.text || {}, it)))
+      .then((t) => setHtml(prepare(t, staticFile('fm-assets/gsap.min.js'), (n) => staticFile(`fm-assets/gsap-${n}.min.js`), mt.text || {}, it, mt.crop || null)))
       .catch((e) => {
         console.error('HyperFrames block failed', e);
         setHtml('<!doctype html><html><body></body></html>');

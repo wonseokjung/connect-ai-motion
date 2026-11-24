@@ -13,7 +13,11 @@ import {galleryStory} from '../lib/gallery.mjs';
 import {synth, peakDb} from '../lib/sound.mjs';
 import {analyseFrames} from '../lib/measure.mjs';
 import {checkBlock} from '../lib/hf-import.mjs';
-import {installSkill, removeSkill} from '../lib/install.mjs';
+import {installSkill, removeSkill, pinSkill, npmCli} from '../lib/install.mjs';
+import {userFile} from '../lib/project.mjs';
+import {splitLines} from '../lib/draft.mjs';
+import {assetName} from '../src/core/assets.mjs';
+import {spawnSync} from 'node:child_process';
 import {validateMeta, LICENSES, mediaOf, leadOf} from '../src/core/catalog.mjs';
 import {mediaName} from '../src/core/assets.mjs';
 import {buildTimeline, seriesPlan, itemFrames} from '../src/core/timeline.mjs';
@@ -21,6 +25,10 @@ import {notSaid, readingSeconds, countWords} from '../src/core/text.mjs';
 import {safeBox} from '../src/core/zones.mjs';
 
 const KIT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// every temp folder a test makes is removed at the end
+const TEMPS = [];
+const tempDir = (prefix) => { const d = fs.mkdtempSync(path.join(os.tmpdir(), prefix)); TEMPS.push(d); return d; };
+process.on('exit', () => { for (const d of TEMPS) try { fs.rmSync(d, {recursive: true, force: true}); } catch {} });
 let n = 0;
 const ok = (name) => console.log(`  ok ${++n} ${name}`);
 const {metas, errors: catErrors} = buildCatalog();
@@ -28,7 +36,7 @@ const hello = readJson(path.join(KIT, 'examples', 'hello', 'storyboard.json'));
 const info = readJson(path.join(KIT, 'examples', 'hello', 'my-info.json'));
 
 function project(story, files = {}) {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fm-test-'));
+  const dir = tempDir('fm-test-');
   const P = projectPaths(dir);
   writeJson(path.join(dir, 'storyboard.json'), story);
   writeJson(path.join(dir, 'my-info.json'), info);
@@ -258,14 +266,90 @@ await expectErr(film(beat({kind: 'kit/photo-kenburns', src: './input/nope.jpg', 
 }
 // ---------- skill installer works in a temp HOME only ----------
 {
-  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'fm-home-'));
+  const home = tempDir('fm-home-');
   for (const d of ['.claude', '.codex', '.gemini/config', '.cursor']) fs.mkdirSync(path.join(home, d), {recursive: true});
   const quiet = () => {};
-  installSkill({agent: 'all', home, env: {}, log: quiet});
+  // the runtime copy is made with a stand-in for npm (no download in tests)
+  const calls = [];
+  const npm = (args, {cwd}) => { calls.push(args[0]); fs.mkdirSync(path.join(cwd, 'node_modules'), {recursive: true}); return {code: 0, out: ''}; };
+  installSkill({agent: 'all', home, env: {}, log: quiet, npm});
   for (const d of ['.claude/skills', '.agents/skills', '.gemini/config/skills', '.cursor/skills']) assert.ok(fs.existsSync(path.join(home, d, 'connect-ai-motion', 'SKILL.md')), d);
+  const rt = path.join(home, '.connect-ai', 'connect-ai-motion', JSON.parse(fs.readFileSync(path.join(KIT, 'package.json'), 'utf8')).version);
+  assert.deepEqual(calls, ['ci'], 'npm ci from npm-shrinkwrap.json');
+  assert.ok(fs.existsSync(path.join(rt, 'bin', 'cli.mjs')) && fs.existsSync(path.join(rt, 'npm-shrinkwrap.json')) && fs.existsSync(path.join(rt, '.runtime.json')));
+  const md = fs.readFileSync(path.join(home, '.claude/skills/connect-ai-motion/SKILL.md'), 'utf8');
+  assert.ok(md.includes(JSON.stringify(path.join(rt, 'bin', 'cli.mjs'))) && md.includes('npx -y connect-ai-motion@'), 'the skill names the runtime and a pinned fallback');
+  assert.ok(fs.existsSync(path.join(home, '.claude/skills/connect-ai-motion/NOTICE.md')));
+  installSkill({agent: 'all', home, env: {}, log: quiet, npm});
+  assert.deepEqual(calls, ['ci'], 'same lock: the runtime is kept, npm is not run again');
+  assert.throws(() => installSkill({agent: 'claud', home, env: {}, log: quiet, npm}), /unknown agent: claud/);
   removeSkill({agent: 'all', home, env: {}, log: quiet});
   for (const d of ['.claude/skills', '.agents/skills', '.gemini/config/skills', '.cursor/skills']) assert.ok(!fs.existsSync(path.join(home, d, 'connect-ai-motion')), d);
-  ok('install-skill / remove-skill in a temp HOME (Claude Code, Codex, Antigravity, Cursor)');
+  ok('install-skill / remove-skill in a temp HOME (Claude Code, Codex, Antigravity, Cursor): runtime copy, pinned skill, unknown agent refused');
+}
+{
+  // Codex installed alone (no ~/.codex folder) is still found by a later install-skill and remove-skill
+  const home = tempDir('fm-home-');
+  const npm = (args, {cwd}) => { fs.mkdirSync(path.join(cwd, 'node_modules'), {recursive: true}); return {code: 0, out: ''}; };
+  installSkill({agent: 'codex', home, env: {}, log: () => {}, npm});
+  const lines = [];
+  installSkill({agent: 'all', home, env: {}, log: (l) => lines.push(l), npm});
+  assert.ok(lines.some((l) => /Codex.*update/.test(l)), lines.join('\n'));
+  assert.equal(pinSkill('a\n<!-- connect-ai-motion:runtime -->\nSTALE-LINE\n<!-- /connect-ai-motion:runtime -->\nb', {bin: '/x/bin/cli.mjs', fallback: 'npx -y connect-ai-motion@9.9.9', kit: '/x'}).includes("STALE-LINE"), false);
+  assert.ok(npmCli() === null || fs.existsSync(npmCli()));
+  ok('install-skill finds an earlier Codex install; the runtime block of the skill is replaced; npm runs without a shell');
+}
+// ---------- files a storyboard names stay in its project folder ----------
+{
+  const P = project(film(beat({})));
+  fs.writeFileSync(path.join(P.input, 'a.png'), 'x');
+  const outside = tempDir('fm-out-');
+  fs.writeFileSync(path.join(outside, 'secret.png'), 'x');
+  fs.symlinkSync(path.join(outside, 'secret.png'), path.join(P.input, 'link.png'));
+  assert.ok(userFile(P.dir, 'input/a.png').abs);
+  assert.match(userFile(P.dir, path.join(outside, 'secret.png')).error, /outside the project folder/);
+  assert.match(userFile(P.dir, '../' + path.basename(outside) + '/secret.png').error, /outside the project folder/);
+  assert.match(userFile(P.dir, 'input/link.png').error, /outside the project folder/, 'a symbolic link out of the folder');
+  assert.match(userFile(P.dir, 'kit:package.json').error, /examples\/ folder only/);
+  assert.ok(userFile(P.dir, 'kit:examples/media/photo-1.jpg').abs);
+  process.env.CONNECT_AI_MOTION_OUTSIDE_FILES = '1';
+  assert.ok(userFile(P.dir, path.join(outside, 'secret.png')).abs, '--outside-files lifts it');
+  delete process.env.CONNECT_AI_MOTION_OUTSIDE_FILES;
+  assert.equal(assetName('clip', 'x.mp4?../../a/b'), assetName('clip', 'x.mp4?../../a/b').replace(/[^a-z0-9_.]/gi, ''));
+  const r = await check(P, {write: false, data: null}).catch((e) => e);
+  assert.ok(!(r instanceof Error));
+  const r2 = await run(film(beat({kind: 'kit/device-browser', src: path.join(outside, 'secret.png'), text: 'One line'})));
+  assert.ok(r2.errors.some((e) => /outside the project folder/.test(e.msg)), JSON.stringify(r2.errors));
+  ok('a storyboard cannot reach files outside its folder (absolute path, ../, a symbolic link, kit:..), unless --outside-files');
+}
+// ---------- a Korean five-line script drafts pictures, not five text cards ----------
+{
+  const five = scriptLines('AI 직원이 영상을 만들어요.\n찍은 영상은 하나도 없어요.\n대본 다섯 줄이면 충분해요.\n그림 장면이 줄마다 하나씩 나와요.\n오늘 바로 해보세요.');
+  const st = draftStory(five, metas, {});
+  const leads = st.beats.map((b) => leadOf(metas[b.kind]));
+  assert.ok(leads.filter((l) => l === 'picture').length >= 2, leads.join(' '));
+  assert.ok(!/type,type,type/.test(leads.join(',')), leads.join(' '));
+  assert.ok(st.beats.every((b) => !metas[b.kind].latinOnly));
+  assert.deepEqual(splitLines(['대본', '다섯', '줄이면', '충분해요'], 2, true), ['대본 다섯 줄이면', '충분해요']);
+  const r = await run(st);
+  assert.ok(r.ok, JSON.stringify(r.errors));
+  assert.ok(!r.advice.some((a) => a.what === 'words-only'));
+  ok('Korean five-line script: draft alternates word and picture scenes, keeps "다섯 줄" together, check passes with no words-only advice');
+}
+// ---------- scenes that cannot show the words, or would show sample words ----------
+{
+  const r = await run(film(beat({say: '한국어 입체 글자', kind: 'remotion/three-type', text: '입체 글자'})));
+  assert.ok(r.errors.some((e) => e.what === 'script'), JSON.stringify(r.errors));
+  const r2 = await run(film(beat({say: 'It counts up.', kind: 'hyperframes/ring-count', text: 'counts'})));
+  assert.ok(r2.errors.some((e) => /needs "value"/.test(e.msg)), JSON.stringify(r2.errors));
+  ok('3D type with Korean is an error (Latin letters only); a number block without a number is an error (no sample number on screen)');
+}
+// ---------- a typo is not a success ----------
+{
+  const r = spawnSync(process.execPath, [path.join(KIT, 'bin', 'cli.mjs'), 'rnu', '--quiet'], {encoding: 'utf8'});
+  assert.equal(r.status, 2);
+  assert.match(r.stdout, /Did you mean run\?/);
+  ok('an unknown command exits 2 and names the close one');
 }
 // ---------- Korean scripts ----------
 {
@@ -302,7 +386,7 @@ await expectErr(film(beat({kind: 'kit/photo-kenburns', src: './input/nope.jpg', 
 {
   const {pkgDir, moduleDirs} = await import('../lib/project.mjs');
   assert.ok(pkgDir('remotion'), 'remotion found');
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'fm-npx-'));
+  const tmp = tempDir('fm-npx-');
   fs.mkdirSync(path.join(tmp, 'node_modules', 'connect-ai-motion'), {recursive: true});
   fs.mkdirSync(path.join(tmp, 'node_modules', 'remotion'), {recursive: true});
   fs.writeFileSync(path.join(tmp, 'node_modules', 'remotion', 'package.json'), '{"version":"0.0.0"}');

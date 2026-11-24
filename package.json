@@ -1,6 +1,6 @@
 {
   "name": "connect-ai-motion",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "No footage needed: a script becomes a finished motion graphics video. One line is one full-frame scene, and most scenes are pictures, not text cards: charts, line drawings, diagrams, 3D, your screenshots and photos in devices and frames. Remotion packages, HyperFrames blocks, Lottie, three.js, shaders and your own components are all one line in a storyboard, in 16:9 and 9:16, with a rhythm check.",
   "type": "module",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "motion": "node bin/cli.mjs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@react-three/fiber": "9.3.0",
@@ -56,7 +56,6 @@
     "bin/",
     "lib/",
     "src/",
-    "!src/catalog/user.generated.tsx",
     "catalog/",
     "skill/",
     "licenses/",
@@ -65,6 +64,7 @@
     "my-info.json",
     "remotion.config.ts",
     "tsconfig.json",
+    "npm-shrinkwrap.json",
     "NOTICE.md",
     "README.md",
     "README.ko.md",

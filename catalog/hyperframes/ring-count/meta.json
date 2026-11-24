@@ -16,6 +16,9 @@
     "value": "number",
     "unit": "word after it"
   },
+  "needs": [
+    "value"
+  ],
   "text": {
     ".num": "value",
     ".unit": "unit"

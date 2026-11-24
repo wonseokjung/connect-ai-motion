@@ -6,8 +6,10 @@ description: Turn a script (a few lines of text, optionally with the user's own 
 # connect-ai-motion
 
 You turn the user's script into `out/film.mp4` (and on request `out/film_9x16.mp4`, `out/film_1x1.mp4`).
-The kit is at the path in `.connect-ai-motion.json` next to this file (`kit`). Run its CLI with `node <kit>/bin/cli.mjs`.
-If that folder is gone (npx cleans its cache now and then), use the `run` line in the same file instead of `node <kit>/bin/cli.mjs` (for example `npx connect-ai-motion@0.3.0 check <project>`), and make the project with `new <project>` instead of copying `my-info.json`.
+<!-- connect-ai-motion:runtime -->
+Run the kit's CLI with `node <kit>/bin/cli.mjs`, where `<kit>` is the `kit` folder written in `.connect-ai-motion.json` next to this file. If that folder is gone, use `npx -y connect-ai-motion` instead of `node <kit>/bin/cli.mjs`.
+<!-- /connect-ai-motion:runtime -->
+Make a project with `new <project>` (it copies `my-info.json` for you). Exit code 0 means done and checked; 1 means it did not finish (the check found errors, or something failed: read the output, fix, run again); 2 means the command itself was mistyped.
 Talk to the user in their language. If the script is Korean (or any language), the words on screen stay in that language unless the user asks for another one.
 
 ## Rules you must keep
@@ -22,8 +24,8 @@ Talk to the user in their language. If the script is Korean (or any language), t
 - Colours: the style's base and accent stay; add at most two or three subject colours and give each one meaning.
 
 ## Steps
-1. Make a project folder. Put the script in it as `script.md` (one line per beat). If there is a voice recording, put it in `<project>/input/` as `voice.wav` with `voice.srt` (subtitles) or `voice.words.json` (word times) next to it. Copy `<kit>/my-info.json` to the project and fill in name, role, links.
-2. `node <kit>/bin/cli.mjs draft <project>/script.md <project>` writes a first `storyboard.json`: one beat per line, a scene chosen by what the line is (a number, steps, a contrast, a quote).
+1. `node <kit>/bin/cli.mjs new <project>` makes the project folder with `script.md`, `storyboard.json` and `my-info.json`. Put the script in `script.md` (one line per beat) and fill in name, role, links in `my-info.json`. Every file the video uses goes inside the project folder (pictures and the voice in `<project>/input/`); files outside it are refused. If there is a voice recording, put it in `<project>/input/` as `voice.wav` with `voice.srt` (subtitles) or `voice.words.json` (word times) next to it.
+2. `node <kit>/bin/cli.mjs draft <project>/script.md <project>` writes a first `storyboard.json` (it replaces the blank one from `new`; a storyboard someone edited is kept and the new draft goes to `storyboard.draft.json`, so add `--force` only to start over): one beat per line, a scene chosen by what the line is (a number, steps, a contrast, a quote).
 3. `node <kit>/bin/cli.mjs catalog --props` lists every scene with its fields. Improve the draft: a better scene per line, the words that matter, items that land on the right moment. Read the script as one story first: what is the one picture each line needs?
 4. `node <kit>/bin/cli.mjs check <project> [--short]`. Read every ERROR; each one says how to fix it. Run check again until PASS.
 5. `node <kit>/bin/cli.mjs sheet <project>` renders one still per beat (fast). Look at `out/sheet.jpg`. Fix what looks empty, crowded or unclear.

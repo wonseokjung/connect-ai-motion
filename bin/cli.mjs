@@ -6,7 +6,7 @@ import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {KIT_NAME} from '../src/core/name.mjs';
 import {KIT, projectPaths, readJson, writeJson, readStory} from '../lib/project.mjs';
-import {buildCatalog} from '../lib/catalog-build.mjs';
+import {buildCatalog, prepareProject, writeUser} from '../lib/catalog-build.mjs';
 import {check, loadData, writeReport} from '../lib/check.mjs';
 import {render} from '../lib/render.mjs';
 import {measureFilm} from '../lib/measure.mjs';
@@ -26,8 +26,19 @@ const opt = (n, d = null) => {
   return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d;
 };
 const pos = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && argv[i - 1].startsWith('--') && VALUE_FLAGS.includes(argv[i - 1].slice(2))));
-const cmd = (flag('help') || argv.includes('-h')) ? 'help' : (pos[0] || 'help');
+const cmd = (flag('help') || argv.includes('-h')) ? 'help' : flag('version') ? 'version' : (pos[0] || 'help');
+const COMMANDS = ['demo', 'new', 'draft', 'run', 'check', 'render', 'sheet', 'catalog', 'gallery', 'hf-import', 'preview', 'doctor', 'install-skill', 'remove-skill', 'help', 'version'];
+// files a storyboard names stay in its project folder unless you say otherwise for this run
+if (flag('outside-files')) process.env.CONNECT_AI_MOTION_OUTSIDE_FILES = '1';
+// a path for a command you copy: quoted when it has a space
+const shq = (p) => (/[\s"'$`\\]/.test(p) ? JSON.stringify(p) : p);
 const log = (...a) => console.log(...a);
+const lev = (a, b) => {
+  const d = Array.from({length: a.length + 1}, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+};
 const secs = (t) => ((Date.now() - t) / 1000).toFixed(1) + ' s';
 const projectDir = (d) => path.resolve(d || '.');
 const shapes = () => ['16x9', ...(flag('short') ? ['9x16'] : []), ...(flag('square') ? ['1x1'] : [])];
@@ -51,8 +62,12 @@ async function full(P, {force = false, only = null} = {}) {
   const bad = r.errors.map((e) => e.id);
   if (!r.ok && !force) {
     log('2/3 render: skipped until check passes. Fix the ERROR lines in storyboard.json (or add --force to see it anyway).');
-    await render(P, data, {aspects: ['16x9'], media: false, bad, log});
-    log(`    sheet: ${path.join(P.out, 'sheet.jpg')} shows every beat; red = the ones with an error`);
+    try {
+      await render(P, data, {aspects: ['16x9'], media: false, bad, log});
+      log(`    sheet: ${path.join(P.out, 'sheet.jpg')} shows every beat; red = the ones with an error`);
+    } catch (e) {
+      log(`    (no sheet either: ${String(e.message).split('\n')[0]})`);
+    }
     return r;
   }
   log('2/3 render');
@@ -64,8 +79,10 @@ async function full(P, {force = false, only = null} = {}) {
     for (const e of m.errors) log(`    ERROR  ${e.msg}`);
     for (const a of m.advice) log(`    advice ${a.msg}`);
     for (const f of m.facts) log(`    ${f}`);
-    log(`done in ${secs(t)}. Video: ${path.join(P.out, 'film.mp4')}  · sheet: out/sheet.jpg · report: out/report.md`);
-    return r2;
+    const left = m.errors.length + r2.errors.length;
+    if (r2.ok && !m.errors.length) log(`done in ${secs(t)}. Video: ${path.join(P.out, 'film.mp4')}  · sheet: out/sheet.jpg · report: out/report.md`);
+    else log(`rendered in ${secs(t)}, but the check of the rendered video found ${left} error${left === 1 ? '' : 's'} (above, and in out/report.md). Fix them and run again. Video so far: ${path.join(P.out, 'film.mp4')}`);
+    return {...r2, ok: r2.ok && !m.errors.length};
   }
   return r;
 }
@@ -91,13 +108,14 @@ function draftInto(P, scriptFile, {force = false} = {}) {
     && cur.beats.every((b) => /^(Your name|The one thing|First step)/.test(b.say || ''));
   if (fs.existsSync(target) && !force && !blank) {
     writeJson(path.join(P.dir, 'storyboard.draft.json'), story);
-    log('  draft: kept your storyboard.json (new draft in storyboard.draft.json)');
-  } else {
-    writeJson(target, story);
-    log(`  draft: ${story.beats.length} beats from ${path.basename(scriptFile)}`);
-    for (const b of story.beats) log(`    ${b.id.padEnd(4)} ${b.kind.padEnd(30)} ${JSON.stringify(b.text ?? b.value ?? b.items ?? '')}`);
+    log('  draft: your storyboard.json is KEPT as it is (it may be your own work). The new draft from the script is in');
+    log(`         storyboard.draft.json. To use the new one instead, run again with --force.`);
+    return {story, kept: true};
   }
-  return story;
+  writeJson(target, story);
+  log(`  draft: ${story.beats.length} beats from ${path.basename(scriptFile)}`);
+  for (const b of story.beats) log(`    ${b.id.padEnd(4)} ${b.kind.padEnd(30)} ${JSON.stringify(b.text ?? b.value ?? b.items ?? b.lines ?? '')}`);
+  return {story, kept: false};
 }
 
 // `connect-ai-motion my-script.md`: a script instead of a command makes a project folder next to it and runs everything
@@ -106,13 +124,15 @@ async function fromFile(file) {
   const dir = path.join(path.dirname(src), path.basename(src).replace(SCRIPT, '') + '-motion');
   const P = projectPaths(dir);
   if (!fs.existsSync(path.join(P.dir, 'my-info.json'))) fs.copyFileSync(path.join(KIT, 'my-info.json'), path.join(P.dir, 'my-info.json'));
-  // a voice file next to the script comes along (same name, or the only audio file)
+  // a voice file next to the script comes along (same name), and subtitles given as the script are the timing too
   for (const ext of ['.wav', '.mp3', '.m4a', '.words.json', '.srt', '.vtt']) {
     const side = src.replace(SCRIPT, ext);
-    if (side !== src && fs.existsSync(side) && !fs.existsSync(path.join(P.input, path.basename(side)))) fs.copyFileSync(side, path.join(P.input, path.basename(side)));
+    const isScript = side === src;
+    if (isScript && ext !== '.srt') continue;
+    if (fs.existsSync(side) && (isScript || !fs.existsSync(path.join(P.input, path.basename(side))))) fs.copyFileSync(side, path.join(P.input, path.basename(side)));
   }
   log(`project folder: ${P.dir}`);
-  draftInto(P, src);
+  if (draftInto(P, src, {force: flag('force')}).kept) log('  rendering your storyboard.json (not the new draft)');
   return full(P, {force: flag('force')});
 }
 
@@ -142,7 +162,7 @@ async function main() {
     case 'new': {
       const P = projectPaths(projectDir(pos[1] || 'my-film'));
       copyDir(path.join(KIT, 'examples', 'blank'), P.dir);
-      log(`${P.dir}: script.md, storyboard.json and my-info.json are ready. Edit them, then: npx ${KIT_NAME} run ${path.relative(process.cwd(), P.dir) || '.'}`);
+      log(`${P.dir}: script.md, storyboard.json and my-info.json are ready. Edit them, then: npx ${KIT_NAME} run ${shq(path.relative(process.cwd(), P.dir) || '.')}`);
       break;
     }
     case 'draft': {
@@ -184,7 +204,9 @@ async function main() {
       const P = projectPaths(projectDir(pos[1]));
       const data = await loadData(P);
       const r = await check(P, {aspects: shapes(), data});
+      printCheck(r);
       await render(P, data, {aspects: shapes(), media: false, bad: r.errors.map((e) => e.id), seconds: Number(opt('seconds', '0')), log});
+      process.exitCode = r.ok ? 0 : 1;
       break;
     }
     case 'catalog': {
@@ -250,17 +272,25 @@ async function main() {
     case 'preview': {
       const P = projectPaths(projectDir(pos[1]));
       const data = await loadData(P);
-      buildCatalog();
+      const {metas} = buildCatalog();
+      // Studio bundles the kit itself: your scenes go into the kit's registry and your files into work/fm-assets
+      const prep = prepareProject(P, data.story, metas);
+      if (prep.errors.length) { for (const e of prep.errors) log(`    ERROR  ${e}`); process.exitCode = 1; break; }
+      writeUser(prep.users);
       const props = path.join(P.work, 'props.json');
       writeJson(props, {data, aspect: flag('short') ? '9x16' : '16x9'});
-      spawn(process.execPath, [cliPath(), 'studio', path.join(KIT, 'src', 'index.ts'), '--public-dir', P.work, '--props', props], {stdio: 'inherit', cwd: KIT});
+      const child = spawn(process.execPath, [cliPath(), 'studio', path.join(KIT, 'src', 'index.ts'), '--public-dir', P.work, '--props', props], {stdio: 'inherit', cwd: KIT, shell: false});
+      await new Promise((res) => child.on('close', (code) => { process.exitCode = code ?? 1; res(); }));
       break;
     }
+    case 'version':
+      log(JSON.parse(fs.readFileSync(path.join(KIT, 'package.json'), 'utf8')).version);
+      break;
     case 'doctor':
       process.exitCode = (await doctor(log)) ? 0 : 1;
       break;
     case 'install-skill': {
-      const list = installSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), log});
+      const list = installSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), runtime: !flag('no-runtime'), log});
       if (!flag('dry-run') && !list.some((t) => t.done)) {
         log('  Nothing was installed. Name your agent: install-skill --agent claude | codex | antigravity | cursor (or --dir <its skills folder>).');
         process.exitCode = 1;
@@ -275,6 +305,12 @@ async function main() {
       removeSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), log});
       break;
     default:
+      if (cmd !== 'help') {
+        // a typo must not look like success to you or to an agent
+        const near = COMMANDS.map((c) => [c, lev(cmd, c)]).sort((a, b) => a[1] - b[1])[0];
+        log(`unknown command: ${cmd}.${near && near[1] <= 2 ? ` Did you mean ${near[0]}?` : ''} The list is below.`);
+        process.exitCode = 2;
+      }
       log(`${KIT_NAME}: a script becomes a motion graphics video. No footage needed.
 One line of your script = one beat = one full-frame scene. Scenes come from Remotion packages, HyperFrames blocks,
 Lottie files, shaders, the kit, or your own file, all called the same way. The kit checks rhythm and words.
@@ -287,6 +323,7 @@ Lottie files, shaders, the kit, or your own file, all called the same way. The k
   npx ${KIT_NAME} run [folder]         check -> render -> check the rendered video
       --short   also 9:16     --square  also 1:1     --only <beat>  re-render one beat     --force  render even if check fails
       --seconds 1   also a contact sheet with one still every second
+      --outside-files   allow files outside the project folder (only for a storyboard you trust)
   npx ${KIT_NAME} check [folder]       rhythm (3 s rule), repeated designs, words not in the script, word count -> out/report.md
   npx ${KIT_NAME} sheet [folder]       stills only: one per beat (fast look before a full render)
   npx ${KIT_NAME} preview [folder]     Remotion Studio with your storyboard
@@ -294,7 +331,8 @@ Lottie files, shaders, the kit, or your own file, all called the same way. The k
   npx ${KIT_NAME} gallery [folder]     render the catalog itself (--role scene | bg | transition, --source remotion, --sheet)
   npx ${KIT_NAME} hf-import <folder>   HyperFrames blocks -> catalog scenes (unsupported ones listed with reasons)
   npx ${KIT_NAME} doctor               check this computer
-  npx ${KIT_NAME} install-skill        add the agent skill (Claude Code, Codex, Antigravity, Cursor)
+  npx ${KIT_NAME} install-skill        add the agent skill (Claude Code, Codex, Antigravity, Cursor) and a kit copy
+                                        that stays in ~/.connect-ai/ (--agent claude, --no-runtime to skip the copy)
 
 Voice: put voice.wav (+ voice.srt or voice.words.json) in <folder>/input/ and beats can start on a spoken word:
   {"at": {"text": "red", "near": 12.4}}`);
@@ -304,7 +342,13 @@ Voice: put voice.wav (+ voice.srt or voice.words.json) in <folder>/input/ and be
 main().catch((e) => {
   console.error(`\n${KIT_NAME}: ${e.message}`);
   if (process.env.CONNECT_AI_MOTION_DEBUG) console.error(e.stack);
-  if (/No available ports|EPERM|listen E|operation not permitted/i.test(String(e.message))) {
+  const msg = String(e.message);
+  if (/ENOTFOUND|EAI_AGAIN|ECONNREFUSED|ECONNRESET|fetch failed|Failed to download|getaddrinfo/i.test(msg)) {
+    console.error(`  Could not download something the first render needs (the Chrome Headless Shell, about 94 MB, once).
+  Check the internet connection. If an agent runs this command, its sandbox may block the network: allow this command to run outside it.
+  첫 렌더에 필요한 브라우저(약 94 MB, 한 번만)를 못 내려받았어요. 인터넷 연결을 확인해 주세요.
+  에이전트가 돌리고 있다면 샌드박스가 네트워크를 막았을 수 있어요. 이 명령을 샌드박스 밖에서 실행하도록 허용해 주세요.`);
+  } else if (/No available ports|listen E(ACCES|PERM|ADDRINUSE)|EPERM[^\n]*(listen|bind|socket)|operation not permitted[^\n]*(listen|bind|socket)/i.test(msg)) {
     // Seen when an agent runs us inside its sandbox (e.g. Codex workspace-write): the renderer needs a local port and a browser.
     console.error(`  The renderer could not open a local port. Your agent is running commands in a sandbox.
   Allow this command to run outside the sandbox (approve it, or give the agent full access for this folder), then run it again.

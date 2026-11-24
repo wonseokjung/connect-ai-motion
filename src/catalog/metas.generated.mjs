@@ -83,6 +83,9 @@ export const METAS = {
    "value": "number",
    "unit": "word after it"
   },
+  "needs": [
+   "value"
+  ],
   "text": {
    ".num": "value",
    ".unit": "unit"
@@ -170,6 +173,9 @@ export const METAS = {
    "value": "number as you say it",
    "text": "what it counts (1-2 words)"
   },
+  "needs": [
+   "value"
+  ],
   "text": {
    "#moment-1 .stat-text": "value",
    "#moment-1 .stat-desc": "text"
@@ -221,6 +227,9 @@ export const METAS = {
   "props": {
    "value": "number or short value"
   },
+  "needs": [
+   "value"
+  ],
   "text": {
    "#moment-2 .stat-text": "value"
   },
@@ -3146,6 +3155,7 @@ export const METAS = {
   "needs": [
    "text"
   ],
+  "latinOnly": true,
   "changes": [
    0,
    0.55
