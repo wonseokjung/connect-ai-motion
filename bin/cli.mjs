@@ -271,7 +271,7 @@ async function main() {
       removeSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), log});
       break;
     default:
-      log(`${KIT_NAME}: a script becomes a motion-graphics film. No footage needed.
+      log(`${KIT_NAME}: a script becomes a motion graphics video. No footage needed.
 One line of your script = one beat = one full-frame scene. Scenes come from Remotion packages, HyperFrames blocks,
 Lottie files, shaders, the kit, or your own file, all called the same way. The kit checks rhythm and words.
 
@@ -280,7 +280,7 @@ Lottie files, shaders, the kit, or your own file, all called the same way. The k
   npx ${KIT_NAME} <script.md>          your script (one line per beat): makes <script>-motion/ next to it and runs everything
   npx ${KIT_NAME} new [folder]         an empty project to fill in
   npx ${KIT_NAME} draft <script> [folder]   first storyboard.json from a script or subtitles (.srt)
-  npx ${KIT_NAME} run [folder]         check -> render -> check the rendered film
+  npx ${KIT_NAME} run [folder]         check -> render -> check the rendered video
       --short   also 9:16     --square  also 1:1     --only <beat>  re-render one beat     --force  render even if check fails
       --seconds 1   also a contact sheet with one still every second
   npx ${KIT_NAME} check [folder]       rhythm (3 s rule), repeated designs, words not in the script, word count -> out/report.md
