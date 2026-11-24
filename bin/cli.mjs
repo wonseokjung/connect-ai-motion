@@ -85,7 +85,11 @@ function draftInto(P, scriptFile, {force = false} = {}) {
   const info = readJson(path.join(P.dir, 'my-info.json')) || {};
   const story = draftStory(readScript(scriptFile), metas, info);
   const target = path.join(P.dir, 'storyboard.json');
-  if (fs.existsSync(target) && !force) {
+  // The untouched storyboard from `new` (its "Your name" placeholder beats) is not the user's work: replace it.
+  const cur = fs.existsSync(target) ? readJson(target) : null;
+  const blank = !!cur && Array.isArray(cur.beats) && cur.beats.some((b) => b.say === 'Your name. What you do in one line.')
+    && cur.beats.every((b) => /^(Your name|The one thing|First step)/.test(b.say || ''));
+  if (fs.existsSync(target) && !force && !blank) {
     writeJson(path.join(P.dir, 'storyboard.draft.json'), story);
     log('  draft: kept your storyboard.json (new draft in storyboard.draft.json)');
   } else {
@@ -299,5 +303,13 @@ Voice: put voice.wav (+ voice.srt or voice.words.json) in <folder>/input/ and be
 
 main().catch((e) => {
   console.error(`\n${KIT_NAME}: ${e.message}`);
+  if (process.env.CONNECT_AI_MOTION_DEBUG) console.error(e.stack);
+  if (/No available ports|EPERM|listen E|operation not permitted/i.test(String(e.message))) {
+    // Seen when an agent runs us inside its sandbox (e.g. Codex workspace-write): the renderer needs a local port and a browser.
+    console.error(`  The renderer could not open a local port. Your agent is running commands in a sandbox.
+  Allow this command to run outside the sandbox (approve it, or give the agent full access for this folder), then run it again.
+  렌더러가 내 컴퓨터 안쪽 포트를 못 열었어요. 에이전트가 샌드박스 안에서 돌리고 있어요.
+  이 명령을 샌드박스 밖에서 실행하도록 허용한 뒤(승인, 또는 이 폴더에 전체 권한) 다시 돌려 주세요.`);
+  }
   process.exitCode = 1;
 });

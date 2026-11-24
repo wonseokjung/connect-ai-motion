@@ -210,8 +210,10 @@ await expectErr(film(beat({kind: 'kit/photo-kenburns', src: './input/nope.jpg', 
   assert.ok(!r.errors.some((e) => ['said', 'kind', 'repeat', 'field'].includes(e.what)), JSON.stringify(r.errors));
   ok('draft: a script becomes beats that use only the words of each line, a different design per beat (number, steps, quote found)');
   const srt = scriptLines('1\n00:00:01,000 --> 00:00:03,000\nHello there\n\n2\n00:00:03,500 --> 00:00:05,000\nSecond line\n', {srt: true});
-  assert.deepEqual(srt.map((x) => x.at), [1, 3.5]);
-  ok('draft from subtitles keeps each line\'s start time');
+  assert.deepEqual(srt.map((x) => x.at), [{text: 'Hello', near: 1}, {text: 'Second', near: 3.5}]);
+  const short = scriptLines('1\n00:00:01,000 --> 00:00:03,000\nHello there\n\n2\n00:00:03,100 --> 00:00:03,700\nRight?\n\n3\n00:00:03,800 --> 00:00:06,000\nThird line here\n', {srt: true});
+  assert.equal(short.length, 2, 'a 0.6 s cue joins a neighbour'); assert.equal(short[1].say, 'Right? Third line here');
+  ok('draft from subtitles: each beat starts on its first spoken word, cues too short to read join a neighbour');
 }
 // ---------- gallery, sound, measure, shapes ----------
 {

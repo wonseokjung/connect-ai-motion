@@ -9,7 +9,7 @@
 
 **Your AI motion graphics employee. Turn a few lines of text into a finished motion graphics video. No footage needed.**
 
-[![These videos were all made from a few lines of text, without a single camera shot](docs/hero.webp)](docs/index.html)
+[![These videos were all made from a few lines of text, without a single camera shot](docs/hero.webp)](https://wonseokjung.github.io/connect-ai-motion/)
 
 ## Start
 
@@ -37,7 +37,7 @@ Then open a new chat with your agent (Claude Code, Codex, Antigravity, Cursor) a
 <tr><td width="25%" valign="top"><img src="docs/showcase/kit-orbit.webp" width="100%" alt="Orbit"><br><b>Orbit</b><br><code>kit/orbit</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-type-mask.webp" width="100%" alt="Word as a window"><br><b>Word as a window</b><br><code>kit/type-mask</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-chart-donut.webp" width="100%" alt="Donut"><br><b>Donut</b><br><code>kit/chart-donut</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-pixel-run.webp" width="100%" alt="Pixel game"><br><b>Pixel game</b><br><code>kit/pixel-run</code></td></tr>
 </table>
 
-All <!--n-->83<!--/n--> items (66 scenes, 10 backgrounds, 7 transitions) are on the [catalog page](docs/index.html) as moving clips.
+All <!--n-->83<!--/n--> items (66 scenes, 10 backgrounds, 7 transitions) are on the [catalog page](https://wonseokjung.github.io/connect-ai-motion/) as moving clips.
 
 ## Without an agent
 

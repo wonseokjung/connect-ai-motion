@@ -10,12 +10,14 @@ const DeviceBrowser: React.FC<SceneProps> = ({it, r, lf, dur, st, ink, u, W, H, 
   const click = cueAt(it, 'click', Math.round(dur * 0.55));
   const capH = text || sub ? (tall ? 210 : 150) * u : 0;
   const ww = tall ? W * 0.92 : W * (capH ? 0.74 : 0.82);
-  const wh = tall ? Math.min(H * 0.56, r[3] - capH) : H * (capH ? 0.68 : 0.8);
+  // 9:16: the window takes the screenshot's shape (wide by default) so a wide page is not cut at the sides
+  const asp = Number(it.aspect) > 0 ? Number(it.aspect) : 16 / 9;
+  const travel = Math.max(0.05, Number(it.scroll ?? (it.page ? 0.4 : 0.24)));
+  const wh = tall && !it.page ? Math.min(H * 0.56, r[3] - capH, ww / asp / (1 + travel) + 66 * u) : tall ? Math.min(H * 0.56, r[3] - capH) : H * (capH ? 0.68 : 0.8);
   const x = (W - ww) / 2, y = tall ? r[1] + (r[3] - wh - capH) / 2 : (H - wh - capH) / 2;
   const bar = 66 * u, vw = ww, vh = wh - bar;
   const kIn = k01(lf, 0, 18);
   // the page: a slow scroll, then a longer one right after the click
-  const travel = Math.max(0.05, Number(it.scroll ?? (it.page ? 0.4 : 0.24)));
   const prog = 0.3 * Math.max(0, Math.min(1, lf / Math.max(1, click))) + 0.7 * k01(lf, click + 3, click + 32, INOUT);
   const at: number[] = Array.isArray(it.at) ? it.at : [60, 60];
   const tx = (vw * Number(at[0])) / 100, ty = (vh * Number(at[1])) / 100;

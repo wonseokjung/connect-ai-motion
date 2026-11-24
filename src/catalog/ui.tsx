@@ -85,6 +85,7 @@ export const fitLines = (text: string, width: number, height: number, maxLines: 
   let best = {fs: 0, lines: [String(text)]};
   for (let n = 1; n <= maxLines; n++) {
     const lines = balance(text, n);
+    if (!lines.length) break; // empty caption (an optional text left out): nothing to fit
     const longest = lines.reduce((a, b) => (measure(a, 100, weight, tracking) > measure(b, 100, weight, tracking) ? a : b));
     const fs = Math.min(fit(longest, width, height / (lines.length * lh), weight, tracking), height / (lines.length * lh));
     if (fs > best.fs * 1.04) best = {fs, lines};

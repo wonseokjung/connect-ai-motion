@@ -9,7 +9,7 @@
 
 **나의 AI 모션그래픽 직원이에요. 글 몇 줄만 주면 완성된 모션그래픽 영상이 나와요. 찍은 영상은 없어도 돼요.**
 
-[![글 몇 줄로 만든 영상들이에요. 카메라로 찍은 화면은 한 장도 없어요](docs/hero.webp)](docs/index.html)
+[![글 몇 줄로 만든 영상들이에요. 카메라로 찍은 화면은 한 장도 없어요](docs/hero.webp)](https://wonseokjung.github.io/connect-ai-motion/)
 
 ## 시작
 
@@ -37,7 +37,7 @@ npx connect-ai-motion install-skill
 <tr><td width="25%" valign="top"><img src="docs/showcase/kit-orbit.webp" width="100%" alt="궤도"><br><b>궤도</b><br><code>kit/orbit</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-type-mask.webp" width="100%" alt="창이 되는 낱말"><br><b>창이 되는 낱말</b><br><code>kit/type-mask</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-chart-donut.webp" width="100%" alt="도넛 차트"><br><b>도넛 차트</b><br><code>kit/chart-donut</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-pixel-run.webp" width="100%" alt="픽셀 게임"><br><b>픽셀 게임</b><br><code>kit/pixel-run</code></td></tr>
 </table>
 
-전부 <!--n-->83<!--/n-->개(장면 66, 배경 10, 전환 7)는 [카탈로그 페이지](docs/index.html)에서 움직이는 걸로 보실 수 있어요.
+전부 <!--n-->83<!--/n-->개(장면 66, 배경 10, 전환 7)는 [카탈로그 페이지](https://wonseokjung.github.io/connect-ai-motion/)에서 움직이는 걸로 보실 수 있어요.
 
 ## 에이전트 없이
 
