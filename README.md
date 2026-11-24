@@ -9,7 +9,7 @@
 
 Open source by CONNECT AI LAB, the tool of lesson 3 of the [Visual Vibe Coding](https://www.aicitybuilders.com/vibecoding) course. For commerce and knowledge content: a shop promo, a course ad, a channel intro, an explainer, when you have something to say but nothing filmed.
 
-[![Films made from a few lines of text: no camera picture in any of them](docs/hero.webp)](docs/index.html)
+[![Videos made from a few lines of text: no camera picture in any of them](docs/hero.webp)](docs/index.html)
 
 ## Start
 
@@ -101,14 +101,14 @@ Like mixed martial arts took the best moves of every style and made them work in
 2. **Time.** Without a voice, a beat lasts as long as its line takes to read (tier C). With your voice and subtitles next to it, a beat starts on a subtitle word (tier B: words spread over each subtitle line by length, so put a beat on a word with `at` where it matters); with word times, on the word itself (tier A). Things inside a scene (list items, the moment a value changes) can land on words too.
 3. **Two shapes.** The same storyboard renders in 16:9 and 9:16. Every scene has its own tall layout, and in 9:16 the words stay out of the app's top bar, button rail and caption area.
 4. **Check before render.** `check` reads the storyboard like a picky editor and writes every problem as a sentence that says how to fix it.
-5. **Check after render.** The kit looks at the rendered film itself and reports blank stretches, a picture that stands still, and scenes that leave the frame empty.
+5. **Check after render.** The kit looks at the rendered video itself and reports blank stretches, a picture that stands still, and scenes that leave the frame empty.
 
 ## What check looks for
 
 | Rule | Grade |
 |---|---|
 | Nothing new on screen for more than 3 s (the picture's content, not a camera move) | error |
-| The same design twice in one film | error (advice in films of 25 beats or more) |
+| The same design twice in one video | error (advice in videos of 25 beats or more) |
 | A word or number on screen that the script line does not say, a chart value included (Korean particles and counters are understood: "7시에" covers "7시", "115명" does not cover "15명") | error |
 | More words than the scene reads well | error |
 | On screen too short to read | error |
@@ -209,7 +209,7 @@ Put `voice.wav` in `<project>/input/` with `voice.srt` (or `.vtt`, or `voice.wor
  "cues": {"swap": {"text": "red", "near": 20.9}}}
 ```
 
-The film is as long as the voice. Transitions sit centred on the cuts, so adding one never moves a cut or the voice. The kit does not make word times from audio (see the roadmap); any tool that writes subtitles or word times works.
+The video is as long as the voice. Transitions sit centred on the cuts, so adding one never moves a cut or the voice. The kit does not make word times from audio (see the roadmap); any tool that writes subtitles or word times works.
 
 
 ## Reference
@@ -223,16 +223,16 @@ npx connect-ai-motion new [folder]         an empty project to fill in
 npx connect-ai-motion draft <script> [folder]
 npx connect-ai-motion check [folder]       --short also checks 9:16, --measure also looks at out/film.mp4
 npx connect-ai-motion sheet [folder]       stills only: one per beat
-npx connect-ai-motion run [folder]         check, render, check the film   --short  --square  --only <beat>  --seconds 1  --force
+npx connect-ai-motion run [folder]         check, render, check the video   --short  --square  --only <beat>  --seconds 1  --force
 npx connect-ai-motion preview [folder]     Remotion Studio with your storyboard
 npx connect-ai-motion catalog              --lead picture  --use chart  --role bg  --props  --json
-npx connect-ai-motion gallery [folder]     the catalog itself as a film   --role scene | bg | transition  --source remotion  --sheet  --clips
+npx connect-ai-motion gallery [folder]     the catalog itself as a video   --role scene | bg | transition  --source remotion  --sheet  --clips
 npx connect-ai-motion hf-import <folder>   HyperFrames blocks to scenes
 npx connect-ai-motion doctor
 npx connect-ai-motion install-skill        --agent claude | codex | antigravity | cursor   (remove-skill takes it out again)
 ```
 
-A project is a folder: `script.md`, `storyboard.json`, `my-info.json`, `input/` (voice, subtitles, your files), `out/` (film, sheets, `report.md`). Styles: `connect` (black and gold), `night`, `paper`; they are one block each in `src/styles/presets.mjs`.
+A project is a folder: `script.md`, `storyboard.json`, `my-info.json`, `input/` (voice, subtitles, your files), `out/` (video, sheets, `report.md`). Styles: `connect` (black and gold), `night`, `paper`; they are one block each in `src/styles/presets.mjs`.
 
 Sound: `"sound": "tones"` adds one soft code-made tone per cut (no samples, nothing downloaded). It is off by default.
 
@@ -241,7 +241,7 @@ Sound: `"sound": "tones"` adds one soft code-made tone per cut (no samples, noth
 - It does not film, generate footage or generate images. It draws with code and frames the pictures, clips and 3D models you give it.
 - It does not write your script and it does not add claims: the screen shows words of the line, and check enforces that.
 - It is not for graphics on top of a person talking: that is [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion). A beat rendered with `--only` can be cut into such a video as a full-frame insert in any editor.
-- 3D scenes use WebGL and are for one to three moments in a film, not every beat.
+- 3D scenes use WebGL and are for one to three moments in a video, not every beat.
 - Shader backgrounds need WebGPU on the computer that renders. Without it the layer stays empty and the plain background shows.
 - The first render downloads the Inter font (Google Fonts) and, once, the browser Remotion renders with.
 - `check` reads the storyboard. It cannot read words drawn inside your own components, HyperFrames blocks or pictures: look at `out/sheet.jpg` for those.

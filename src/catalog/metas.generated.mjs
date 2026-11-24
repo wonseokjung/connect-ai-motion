@@ -3361,7 +3361,7 @@ export const METAS = {
  "shader/bg-flow": {
   "kind": "shader/bg-flow",
   "title": "Flowing gradient (shader)",
-  "description": "A slow liquid gradient in the film's colours, drawn on the GPU by the shaders package (FlowingGradient, WebGPU) and locked to the frame, so every render is the same.",
+  "description": "A slow liquid gradient in the video's colours, drawn on the GPU by the shaders package (FlowingGradient, WebGPU) and locked to the frame, so every render is the same.",
   "source": {
    "type": "shader",
    "package": "shaders",

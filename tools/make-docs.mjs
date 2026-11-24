@@ -37,7 +37,7 @@ const promptOf = (m) =>
   m.role === 'scene'
     ? `Use ${KIT_NAME}. For this line of my script, use the scene "${m.kind}" (${m.title}). Fields: ${Object.entries(m.props || {}).map(([k, v]) => `${k} = ${v}`).join('; ')}. Take every word on screen from the line itself. Then run check and show me the sheet.`
     : m.role === 'bg'
-      ? `Use ${KIT_NAME}. Set the background of my film to "${m.kind}" (${m.title}) in storyboard.json ("bg"), render the sheet and show it to me.`
+      ? `Use ${KIT_NAME}. Set the background of my video to "${m.kind}" (${m.title}) in storyboard.json ("bg"), render the sheet and show it to me.`
       : `Use ${KIT_NAME}. Where my script changes topic, bring the next beat in with "${m.kind}" (${m.title}) as its "in". Keep every other cut a hard cut. Run check.`;
 
 const SOURCE = {kit: 'connect-ai-motion', remotion: 'Remotion packages', hyperframes: 'HyperFrames blocks', lottie: 'Lottie files', shader: 'GPU shaders'};
@@ -72,14 +72,14 @@ const listed = all.filter((m) => m.status && m.status !== 'ok');
 const GROUPS = [
   ['picture', 'Pictures', '그림이 주인공인 장면', 'an object, a drawing, a chart, a device, a photo or 3D carries the beat', '물체 · 선 그림 · 그래프 · 기기 · 사진 · 3D 가 박자를 끌고 갑니다', pictures],
   ['type', 'Words', '글자가 주인공인 장면', 'the words are the picture: use them between pictures, not in a row', '글자가 곧 그림인 장면: 그림 사이에, 연달아 쓰지 않습니다', wordScenes],
-  ['bg', 'Backgrounds', '배경', 'behind a whole film or one beat', '영상 전체 또는 한 박자의 뒤', all.filter((m) => m.role === 'bg')],
+  ['bg', 'Backgrounds', '배경', 'behind a whole video or one beat', '영상 전체 또는 한 박자의 뒤', all.filter((m) => m.role === 'bg')],
   ['transition', 'Transitions', '전환', 'a hard cut needs nothing; these are for a change of topic', '기본은 컷; 주제가 바뀔 때만', all.filter((m) => m.role === 'transition' || m.role === 'sweep')],
   ['listed', 'Listed, not bundled', '목록만 (내려받기 필요)', 'known sources the kit does not download for you', '키트가 대신 내려받지 않는 출처', listed],
 ];
 const sections = GROUPS.filter((g) => g[5].length)
   .map(([id, en, ko, subEn, subKo, list]) => `<section data-group="${id}"><h2><span data-en="${en}" data-ko="${ko}">${en}</span> <small>${list.length}</small><i data-en="${subEn}" data-ko="${subKo}">${subEn}</i></h2><div class="grid">${list.map(card).join('\n')}</div></section>`)
   .join('\n');
-const agentPrompt = `Use ${KIT_NAME} (npx ${KIT_NAME} install-skill). Make a motion graphics film from my script below, no footage. One beat per line, a different scene for each beat, words on screen only from the line. Run check until it passes, show me the sheet, then render 16:9 and 9:16.\n\n<paste your script here, one line per beat>`;
+const agentPrompt = `Use ${KIT_NAME} (npx ${KIT_NAME} install-skill). Make a motion graphics video from my script below, no footage. One beat per line, a different scene for each beat, words on screen only from the line. Run check until it passes, show me the sheet, then render 16:9 and 9:16.\n\n<paste your script here, one line per beat>`;
 const hasDemo = (f) => fs.existsSync(path.join(DOCS, 'demo', f));
 
 const html = `<!doctype html>
@@ -88,7 +88,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${KIT_NAME} · catalog</title>
-<meta name="description" content="No footage needed: a script becomes a finished motion-graphics film. ${playable.length} scenes, backgrounds and transitions from Remotion, HyperFrames, Lottie and shaders, each called with one line. Open source by CONNECT AI LAB.">
+<meta name="description" content="No footage needed: a script becomes a finished motion graphics video. ${playable.length} scenes, backgrounds and transitions from Remotion, HyperFrames, Lottie and shaders, each called with one line. Open source by CONNECT AI LAB.">
 <style>
 :root{--bg:#0B0A09;--bg2:#14110E;--ink:#EBE2D2;--dim:rgba(235,226,210,.6);--faint:rgba(235,226,210,.14);--gold:#D6892A;--goldhi:#F2B45A;--teal:#3FB7A6}
 :root[data-theme=paper]{--bg:#F2ECE0;--bg2:#E8E0D0;--ink:#17130F;--dim:rgba(23,19,15,.64);--faint:rgba(23,19,15,.16);--gold:#B56A14;--goldhi:#8A4E0B;--teal:#1F7F72}
@@ -158,12 +158,12 @@ footer b{color:var(--ink);font-weight:400;letter-spacing:.24em;text-transform:up
   <div class="hero">
     <div>
       <div class="kicker" data-en="Visual Vibe Coding · lesson 3" data-ko="비주얼 바이브코딩 · 3강">Visual Vibe Coding · lesson 3</div>
-      <h1 data-en="No footage.<br>A script becomes <em>a finished film.</em>" data-ko="찍은 영상 없이.<br>대본이 <em>완성된 영상</em>이 됩니다.">No footage.<br>A script becomes <em>a finished film.</em></h1>
+      <h1 data-en="No footage.<br>A script becomes <em>a finished video.</em>" data-ko="찍은 영상 없이.<br>대본이 <em>완성된 영상</em>이 됩니다.">No footage.<br>A script becomes <em>a finished video.</em></h1>
       <p class="lead" data-en="Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene: a chart that draws itself, a line drawing, 3D, your screenshot in a device, a still that moves. Remotion, HyperFrames, Lottie, three.js and shaders are all called the same way, and it checks its own rhythm." data-ko="하고 싶은 말은 있는데 찍어 둔 영상이 없을 때 씁니다. 대본 한 줄이 화면 가득한 장면 하나가 됩니다: 스스로 그려지는 그래프, 선 그림, 3D, 기기 안의 내 스크린샷, 움직이는 사진. Remotion · HyperFrames · Lottie · three.js · 셰이더를 같은 방법으로 부르고, 리듬은 스스로 검사합니다.">Use it when you have something to say but nothing filmed. One line of your script is one full-frame scene: a chart that draws itself, a line drawing, 3D, your screenshot in a device, a still that moves. Remotion, HyperFrames, Lottie, three.js and shaders are all called the same way, and it checks its own rhythm.</p>
       <div class="cmd"><span><i>$</i> npx ${KIT_NAME} demo</span><button data-copy="npx ${KIT_NAME} demo">Copy</button></div>
       <div class="cmd"><span><i>$</i> npx ${KIT_NAME} install-skill</span><button data-copy="npx ${KIT_NAME} install-skill">Copy</button></div>
     </div>
-    <div class="film">${hasDemo('flagship.mp4') ? `<video id="heroFilm" src="demo/flagship.mp4" poster="demo/flagship_poster.jpg" muted loop autoplay playsinline></video><button class="sound" id="heroSound" data-en="Sound on" data-ko="소리 켜기">Sound on</button><div class="tag" data-en="No footage in this film: his lecture voice and scenes from this catalog" data-ko="촬영본 없이: 강의 목소리 한 대목과 이 카탈로그의 장면만">No footage in this film: his lecture voice and scenes from this catalog</div>` : hasDemo('hello.mp4') ? `<video src="demo/hello.mp4" poster="demo/hello_poster.jpg" muted loop autoplay playsinline></video>` : ''}</div>
+    <div class="film">${hasDemo('flagship.mp4') ? `<video id="heroFilm" src="demo/flagship.mp4" poster="demo/flagship_poster.jpg" muted loop autoplay playsinline></video><button class="sound" id="heroSound" data-en="Sound on" data-ko="소리 켜기">Sound on</button><div class="tag" data-en="No footage in this video: his lecture voice and scenes from this catalog" data-ko="촬영본 없이: 강의 목소리 한 대목과 이 카탈로그의 장면만">No footage in this video: his lecture voice and scenes from this catalog</div>` : hasDemo('hello.mp4') ? `<video src="demo/hello.mp4" poster="demo/hello_poster.jpg" muted loop autoplay playsinline></video>` : ''}</div>
   </div>
   <div class="facts">
     <div><b>${count('scene')}</b><span data-en="scenes, ${pictures.length} of them pictures" data-ko="장면, 그중 그림 장면 ${pictures.length}">scenes, ${pictures.length} of them pictures</span></div>
