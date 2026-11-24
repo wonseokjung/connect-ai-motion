@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/brand/banner.jpg" width="100%" alt="connect-ai-motion by AI Mentor Jay, CONNECT AI LAB"></p>
+
 <p align="center">
   <b>CONNECT AI LAB</b> · AI education for everyone · 모두를 위한 AI 교육<br>
   <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a> · <a href="https://www.aicitybuilders.com/vibecoding">Course: Visual Vibe Coding</a> · <a href="README.ko.md">한국어</a>
@@ -60,3 +62,10 @@ Every command and option is in [docs/guide.md](docs/guide.md).
 This project is MIT. It runs on [Remotion](https://www.remotion.dev), which has its own license. Remotion is free for individuals, non-profits and companies with up to 3 employees; other companies need a Remotion Company License. The details are in [NOTICE.md](NOTICE.md).
 
 If you want to build tools like this with your own AI agent, I show you how in [Visual Vibe Coding](https://www.aicitybuilders.com/vibecoding).
+
+<table><tr>
+<td width="140" valign="top"><img src="docs/brand/jay.jpg" width="128" alt="AI Mentor Jay"></td>
+<td valign="top"><b>Made by AI Mentor Jay</b> · CONNECT AI LAB<br>
+I build AI employees like this one in the open, one by one, and show how on YouTube and in my course.<br>
+<a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a> · <a href="https://www.aicitybuilders.com/vibecoding">Visual Vibe Coding</a> · <a href="https://github.com/wonseokjung">More open source</a></td>
+</tr></table>

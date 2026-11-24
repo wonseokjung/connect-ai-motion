@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/brand/banner.jpg" width="100%" alt="AI 멘토 제이, CONNECT AI LAB 의 connect-ai-motion"></p>
+
 <p align="center">
   <b>CONNECT AI LAB</b> · 모두를 위한 AI 교육 · AI education for everyone<br>
   <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a> · <a href="https://www.aicitybuilders.com/vibecoding">강의: 비주얼 바이브코딩</a> · <a href="README.md">English</a>
@@ -60,3 +62,10 @@ npx connect-ai-motion my-script.md  # 내 대본으로, 한 줄에 장면 하나
 MIT예요. 다만 바탕이 되는 [Remotion](https://www.remotion.dev)은 라이선스가 따로 있어요. 개인, 직원 3명 이하 회사, 비영리는 무료고, 그 밖의 회사는 Remotion Company License가 필요해요. 자세한 건 [NOTICE.md](NOTICE.md)에 있어요.
 
 이런 도구를 내 AI 에이전트로 직접 만드는 법은 [비주얼 바이브코딩](https://www.aicitybuilders.com/vibecoding)에서 알려 드려요.
+
+<table><tr>
+<td width="140" valign="top"><img src="docs/brand/jay.jpg" width="128" alt="AI 멘토 제이"></td>
+<td valign="top"><b>만든 사람: AI 멘토 제이</b> · CONNECT AI LAB<br>
+이런 AI 직원을 하나씩 오픈소스로 만들고 있어요. 만드는 법은 유튜브랑 강의에서 보여 드려요.<br>
+<a href="https://www.youtube.com/@CONNECT-AI-LAB">유튜브</a> · <a href="https://www.aicitybuilders.com/vibecoding">비주얼 바이브코딩</a> · <a href="https://github.com/wonseokjung">다른 오픈소스</a></td>
+</tr></table>
