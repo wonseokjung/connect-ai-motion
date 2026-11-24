@@ -58,13 +58,13 @@ async function full(P, {force = false, only = null} = {}) {
   log('2/3 render');
   await render(P, data, {aspects, only, bad, seconds: Number(opt('seconds', '0')), scale: Number(opt('scale', '1')), log});
   if (!only) {
-    log('3/3 check (the rendered film)');
+    log('3/3 check (the rendered video)');
     const m = await measureFilm(path.join(P.out, 'film.mp4'), r.timelines['16x9']);
     const r2 = await check(P, {aspects, data, measured: m});
     for (const e of m.errors) log(`    ERROR  ${e.msg}`);
     for (const a of m.advice) log(`    advice ${a.msg}`);
     for (const f of m.facts) log(`    ${f}`);
-    log(`done in ${secs(t)}. Film: ${path.join(P.out, 'film.mp4')}  · sheet: out/sheet.jpg · report: out/report.md`);
+    log(`done in ${secs(t)}. Video: ${path.join(P.out, 'film.mp4')}  · sheet: out/sheet.jpg · report: out/report.md`);
     return r2;
   }
   return r;
