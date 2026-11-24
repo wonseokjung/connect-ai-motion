@@ -54,7 +54,7 @@ const card = (m) => {
     <code class="kind">${esc(m.kind)}</code>
     <p>${esc(m.description)}</p>
     ${ok ? '' : `<p class="why">${esc((m.reasons || []).join(' '))}</p>`}
-    <div class="foot"><span>${esc(src)} · ${esc(m.license)}</span>${ok ? `<span class="btns"><button data-copy="${esc(lineOf(m))}">Copy line</button><button data-copy="${esc(promptOf(m))}">Copy prompt</button></span>` : ''}</div>
+    <div class="foot"><span>${esc(src)} · ${esc(m.license)}</span>${ok ? `<span class="btns"><button data-copy="${esc(promptOf(m))}">Copy prompt</button></span>` : ''}</div>
   </div>
 </article>`;
 };
