@@ -1,9 +1,71 @@
+<p align="center">
+  <b>CONNECT AI LAB</b> · AI education for everyone · 모두를 위한 AI 교육<br>
+  <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a> · <a href="https://www.aicitybuilders.com/vibecoding">Course: Visual Vibe Coding</a> · <a href="README.ko.md">한국어</a>
+</p>
+
 # connect-ai-motion
 
-**No footage needed. A script becomes a finished motion-graphics film.**
+**Your AI motion graphics employee. Turn a few lines of text into a finished motion graphics video. No footage needed.**
 
-Open source by [CONNECT AI LAB](https://www.youtube.com/@CONNECT-AI-LAB) · AI education for everyone · the tool of lesson 3 of the Visual Vibe Coding course.
-Use it when you have something to say but nothing filmed: a channel intro, a shop promo, an explainer, a lesson recap.
+Open source by CONNECT AI LAB, the tool of lesson 3 of the [Visual Vibe Coding](https://www.aicitybuilders.com/vibecoding) course. For commerce and knowledge content: a shop promo, a course ad, a channel intro, an explainer, when you have something to say but nothing filmed.
+
+[![Films made from a few lines of text: no camera picture in any of them](docs/hero.webp)](docs/index.html)
+
+## Start
+
+Run one command to give your coding agent (Claude Code, Codex, Antigravity, Cursor) the skill:
+
+```bash
+npx connect-ai-motion install-skill
+```
+
+Then open a new chat with your agent and say "make a motion graphics video from this script", along with your script (a few lines, any language) and any images you want to include. The agent drafts the storyboard, checks it, renders `out/film.mp4` (and 9:16 for Shorts) and tells you what the check found.
+
+You need Node.js 18 or newer. The first run downloads the packages (npm asks "Ok to proceed?": answer y), and the first render downloads the browser Remotion renders with, once.
+
+## Showcase
+
+No camera picture in any of these. Each one is a storyboard of one line per scene; the words on screen are words of the script.
+
+<table>
+<tr>
+<td width="27%" valign="top"><img src="docs/showcase/course_ad_9x16.webp" width="100%" alt="A course ad, no footage"><br><b>A course ad, no footage</b><br><sub>Ten lines of text and two screenshots of the course page. 28 s, 16:9 and 9:16. <a href="docs/demo/course_ad_9x16.mp4">mp4</a></sub></td>
+<td width="27%" valign="top"><img src="docs/showcase/shop_ko_9x16.webp" width="100%" alt="A shop promo in Korean"><br><b>A shop promo in Korean, brand colours</b><br><sub>Six lines of Korean for a made-up bakery. <code>demo --ko</code> makes it on your computer. <a href="docs/demo/shop_ko_9x16.mp4">mp4</a></sub></td>
+<td width="46%" valign="top"><img src="docs/showcase/flagship.webp" width="100%" alt="A talk, without the footage"><br><b>A talk, without the footage</b><br><sub>The author's own lecture voice. Every beat starts on the word he says; 20 beats, 17 of them pictures. <a href="docs/demo/flagship.mp4">mp4 with sound</a></sub></td>
+</tr>
+</table>
+
+### Scenes you can call with one line
+
+Most scenes are pictures, not text cards. Each one is one line of `storyboard.json`, for example `{"say": "With 2D and 3D,", "kind": "kit/flat-to-solid", "from": "2D", "to": "3D"}`.
+
+<table>
+<tr><td width="25%" valign="top"><img src="docs/showcase/kit-flat-to-solid.webp" width="100%" alt="Flat to solid"><br><b>Flat to solid</b><br><sub>Flat shapes gain depth on the word.</sub><br><code>kit/flat-to-solid</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-device-browser.webp" width="100%" alt="Your page in a browser"><br><b>Your page in a browser</b><br><sub>Your screenshot scrolls inside a window, the cursor clicks.</sub><br><code>kit/device-browser</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-chart-line.webp" width="100%" alt="Line chart, drawn"><br><b>Line chart, drawn</b><br><sub>The line draws itself, point by point, on the words.</sub><br><code>kit/chart-line</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-iso-city.webp" width="100%" alt="Isometric city"><br><b>Isometric city</b><br><sub>Towers rise from a city, one per thing you name.</sub><br><code>kit/iso-city</code></td></tr>
+<tr><td width="25%" valign="top"><img src="docs/showcase/kit-photo-wipe.webp" width="100%" alt="Two pictures, one line"><br><b>Two pictures, one line</b><br><sub>A line sweeps the photo into a drawing.</sub><br><code>kit/photo-wipe</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-draw-route.webp" width="100%" alt="Route on a map"><br><b>Route on a map</b><br><sub>A route draws across a map, pin by pin.</sub><br><code>kit/draw-route</code></td><td width="25%" valign="top"><img src="docs/showcase/remotion-three-model.webp" width="100%" alt="Your 3D model"><br><b>Your 3D model</b><br><sub>Your .glb turns from wireframe to finished.</sub><br><code>remotion/three-model</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-code-result.webp" width="100%" alt="Code and its result"><br><b>Code and its result</b><br><sub>One value in the code changes, the result follows.</sub><br><code>kit/code-result</code></td></tr>
+<tr><td width="25%" valign="top"><img src="docs/showcase/kit-orbit.webp" width="100%" alt="Orbit"><br><b>Orbit</b><br><sub>The things you name circle the one in the middle.</sub><br><code>kit/orbit</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-type-mask.webp" width="100%" alt="Word as a window"><br><b>Word as a window</b><br><sub>A word opens like a window onto your picture.</sub><br><code>kit/type-mask</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-chart-donut.webp" width="100%" alt="Donut"><br><b>Donut</b><br><sub>Slices grow to the numbers you say.</sub><br><code>kit/chart-donut</code></td><td width="25%" valign="top"><img src="docs/showcase/kit-pixel-run.webp" width="100%" alt="Pixel game"><br><b>Pixel game</b><br><sub>A small game world, drawn in code.</sub><br><code>kit/pixel-run</code></td></tr>
+</table>
+
+All <!--n-->83<!--/n--> items (66 scenes, 10 backgrounds, 7 transitions) are on the [catalog page](docs/index.html) as living clips.
+
+## Without an agent
+
+```bash
+npx connect-ai-motion demo          # the built-in example, start to finish
+npx connect-ai-motion demo --ko     # the Korean example, 16:9 and 9:16
+npx connect-ai-motion my-script.md  # your script, one line per scene
+```
+
+## Your brand
+
+The look is black and gold with subject colours. Your own colours and font go in `storyboard.json`:
+
+```json
+{"colors": {"accent": "#E4572E", "bg": "#101014", "ink": "#F5F0E6"}, "font": "input/MyFont.ttf"}
+```
+
+Pick colours anywhere (Adobe Color, for example) and a font file you may use (Google Fonts: Get font, Download; most are under the SIL Open Font License). Korean, Japanese and other scripts work on screen; without a font file the computer's own fonts draw them.
+
+## What it is
 
 One line of your script is one beat, and one beat is one full-frame scene. Most scenes are pictures, not text cards: a chart that draws itself, a line drawing, a 3D model, your screenshot inside a device, a still photo that moves, a flow chart, an isometric city. The scenes are not ours alone: Remotion packages, HyperFrames blocks, Lottie files, GPU shaders and your own components all sit in one catalog and are called the same way, and one layer on top directs the beats and checks the rhythm.
 
@@ -32,40 +94,11 @@ Like mixed martial arts took the best moves of every style and made them work in
 
 > **Licences.** This kit is MIT. It runs on [Remotion](https://www.remotion.dev), which is not MIT: Remotion is free for individuals, for companies with up to 3 employees and for non-profits; other companies need a Remotion Company License ([LICENSE.md](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)). Some catalog items use Remotion packages under the same Remotion License, HyperFrames blocks are Apache-2.0, GSAP uses GreenSock's standard no-charge license (not an OSI licence). Each item says its licence in its `meta.json`; the catalog refuses anything that is not on its allow list. The full list is in [NOTICE.md](NOTICE.md).
 
-## See it
-
-| | File | What to look at |
-|---|---|---|
-| What you can make | [flagship.mp4](docs/demo/flagship.mp4) · [9:16](docs/demo/flagship_9x16.mp4) | 49 s of the author's own lecture voice (Korean) and no camera picture: 20 beats, 17 of them pictures, each a different scene, every beat starting on a word he says (word times from the audio); English on screen from the English subtitles of that video |
-| A talk, without the footage | [demo_jay.mp4](docs/demo/demo_jay.mp4) | 35 s of the same lecture explained with pictures: 11 beats, 10 of them pictures, three custom scenes written for this film (the rabbit he talks about, the cost that falls, three curves) |
-| The built-in example | [hello.mp4](docs/demo/hello.mp4) · [9:16](docs/demo/hello_9x16.mp4) | 31 s made from ten lines of text, no voice, no sound: what `demo` renders on your computer |
-| Scenes | [gallery_scene.mp4](docs/demo/gallery_scene.mp4) · [sheet](docs/demo/gallery_scene_sheet.jpg) | all 66 scenes with their own example, pictures first |
-| Backgrounds | [gallery_bg.mp4](docs/demo/gallery_bg.mp4) | 10 backgrounds (noise, rays, six GPU shaders) |
-| Transitions | [gallery_transition.mp4](docs/demo/gallery_transition.mp4) | 6 transitions and the light leak that passes over a hard cut |
-| Catalog page | [docs/index.html](docs/index.html) | every item as a looping clip with the line that calls it |
-
-![one still per beat of the flagship demo](docs/demo/flagship_sheet.jpg)
-
-The storyboards behind both films are in [docs/demo/flagship](docs/demo/flagship) and [docs/demo/jay-one-line](docs/demo/jay-one-line) (storyboard, word times, the pictures they use, the custom scenes, the check report; the voice recordings are not in the repository, so they check and render silently).
-
-## Try it
-
-You need Node.js 18 or newer. No Python. The ffmpeg inside Remotion is used.
-
-```bash
-git clone https://github.com/wonseokjung/connect-ai-motion.git
-cd connect-ai-motion
-npm install
-npx connect-ai-motion demo        # the built-in example, start to finish
-npx connect-ai-motion catalog     # every scene, background and transition
-```
-
-Your own film: write a few lines in `my-script.md` and run `npx connect-ai-motion my-script.md`. Or with a coding agent (Claude Code, Codex, Antigravity): `npx connect-ai-motion install-skill`, then ask it to "make a motion graphics film from this script".
 
 ## How it works
 
 1. **Beats.** `draft` turns each line of your script into a beat and picks a scene by what the line is: a number, steps, a contrast, a quote. It only copies words out of the line. Then you (or your agent) improve it. A line can be split into several beats, and several lines can share one.
-2. **Time.** Without a voice, a beat lasts as long as its line takes to read (tier C). With your voice and subtitles next to it, a beat starts on a subtitle word (tier B, about ±0.2 s); with word times, on the word itself (tier A). Things inside a scene (list items, the moment a value changes) can land on words too.
+2. **Time.** Without a voice, a beat lasts as long as its line takes to read (tier C). With your voice and subtitles next to it, a beat starts on a subtitle word (tier B: words spread over each subtitle line by length, so put a beat on a word with `at` where it matters); with word times, on the word itself (tier A). Things inside a scene (list items, the moment a value changes) can land on words too.
 3. **Two shapes.** The same storyboard renders in 16:9 and 9:16. Every scene has its own tall layout, and in 9:16 the words stay out of the app's top bar, button rail and caption area.
 4. **Check before render.** `check` reads the storyboard like a picky editor and writes every problem as a sentence that says how to fix it.
 5. **Check after render.** The kit looks at the rendered film itself and reports blank stretches, a picture that stands still, and scenes that leave the frame empty.
@@ -76,7 +109,7 @@ Your own film: write a few lines in `my-script.md` and run `npx connect-ai-motio
 |---|---|
 | Nothing new on screen for more than 3 s (the picture's content, not a camera move) | error |
 | The same design twice in one film | error (advice in films of 25 beats or more) |
-| A word or number on screen that the script line does not say | error |
+| A word or number on screen that the script line does not say, a chart value included (Korean particles and counters are understood: "7시에" covers "7시", "115명" does not cover "15명") | error |
 | More words than the scene reads well | error |
 | On screen too short to read | error |
 | A scene, background or transition that does not exist, cannot play here, or is used in the wrong place (it names the closest ones) | error |
@@ -178,10 +211,13 @@ Put `voice.wav` in `<project>/input/` with `voice.srt` (or `.vtt`, or `voice.wor
 
 The film is as long as the voice. Transitions sit centred on the cuts, so adding one never moves a cut or the voice. The kit does not make word times from audio (see the roadmap); any tool that writes subtitles or word times works.
 
-## Commands
+
+## Reference
+
+### Commands
 
 ```
-npx connect-ai-motion demo                 the built-in example
+npx connect-ai-motion demo                 the built-in example (--ko: the Korean one)
 npx connect-ai-motion <script.md>          your script: makes <script>-motion/ next to it and runs everything
 npx connect-ai-motion new [folder]         an empty project to fill in
 npx connect-ai-motion draft <script> [folder]
@@ -193,14 +229,14 @@ npx connect-ai-motion catalog              --lead picture  --use chart  --role b
 npx connect-ai-motion gallery [folder]     the catalog itself as a film   --role scene | bg | transition  --source remotion  --sheet  --clips
 npx connect-ai-motion hf-import <folder>   HyperFrames blocks to scenes
 npx connect-ai-motion doctor
-npx connect-ai-motion install-skill        --agent claude | codex | antigravity   (remove-skill takes it out again)
+npx connect-ai-motion install-skill        --agent claude | codex | antigravity | cursor   (remove-skill takes it out again)
 ```
 
 A project is a folder: `script.md`, `storyboard.json`, `my-info.json`, `input/` (voice, subtitles, your files), `out/` (film, sheets, `report.md`). Styles: `connect` (black and gold), `night`, `paper`; they are one block each in `src/styles/presets.mjs`.
 
 Sound: `"sound": "tones"` adds one soft code-made tone per cut (no samples, nothing downloaded). It is off by default.
 
-## Where it stops
+### Where it stops
 
 - It does not film, generate footage or generate images. It draws with code and frames the pictures, clips and 3D models you give it.
 - It does not write your script and it does not add claims: the screen shows words of the line, and check enforces that.
@@ -208,6 +244,9 @@ Sound: `"sound": "tones"` adds one soft code-made tone per cut (no samples, noth
 - 3D scenes use WebGL and are for one to three moments in a film, not every beat.
 - Shader backgrounds need WebGPU on the computer that renders. Without it the layer stays empty and the plain background shows.
 - The first render downloads the Inter font (Google Fonts) and, once, the browser Remotion renders with.
+- `check` reads the storyboard. It cannot read words drawn inside your own components, HyperFrames blocks or pictures: look at `out/sheet.jpg` for those.
+- Your own components and HyperFrames blocks are code that runs on your computer. Use files you trust.
+- Tested on macOS. Windows and Linux are expected to work (Node and Remotion run there) but are not tested yet; please open an issue with what you see.
 
 ## Roadmap
 
@@ -219,7 +258,12 @@ Built on [Remotion](https://github.com/remotion-dev/remotion). HyperFrames forma
 
 ---
 
-**CONNECT AI LAB** · AI education for everyone · [YouTube](https://www.youtube.com/@CONNECT-AI-LAB) · [aicitybuilders.com](https://www.aicitybuilders.com)
-Each lesson of the Visual Vibe Coding course ships one open-source tool. Lesson 2: [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion). Lesson 3: this one.
+<p align="center">
+  <b>CONNECT AI LAB</b> · AI education for everyone<br>
+  Learn to build tools like this with your own AI agent: <a href="https://www.aicitybuilders.com/vibecoding"><b>Visual Vibe Coding</b></a> at aicitybuilders.com<br>
+  New lessons and tools on <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a>
+</p>
 
-한국어: [README.ko.md](README.ko.md)
+Each lesson of the course gives your AI agent one new skill, one AI employee at a time. Lesson 2: [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion) (motion graphics on top of your own video). Lesson 3: this one (motion graphics with no footage).
+
+MIT · CONNECT AI LAB · 한국어: [README.ko.md](README.ko.md)

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// connect-ai-motion: a script becomes a motion-graphics film. No footage needed.
+// connect-ai-motion: a script becomes a motion graphics video. No footage needed.
 // One line of the script = one beat = one full-frame scene from the catalog.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,6 +16,7 @@ import {doctor} from '../lib/doctor.mjs';
 import {cliPath} from '../lib/ffmpeg.mjs';
 import {installSkill, removeSkill} from '../lib/install.mjs';
 import {importHyperFrames} from '../lib/hf-import.mjs';
+import {banner, gold, dimmed} from '../lib/banner.mjs';
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = ['only', 'agent', 'dir', 'style', 'source', 'secs', 'prefix', 'license', 'use', 'role', 'seconds', 'name', 'scale', 'lead'];
@@ -25,7 +26,7 @@ const opt = (n, d = null) => {
   return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d;
 };
 const pos = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && argv[i - 1].startsWith('--') && VALUE_FLAGS.includes(argv[i - 1].slice(2))));
-const cmd = pos[0] || 'help';
+const cmd = (flag('help') || argv.includes('-h')) ? 'help' : (pos[0] || 'help');
 const log = (...a) => console.log(...a);
 const secs = (t) => ((Date.now() - t) / 1000).toFixed(1) + ' s';
 const projectDir = (d) => path.resolve(d || '.');
@@ -111,13 +112,25 @@ async function fromFile(file) {
   return full(P, {force: flag('force')});
 }
 
+const BANNER_CMDS = new Set(['demo', 'run', 'help', 'doctor', 'install-skill', 'catalog', 'new']);
+function hello() {
+  log(banner());
+  log('  ' + 'No footage needed. ' + gold('A few lines of text become a motion graphics video.') + dimmed('  찍은 영상 없이, 글 몇 줄로 모션그래픽 영상'));
+  log('');
+}
+
 async function main() {
-  if (SCRIPT.test(cmd) && fs.existsSync(cmd)) return fromFile(cmd);
+  if ((BANNER_CMDS.has(cmd) || SCRIPT.test(cmd)) && !flag('quiet') && !flag('json')) hello();
+  if (SCRIPT.test(cmd) && fs.existsSync(cmd)) { const r = await fromFile(cmd); process.exitCode = r?.ok ? 0 : 1; return; }
+  if (SCRIPT.test(cmd)) { log(`${cmd}: file not found. Write your script there first (one line per scene), then run this again.`); process.exitCode = 1; return; }
   switch (cmd) {
     case 'demo': {
       // built-in example: a short film about what this kit is, text only (no voice needed)
-      const P = projectPaths(projectDir(pos[1] || 'fm-demo'));
-      copyDir(path.join(KIT, 'examples', 'hello'), P.dir);
+      // --ko: the Korean example (a made-up bakery promo, Korean on screen, brand colours, 16:9 + 9:16)
+      const ko = flag('ko');
+      const P = projectPaths(projectDir(pos[1] || (ko ? 'fm-demo-ko' : 'fm-demo')));
+      copyDir(path.join(KIT, 'examples', ko ? 'shop-ko' : 'hello'), P.dir);
+      if (ko && !argv.includes('--short')) argv.push('--short');
       const r = await full(P, {force: flag('force')});
       process.exitCode = r.ok ? 0 : 1;
       break;
@@ -242,9 +255,18 @@ async function main() {
     case 'doctor':
       process.exitCode = (await doctor(log)) ? 0 : 1;
       break;
-    case 'install-skill':
-      installSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), log});
+    case 'install-skill': {
+      const list = installSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), log});
+      if (!flag('dry-run') && !list.some((t) => t.done)) {
+        log('  Nothing was installed. Name your agent: install-skill --agent claude | codex | antigravity | cursor (or --dir <its skills folder>).');
+        process.exitCode = 1;
+      } else if (!flag('dry-run')) {
+        log('');
+        log('  ' + gold('Done.') + ' Open a NEW chat in your agent and say:  "make a motion graphics video from this script"');
+        log('  ' + gold('끝.') + ' 에이전트에서 새 대화를 열고 이렇게 말하세요:  "이 대본으로 모션그래픽 영상 만들어 줘"');
+      }
       break;
+    }
     case 'remove-skill':
       removeSkill({agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), log});
       break;
@@ -254,6 +276,7 @@ One line of your script = one beat = one full-frame scene. Scenes come from Remo
 Lottie files, shaders, the kit, or your own file, all called the same way. The kit checks rhythm and words.
 
   npx ${KIT_NAME} demo                 built-in example, start to finish (text only, no voice needed)
+  npx ${KIT_NAME} demo --ko            the Korean example: a shop promo in Korean, 16:9 and 9:16 (한국어 예제)
   npx ${KIT_NAME} <script.md>          your script (one line per beat): makes <script>-motion/ next to it and runs everything
   npx ${KIT_NAME} new [folder]         an empty project to fill in
   npx ${KIT_NAME} draft <script> [folder]   first storyboard.json from a script or subtitles (.srt)
@@ -267,7 +290,7 @@ Lottie files, shaders, the kit, or your own file, all called the same way. The k
   npx ${KIT_NAME} gallery [folder]     render the catalog itself (--role scene | bg | transition, --source remotion, --sheet)
   npx ${KIT_NAME} hf-import <folder>   HyperFrames blocks -> catalog scenes (unsupported ones listed with reasons)
   npx ${KIT_NAME} doctor               check this computer
-  npx ${KIT_NAME} install-skill        add the agent skill (Claude Code, Codex, Antigravity)
+  npx ${KIT_NAME} install-skill        add the agent skill (Claude Code, Codex, Antigravity, Cursor)
 
 Voice: put voice.wav (+ voice.srt or voice.words.json) in <folder>/input/ and beats can start on a spoken word:
   {"at": {"text": "red", "near": 12.4}}`);

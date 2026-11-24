@@ -16,7 +16,9 @@ import {HyperFramesBlock} from '../adapters/HyperFrames';
 import {LottieFile} from '../adapters/Lottie';
 import {ClipScene} from '../adapters/Clip';
 import {FONT, INOUT} from '../catalog/ui';
-import {fontsReady} from '../brand';
+import {fontsReady, loadBrandFont} from '../brand';
+import {mediaName} from '../core/assets.mjs';
+import {withColors} from '../styles/presets.mjs';
 
 export type FilmData = {story: any; words?: any; info?: any; voiceSeconds?: number; voiceFile?: string | null; sfxFile?: string | null};
 export type FilmProps = {data: FilmData | null; aspect: '16x9' | '9x16' | '1x1'; tl?: any; captions?: boolean; clean?: boolean};
@@ -94,10 +96,14 @@ export const Film: React.FC<FilmProps> = ({data, aspect, tl: given, captions, cl
   // scenes fit their words by measuring them, so nothing is drawn until the font is loaded
   const [ready, setReady] = useState(false);
   const [handle] = useState(() => delayRender('fonts'));
+  const brandFile = data?.story?.font ? 'fm-assets/' + mediaName(String(data.story.font)) : null;
   useEffect(() => {
     const go = () => setReady(true);
-    fontsReady.then(go, go);
-  }, []);
+    // your own font file (storyboard "font"): loaded before anything is measured; if it fails, Inter stays
+    const wait: Promise<unknown>[] = [fontsReady];
+    if (brandFile) wait.push(loadBrandFont(staticFile(brandFile)).catch(() => null));
+    Promise.all(wait).then(go, go);
+  }, [brandFile]);
   // the font hold is let go only after the scenes are on the page: a scene that loads something (a model, a texture)
   // has asked for its own hold by then, so no frame is taken in between
   useEffect(() => {
@@ -105,7 +111,7 @@ export const Film: React.FC<FilmProps> = ({data, aspect, tl: given, captions, cl
   }, [ready, handle]);
   const d = data || EMPTY;
   const tl = given || timelineFor(d, aspect);
-  const st = getStyle(d.story?.style || d.info?.style);
+  const st = withColors(getStyle(d.story?.style || d.info?.style), d.story?.colors || d.info?.colors);
   const {W, H} = tl;
   const plan = seriesPlan(tl);
   const words = d.words ? toWords(d.words) : [];

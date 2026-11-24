@@ -13,6 +13,21 @@ export const STYLES = {
 
 export const getStyle = (name) => STYLES[name] || STYLES.connect;
 
+// Your brand colours on top of a style ("colors": {"accent": "#E4572E", "bg": "#101014", "ink": "#F5F0E6"} in
+// storyboard.json or my-info.json). Only #rrggbb values are taken; the rest of the style stays.
+const HEX = /^#[0-9a-f]{6}$/i;
+const rgba = (hex, a) => `rgba(${parseInt(hex.slice(1, 3), 16)},${parseInt(hex.slice(3, 5), 16)},${parseInt(hex.slice(5, 7), 16)},${a})`;
+export function withColors(st, colors) {
+  if (!colors || typeof colors !== 'object') return st;
+  const c = Object.fromEntries(Object.entries(colors).filter(([k, v]) => ['accent', 'accentHi', 'bg', 'bg2', 'ink'].includes(k) && HEX.test(String(v))));
+  if (!Object.keys(c).length) return st;
+  const out = {...st, ...c};
+  if (c.accent && !c.accentHi) out.accentHi = c.accent;
+  if (c.ink) { out.dim = rgba(c.ink, 0.55); out.faint = rgba(c.ink, 0.16); out.card = rgba(c.ink, 0.045); out.cardLine = rgba(c.ink, 0.14); }
+  if (c.bg && !c.bg2) out.bg2 = c.bg;
+  return out;
+}
+
 // Timing numbers (frames at 30 fps) follow motionmaxxing (Apache-2.0, commit 8c8ec0f2a6f6):
 // entry 12, opacity 6, blur 7, exit 13. Ease out when landing, accelerate when leaving.
 export const TIMING = {enter: 12, opacity: 6, blur: 7, exit: 13};

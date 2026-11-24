@@ -1,12 +1,14 @@
 ---
 name: connect-ai-motion
-description: Turn a script (a few lines of text, optionally with the user's own voice recording) into a finished motion-graphics film without any footage, in 16:9 and 9:16. One line of the script is one full-frame scene from a catalog of 83 scenes, backgrounds and transitions (Remotion packages, HyperFrames blocks, Lottie files, three.js, shaders) or the user's own component, each called with one line. More than half of the scenes are pictures, not text cards: charts, line drawings, diagrams, 3D, and the user's own screenshots, photos, clips and models inside devices and frames. Use when the user says "make a video from this script", "motion graphics only", "explainer without footage", "intro film for my channel / shop", "이 대본으로 모션그래픽 영상 만들어 줘", "영상 없이 모션그래픽으로". It checks rhythm (something new every 3 s), repeated designs, rows of text-only scenes and words that are not in the script.
+description: Turn a script (a few lines of text, optionally with the user's own voice recording) into a finished motion-graphics film without any footage, in 16:9 and 9:16. One line of the script is one full-frame scene from a catalog of 83 scenes, backgrounds and transitions (Remotion packages, HyperFrames blocks, Lottie files, three.js, shaders) or the user's own component, each called with one line. More than half of the scenes are pictures, not text cards: charts, line drawings, diagrams, 3D, and the user's own screenshots, photos, clips and models inside devices and frames. Use when the user says "make a video from this script", "motion graphics only", "explainer without footage", "intro film for my channel / shop", "이 대본으로 모션그래픽 영상 만들어 줘", "영상 없이 모션그래픽으로", "가게 홍보 영상 만들어 줘", "강의 소개 영상 만들어 줘". It checks rhythm (something new every 3 s), repeated designs, rows of text-only scenes and words that are not in the script.
 ---
 
 # connect-ai-motion
 
 You turn the user's script into `out/film.mp4` (and on request `out/film_9x16.mp4`, `out/film_1x1.mp4`).
 The kit is at the path in `.connect-ai-motion.json` next to this file (`kit`). Run its CLI with `node <kit>/bin/cli.mjs`.
+If that folder is gone (npx cleans its cache now and then), use the `run` line in the same file instead of `node <kit>/bin/cli.mjs` (for example `npx connect-ai-motion@0.3.0 check <project>`), and make the project with `new <project>` instead of copying `my-info.json`.
+Talk to the user in their language. If the script is Korean (or any language), the words on screen stay in that language unless the user asks for another one.
 
 ## Rules you must keep
 - Only what the script says. Every word and number on screen comes from the `say` line of its beat (or from `my-info.json` / `allow`, which the user wrote). Never add numbers, results or claims. If the voice is in one language and the screen in another, `say` is the line in the screen language; a person decides whether the meaning is the same.
@@ -26,7 +28,7 @@ The kit is at the path in `.connect-ai-motion.json` next to this file (`kit`). R
 4. `node <kit>/bin/cli.mjs check <project> [--short]`. Read every ERROR; each one says how to fix it. Run check again until PASS.
 5. `node <kit>/bin/cli.mjs sheet <project>` renders one still per beat (fast). Look at `out/sheet.jpg`. Fix what looks empty, crowded or unclear.
 6. `node <kit>/bin/cli.mjs run <project> [--short] [--seconds 1]`. It renders, then measures the film itself (blank frames, a picture that stands still, a scene that leaves the frame empty) and adds that to `out/report.md`. To redo one beat: `render <project> --only <beat id>`.
-7. Tell the user where `out/film.mp4` is and what the report says (timing tier, advice that is left).
+7. Show the user the result: open `out/film.mp4` (on macOS `open <file>`, on Windows `start "" <file>`), then tell them where it is and what the report says (timing tier, advice that is left).
 
 ## storyboard.json
 ```json

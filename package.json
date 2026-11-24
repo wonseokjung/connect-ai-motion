@@ -1,7 +1,7 @@
 {
   "name": "connect-ai-motion",
-  "version": "0.2.0",
-  "description": "No footage needed: a script becomes a finished motion-graphics film. One line is one full-frame scene, and most scenes are pictures, not text cards: charts, line drawings, diagrams, 3D, your screenshots and photos in devices and frames. Remotion packages, HyperFrames blocks, Lottie, three.js, shaders and your own components are all one line in a storyboard, in 16:9 and 9:16, with a rhythm check.",
+  "version": "0.3.0",
+  "description": "No footage needed: a script becomes a finished motion graphics video. One line is one full-frame scene, and most scenes are pictures, not text cards: charts, line drawings, diagrams, 3D, your screenshots and photos in devices and frames. Remotion packages, HyperFrames blocks, Lottie, three.js, shaders and your own components are all one line in a storyboard, in 16:9 and 9:16, with a rhythm check.",
   "type": "module",
   "license": "MIT",
   "author": "CONNECT AI LAB",
@@ -24,6 +24,7 @@
     "@remotion/bundler": "4.0.529",
     "@remotion/captions": "4.0.529",
     "@remotion/cli": "4.0.529",
+    "@remotion/fonts": "4.0.529",
     "@remotion/google-fonts": "4.0.529",
     "@remotion/gsap": "4.0.529",
     "@remotion/layout-utils": "4.0.529",

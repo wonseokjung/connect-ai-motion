@@ -257,13 +257,56 @@ await expectErr(film(beat({kind: 'kit/photo-kenburns', src: './input/nope.jpg', 
 // ---------- skill installer works in a temp HOME only ----------
 {
   const home = fs.mkdtempSync(path.join(os.tmpdir(), 'fm-home-'));
-  for (const d of ['.claude', '.codex', '.gemini/config']) fs.mkdirSync(path.join(home, d), {recursive: true});
+  for (const d of ['.claude', '.codex', '.gemini/config', '.cursor']) fs.mkdirSync(path.join(home, d), {recursive: true});
   const quiet = () => {};
   installSkill({agent: 'all', home, env: {}, log: quiet});
-  for (const d of ['.claude/skills', '.agents/skills', '.gemini/config/skills']) assert.ok(fs.existsSync(path.join(home, d, 'connect-ai-motion', 'SKILL.md')), d);
+  for (const d of ['.claude/skills', '.agents/skills', '.gemini/config/skills', '.cursor/skills']) assert.ok(fs.existsSync(path.join(home, d, 'connect-ai-motion', 'SKILL.md')), d);
   removeSkill({agent: 'all', home, env: {}, log: quiet});
-  for (const d of ['.claude/skills', '.agents/skills', '.gemini/config/skills']) assert.ok(!fs.existsSync(path.join(home, d, 'connect-ai-motion')), d);
-  ok('install-skill / remove-skill in a temp HOME (Claude Code, Codex, Antigravity)');
+  for (const d of ['.claude/skills', '.agents/skills', '.gemini/config/skills', '.cursor/skills']) assert.ok(!fs.existsSync(path.join(home, d, 'connect-ai-motion')), d);
+  ok('install-skill / remove-skill in a temp HOME (Claude Code, Codex, Antigravity, Cursor)');
+}
+// ---------- Korean scripts ----------
+{
+  assert.deepEqual(notSaid('7시', '매일 아침 7시에 첫 빵이 나옵니다.'), []);
+  assert.deepEqual(notSaid('대량 생산', '대량 생산이 아니라, 하루 한 번 굽습니다.'), []);
+  assert.deepEqual(notSaid('70', '매일 아침 7시에 나옵니다.'), ['70']);
+  assert.deepEqual(notSaid('7', '17시에 엽니다.'), ['7']);
+  assert.deepEqual(notSaid('맛집', '작은 빵집입니다.'), ['맛집']);
+  for (const [a, b, e] of [['15명', '115명이 왔다', ['15명']], ['1.5배', '15배 빨라', ['1.5배']], ['1.5배', '1.5배 빨라', []], ['50%', '50명', ['%']], ['AI', 'AI로 만듭니다', []], ['10,000원', '10,000원입니다', []], ['25', '2.5 times', ['25']], ['2.5', '2.5 times', []]]) assert.deepEqual(notSaid(a, b), e, `${a} | ${b}`);
+  assert.equal(draftStory(scriptLines('2D에서 3D로 바꿉니다.'), metas, {}).beats[0].value, undefined);
+  const lines = scriptLines('작은 빵집, 브레드입니다.\n매일 아침 7시에 첫 빵이 나옵니다.\n반죽, 발효, 굽기. 세 단계를 손으로 합니다.\n대량 생산이 아니라, 하루 한 번 굽습니다.\n오늘도 문을 엽니다. 브레드.');
+  const st = draftStory(lines, metas, {});
+  const by = Object.fromEntries(st.beats.map((b) => [b.id, b]));
+  assert.equal(by.b2.value, '7시');
+  assert.deepEqual(by.b3.items, ['반죽', '발효', '굽기']);
+  assert.equal(by.b4.text, '대량 생산');
+  assert.equal(by.b5.text, '브레드');
+  for (const b of st.beats) for (const f of ['text', 'sub', 'value']) if (b[f]) assert.deepEqual(notSaid(b[f], b.say), [], `${b.id}.${f}`);
+  ok('Korean: particles and counters do not count as new words, a number inside a longer number does; draft keeps 7시, a three-step list, a contrast and the name on the end card');
+}
+// ---------- numbers in charts come from the line ----------
+{
+  const st = {version: 1, style: 'connect', beats: [
+    {id: 'a', say: 'Charts that draw themselves.', kind: 'kit/chart-line', items: [{text: 'Charts', value: 2}, {text: 'draw', value: 5}], dur: 2.6},
+    {id: 'b', say: 'From 2 to 9.', kind: 'kit/chart-line', items: [{text: 'From', value: 2}, {text: 'to', value: 9}], dur: 2.6},
+  ]};
+  const P = project(st);
+  const r = await check(P, {aspects: ['16x9']});
+  assert.ok(r.errors.some((e) => e.id === 'a' && /"2", "5"/.test(e.msg)), 'invented values caught');
+  assert.ok(!r.errors.some((e) => e.id === 'b' && e.what === 'said'), 'said values pass');
+  ok('check: a number in a chart (printed or as a height) must be said in the line');
+}
+// ---------- the kit finds its packages when npx puts them next to it ----------
+{
+  const {pkgDir, moduleDirs} = await import('../lib/project.mjs');
+  assert.ok(pkgDir('remotion'), 'remotion found');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'fm-npx-'));
+  fs.mkdirSync(path.join(tmp, 'node_modules', 'connect-ai-motion'), {recursive: true});
+  fs.mkdirSync(path.join(tmp, 'node_modules', 'remotion'), {recursive: true});
+  fs.writeFileSync(path.join(tmp, 'node_modules', 'remotion', 'package.json'), '{"version":"0.0.0"}');
+  assert.equal(pkgDir('remotion', path.join(tmp, 'node_modules', 'connect-ai-motion')), path.join(tmp, 'node_modules', 'remotion'));
+  assert.ok(moduleDirs().length >= 1);
+  ok('packages are found next to the kit (npx layout) as well as inside it (a clone)');
 }
 // ---------- nothing personal in the package ----------
 {

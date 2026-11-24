@@ -27,7 +27,8 @@ export const itemText = (x) => (x && typeof x === 'object' ? String(x.text ?? x.
 export function shownText(it) {
   const out = [];
   for (const k of TEXT_FIELDS) if (it[k] != null && it[k] !== '') out.push(String(it[k]));
-  for (const k of LIST_FIELDS) if (Array.isArray(it[k])) for (const x of it[k]) { out.push(itemText(x)); if (x && typeof x === 'object' && x.sub) out.push(String(x.sub)); }
+  // a number in a chart or a tower is data the viewer reads (printed, or as a height): it must come from the line too
+  for (const k of LIST_FIELDS) if (Array.isArray(it[k])) for (const x of it[k]) { out.push(itemText(x)); if (x && typeof x === 'object' && x.sub) out.push(String(x.sub)); if (x && typeof x === 'object' && x.value != null && x.value !== '') out.push(String(x.value)); }
   return out;
 }
 

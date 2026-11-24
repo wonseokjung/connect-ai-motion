@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "title": "예시: 영상 없이 만든 가게 홍보 (작은 빵집, 실제 가게가 아닙니다)",
+  "style": "connect",
+  "colors": {"accent": "#E8A14A", "bg": "#120D09"},
+  "bg": "kit/bg-pool",
+  "sound": false,
+  "beats": [
+    {"id": "town", "say": "우리 동네 작은 빵집.", "kind": "kit/draw-skyline", "text": "작은 빵집", "sub": "우리 동네", "seed": "bakery", "color": "amber", "stage": "wine"},
+    {"id": "seven", "say": "아침 7시.", "kind": "kit/big-number", "value": "7시", "text": "아침", "color": "amber"},
+    {"id": "bread", "say": "갓 구운 첫 빵이 나옵니다.", "kind": "kit/draw-svg", "viewBox": "0 0 400 260",
+     "paths": [
+       {"d": "M40 170 C40 92 118 62 200 62 C282 62 360 92 360 170 L360 198 C360 214 350 222 334 222 L66 222 C50 222 40 214 40 198 Z", "color": "amber"},
+       {"d": "M112 118 C134 98 158 98 180 116", "color": "ivory", "fill": false},
+       {"d": "M176 104 C198 84 222 84 244 102", "color": "ivory", "fill": false},
+       {"d": "M240 118 C262 98 286 98 308 116", "color": "ivory", "fill": false}
+     ],
+     "text": "갓 구운 첫 빵", "color": "amber", "stage": "wine"},
+    {"id": "steps", "say": "반죽, 발효, 굽기.", "kind": "kit/flow-chart", "items": ["반죽", "발효", "굽기"], "stage": "moss"},
+    {"id": "hand", "say": "공장이 아니라, 손으로 굽습니다.", "kind": "kit/compare", "text": "공장", "sub": "손으로", "color": "amber"},
+    {"id": "end", "say": "오늘도 문을 엽니다. 작은 빵집.", "kind": "kit/endcard", "text": "작은 빵집", "sub": "오늘도 문을 엽니다", "in": "remotion/tr-fade"}
+  ]
+}
