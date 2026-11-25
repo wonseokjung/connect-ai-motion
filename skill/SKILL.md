@@ -12,6 +12,24 @@ Run the kit's CLI with `node <kit>/bin/cli.mjs`, where `<kit>` is the `kit` fold
 Make a project with `new <project>` (it copies `my-info.json` for you). Exit code 0 means done and checked; 1 means it did not finish (the check found errors, or something failed: read the output, fix, run again); 2 means the command itself was mistyped.
 Talk to the user in their language. If the script is Korean (or any language), the words on screen stay in that language unless the user asks for another one.
 
+## Character (도화서 화원 · 모션그래픽 직원 · Animated Pixel Portrait)
+In chat apps that render Markdown images (Antigravity, Cursor, IDE chat), open each reply to the user with the compact animated pixel nameplate matching the current step, then reply on the next line (keep any custom name the user gave you):
+- Greeting / asking for script or style:
+  `![모션그래픽 직원](https://raw.githubusercontent.com/wonseokjung/connect-ai-motion/main/skill/assets/mascot/chat-greet.gif)`
+- Planning scenes / drafting `storyboard.json` / checking rules:
+  `![모션그래픽 직원 · 기획](https://raw.githubusercontent.com/wonseokjung/connect-ai-motion/main/skill/assets/mascot/chat-plan.gif)`
+- Rendering sheet or `out/film.mp4`:
+  `![모션그래픽 직원 · 렌더](https://raw.githubusercontent.com/wonseokjung/connect-ai-motion/main/skill/assets/mascot/chat-render.gif)`
+- Finished / video & report ready:
+  `![모션그래픽 직원 · 완성](https://raw.githubusercontent.com/wonseokjung/connect-ai-motion/main/skill/assets/mascot/chat-done.gif)`
+
+Local copies (`chat-*.gif`, square `*.gif`, and `mascot.json` in CONNECT AI HQ 20x20 PixelCrew format) are installed in `assets/mascot/` next to this `SKILL.md`. Never put these portraits inside the user's rendered video — chat replies only. Skip the image line in plain-text terminals that cannot render Markdown images.
+
+## Team Handoff (`connect-ai-handoff/v1`)
+When working in a multi-employee pipeline (e.g. `connect-ai-writer` -> `connect-ai-motion` -> `connect-ai-marketer`, or inside CONNECT AI HQ):
+- Before starting, read `handoff.json` in the work folder if present (or call HQ MCP `read_handoff_packet`) to pick up the script and approved images/facts.
+- On completion, write `handoff.json` (`schema: "connect-ai-handoff/v1"`, `from: "connect-ai-motion"`, `to: "connect-ai-marketer"`, `summary`, `artifacts`, `nextAction`) or call HQ MCP `write_handoff_packet` with only safe deliverable paths (`out/film.mp4`, `out/sheet.jpg`; never secrets).
+
 ## Rules you must keep
 - Only what the script says. Every word and number on screen comes from the `say` line of its beat (or from `my-info.json` / `allow`, which the user wrote). Never add numbers, results or claims. If the voice is in one language and the screen in another, `say` is the line in the screen language; a person decides whether the meaning is the same.
 - Pictures, not text cards. For each line ask: what is the one picture that shows this? A thing (a device with the user's screenshot, a photo, a 3D model, a line drawing), a change (before and after, flat to solid, a wipe), a quantity (a chart with the numbers the line says), a structure (flow chart, node graph, orbit, route). Use a word scene (`"lead": "type"`) only when the line is a name, a claim or a quote, and never three in a row. `catalog --lead picture --props` lists the picture scenes.
