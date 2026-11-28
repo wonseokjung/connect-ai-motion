@@ -176,4 +176,4 @@ npx connect-ai-motion install-skill        --agent claude | codex | antigravity 
 
 ## 강의
 
-비주얼 바이브코딩은 강의마다 여러분들의 AI 에이전트한테 스킬을 하나씩 드려요. AI 직원을 한 명씩 만들어 가는 거예요. 2강은 [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion)(내 영상 위에 모션그래픽)이고요, 3강이 바로 이 도구(찍은 영상 없이 모션그래픽)예요.
+비주얼 바이브코딩은 강의마다 여러분들의 AI 에이전트한테 스킬을 하나씩 드려요. AI 에이전트를 한 명씩 만들어 가는 거예요. 2강은 [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion)(내 영상 위에 모션그래픽)이고요, 3강이 바로 이 도구(찍은 영상 없이 모션그래픽)예요.

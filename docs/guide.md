@@ -207,4 +207,4 @@ Word times from audio on your computer (whisper.cpp through `@remotion/install-w
 
 ## The course
 
-Each lesson of the course gives your AI agent one new skill, one AI employee at a time. Lesson 2: [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion) (motion graphics on top of your own video). Lesson 3: this one (motion graphics with no footage).
+Each lesson of the course gives your AI agent one new skill, one AI agent at a time. Lesson 2: [connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion) (motion graphics on top of your own video). Lesson 3: this one (motion graphics with no footage).

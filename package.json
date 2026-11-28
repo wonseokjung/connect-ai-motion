@@ -88,6 +88,8 @@
     "charts",
     "diagrams",
     "script-to-video",
-    "agent-skill"
+    "agent-skill",
+    "ai-agent",
+    "automation-agent"
   ]
 }

@@ -1,8 +1,8 @@
 {
   "kit": "connect-ai-motion",
   "employee": {
-    "ko": "AI 모션그래픽 직원",
-    "en": "AI motion designer"
+    "ko": "AI 모션그래픽 에이전트",
+    "en": "AI Motion Graphics Agent"
   },
   "by": "AI Mentor Jay",
   "brand": "CONNECT AI LAB",
