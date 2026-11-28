@@ -19,6 +19,14 @@ npx connect-ai-motion install-skill
 
 그다음에 에이전트(Claude Code, Codex, Antigravity, Cursor)에서 새 대화를 여시고, "이 대본으로 모션그래픽 영상 만들어 줘" 이렇게 한번 말해 보세요.
 
+<p align="center">
+  <img src="skill/assets/mascot/greet.gif" width="68" alt="도화서 모션 화원 · 인사">&nbsp;
+  <img src="skill/assets/mascot/plan.gif" width="68" alt="도화서 모션 화원 · 기획">&nbsp;
+  <img src="skill/assets/mascot/render.gif" width="68" alt="도화서 모션 화원 · 렌더">&nbsp;
+  <img src="skill/assets/mascot/done.gif" width="68" alt="도화서 모션 화원 · 완성"><br>
+  <sub><b>도화서 화원 · 모션</b> (CONNECT AI HQ PixelCrew) — 대화할 때 인사·장면 구성·렌더·완성 상태에 맞춰 작게 움직이며 표정이 바뀌는 픽셀 캐릭터예요.</sub>
+</p>
+
 ## 이렇게 나와요
 
 <table>

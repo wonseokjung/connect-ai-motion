@@ -19,6 +19,14 @@ npx connect-ai-motion install-skill
 
 Then open a new chat with your agent (Claude Code, Codex, Antigravity, Cursor) and say "make a motion graphics video from this script".
 
+<p align="center">
+  <img src="skill/assets/mascot/greet.gif" width="68" alt="Dohwaseo Motion Painter · Greet">&nbsp;
+  <img src="skill/assets/mascot/plan.gif" width="68" alt="Dohwaseo Motion Painter · Plan">&nbsp;
+  <img src="skill/assets/mascot/render.gif" width="68" alt="Dohwaseo Motion Painter · Render">&nbsp;
+  <img src="skill/assets/mascot/done.gif" width="68" alt="Dohwaseo Motion Painter · Done"><br>
+  <sub><b>Dohwaseo Motion Painter</b> (CONNECT AI HQ PixelCrew) — gently animated pixel portrait that switches expression as it greets, storyboards, renders, and finishes your film.</sub>
+</p>
+
 ## Showcase
 
 <table>
